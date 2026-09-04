@@ -1,0 +1,15 @@
+[package]
+name = "aethel-types"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "Data-only identifiers, commitments, and canonical digests shared by the Aethel crates"
+
+[dependencies]
+ed25519-dalek.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+hex.workspace = true
+thiserror.workspace = true

@@ -3,14 +3,100 @@
 version = 4
 
 [[package]]
+name = "aethel"
+version = "0.1.0"
+dependencies = [
+ "aethel-core",
+ "aethel-distribution",
+ "aethel-obligation-wallet",
+ "aethel-provider-sdk",
+ "aethel-servicing",
+ "aethel-tokenization",
+ "aethel-types",
+ "ed25519-dalek",
+ "serde_json",
+]
+
+[[package]]
 name = "aethel-core"
 version = "0.1.0"
 dependencies = [
+ "aethel-provider-sdk",
+ "aethel-types",
  "dekyx-aethel",
  "dekyx-core",
  "ed25519-dalek",
  "hex",
  "rand_core",
+ "serde",
+ "serde_json",
+ "sha2",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "aethel-distribution"
+version = "0.1.0"
+dependencies = [
+ "aethel-tokenization",
+ "aethel-types",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "aethel-obligation-wallet"
+version = "0.1.0"
+dependencies = [
+ "aethel-types",
+ "ed25519-dalek",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "aethel-provider-sdk"
+version = "0.1.0"
+dependencies = [
+ "aethel-types",
+ "dekyx-core",
+ "ed25519-dalek",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "aethel-servicing"
+version = "0.1.0"
+dependencies = [
+ "aethel-provider-sdk",
+ "aethel-types",
+ "ed25519-dalek",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "aethel-tokenization"
+version = "0.1.0"
+dependencies = [
+ "aethel-core",
+ "aethel-types",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "aethel-types"
+version = "0.1.0"
+dependencies = [
+ "ed25519-dalek",
+ "hex",
  "serde",
  "serde_json",
  "sha2",

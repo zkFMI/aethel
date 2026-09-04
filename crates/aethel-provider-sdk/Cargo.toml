@@ -1,0 +1,20 @@
+[package]
+name = "aethel-provider-sdk"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "Open provider plug-in contract for Aethel: capabilities, signed artifacts, key rotation, status, and validation"
+
+[dependencies]
+aethel-types.workspace = true
+# DeKYX is the only credential layer. A credential-issuer provider vouches for
+# a DeKYX issuer key, so the SDK carries that request type and nothing else
+# about identity.
+dekyx-core = { git = "https://github.com/shukob/dekyx" }
+ed25519-dalek.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

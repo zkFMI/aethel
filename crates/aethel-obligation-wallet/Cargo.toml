@@ -1,0 +1,14 @@
+[package]
+name = "aethel-obligation-wallet"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "Obligor-side schedule projection, bounded pre-authorization, signing requests, durable outbound queue, and receipt reconciliation"
+
+[dependencies]
+aethel-types.workspace = true
+ed25519-dalek.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true

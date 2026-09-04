@@ -1,0 +1,20 @@
+[package]
+name = "aethel"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "Aethel: programmable payment-stream receivables. One crate that re-exports the protocol, provider, tokenization, distribution, obligation-wallet, and servicing modules"
+
+[dependencies]
+aethel-types.workspace = true
+aethel-provider-sdk.workspace = true
+aethel-core.workspace = true
+aethel-tokenization.workspace = true
+aethel-distribution.workspace = true
+aethel-obligation-wallet.workspace = true
+aethel-servicing.workspace = true
+
+[dev-dependencies]
+ed25519-dalek.workspace = true
+serde_json.workspace = true

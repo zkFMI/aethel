@@ -1,115 +1,201 @@
-# aethel-core
+# Aethel — Programmable Payment-Stream Receivables
 
-Aethel's protocol state above DeFMI and zkPI: signed stream state, receivable
-series, provider capabilities, credit decisions, guarantees, funding quotes,
-issuance, default, and claim semantics. Asset title and money stay in DeFMI;
-identity stays in DeKYX; guarantee capacity stays in DeCCP.
+Aethel turns a signed payment stream into a financeable receivable and lets
+independent providers supply credit assessment, guarantees, funding, and
+servicing around it.
 
-## DeKYX cutover (2026-09-02)
+The central idea is that the **payment stream itself becomes the receivable**.
+Aethel does not hard-code one lender, rating model, guarantor, or marketplace.
+Providers join through explicit capabilities, sign the artifacts they are
+responsible for, and can be replaced or combined without changing the stream's
+underlying payment semantics.
 
-The KYB / anonymous-subject logic that used to live here and in
-`qomm-zkpi::confidential_subject` is DeKYX's. The `qomm-zkpi` module is
-deleted; nothing implements a credential outside `dekyx-core`. What remains in
-Aethel is the thin adapter in `src/subject.rs`:
+This repository contains the deterministic Rust state machine for that process.
+It is a research implementation and has not been audited for production use.
 
-| Concern | Before | Now |
-|---|---|---|
-| Issuer trust and key epochs | Aethel provider registry + DeFMI participant quote-key epoch | `dekyx_core::IssuerDirectory` stored in `AethelBook::credential_issuers`; a `CredentialIssuer` provider vouches for a DeKYX issuer key with `RegisterCredentialIssuer` (first epoch) and rotates it with a later registration that bounds the earlier epochs |
-| Credential and proof verification | `qomm_zkpi::confidential_subject` verified in the Avalanche VM | `dekyx_core::AnonymousPresentation` verified by `dekyx_aethel::AethelDeKyxAdapter` inside `AethelBook::record_confidential_{credit_decision,guarantee}` |
-| What the proof is bound to | issuer, scope, policy, expiry | plus audience (`aethel_domain_id`), action (credit decision vs guarantee), the unsigned artifact statement, and the artifact nonce (`ConfidentialArtifact::presentation_context`) |
-| Revocation | none | issuer-signed `RevocationStatusList` published with `PublishCredentialStatus`; an epoch without a list fails closed |
-| Key rotation | none | `RegisterCredentialIssuer { previous_epochs_valid_until: Some(t) }`; `t` before the old epoch's `valid_from` retires it immediately |
-| Line identity | issuer, epoch, commitment, scope, policy, nullifier, expiry all equal | `subject_line_id = H(issuer, scope, policy, nullifier)`; a re-issued credential after rotation continues the line |
-| Replay | operation id, provider nonce, subject nullifier per line | plus DeKYX `PresentationLedger` over (nullifier, context) in `AethelBook::consumed_presentations` |
-| Stored record | Aethel-owned `ConfidentialSubjectBinding` built by the VM | `dekyx_aethel::AethelSubjectBinding` (re-exported under the old name) built only by DeKYX verification |
-| Series policy | `requires_confidential_subject` | plus `subject_kind` (default legal entity), `required_qualifications`, `accepted_issuer_namespace_digest`; all default so existing series digests are unchanged |
+## What Aethel provides
 
-`ProviderCapability::CredentialIssuer` is kept: it is Aethel governance saying
-which provider may vouch for a DeKYX issuer key, not a credential format.
+- Registration and versioned state transitions for signed payment streams.
+- Receivable series that define which streams may be financed and under what
+  policy.
+- Signed credit decisions bound to one receivable context.
+- Guarantees with explicit loss layers and lifecycle states.
+- Competing funding quotes from independent liquidity providers.
+- Receivable issuance, default attestation, guarantee claim, and release.
+- Provider registration, capability separation, suspension, revocation, and
+  key rotation.
+- Anonymous qualification checks through DeKYX, without storing a legal name in
+  the Aethel record.
 
-## Credential and provider key policy
+Aethel records the commercial meaning and lifecycle of a receivable. It does
+not hold cash, securities, or legal title. Those authoritative assets and their
+settlement remain in DeFMI.
 
-Two kinds of key rotate independently, and both leave what they signed in
-place.
+## End-to-end flow
 
-- **DeKYX issuer keys.** A rotation is a second `RegisterCredentialIssuer`
-  by the same provider at a higher epoch with `previous_epochs_valid_until`.
-  Credentials under an earlier epoch verify until that instant (the grace
-  window); an instant before the epoch's `valid_from` retires it at once,
-  which is the key-compromise path. A credential re-issued under the new key
-  with the same subject secret continues the same line. Revocation is the
-  issuer-signed status list: a newer list naming the credential stops new
-  artifacts on that line, an older list cannot lift it, and a line's already
-  recorded decision and guarantee stay in the book.
-- **Aethel provider keys.** `RotateProviderKey` installs the next artifact
-  key; the request is signed by the next key as proof of possession, and the
-  authority to rotate is the application's (in the VM, quorum approval plus
-  equality with the DeFMI participant's admin-rotated quote key). The retired
-  key is kept in `ProviderDefinition::retired_keys`: artifacts it signed while
-  live remain valid under `AethelBook::validate`, and it signs nothing new. A
-  key that was ever the provider's cannot return. `SetProviderStatus`
-  suspends, reinstates, or revokes; revocation is terminal and blocks further
-  rotation. Nothing recorded is removed by either.
+```mermaid
+flowchart LR
+    S["Signed payment stream"] --> R["Register stream"]
+    R --> RS["Create receivable series"]
 
-## Guarantees and DeCCP
+    K["DeKYX\nqualified subject"] --> C
+    C["Credit providers\nsubmit signed decisions"] --> G
+    G["Guarantors\ncommit coverage"] --> F
+    F["Liquidity providers\nsubmit funding quotes"] --> I
+    RS --> C
 
-Aethel records what a guarantee means; DeCCP owns the capacity it draws on. A
-`GuaranteeCommitment` names the DeFMI facility and hold; the Avalanche VM
-reserves the same hold in its DeCCP `ClearingBook` through
-`deccp_aethel::AethelDeCcpAdapter` in the same transaction, binds it at
-issuance, consumes it at claim, and releases it through the new
-`GuaranteeRelease` (`AethelBook::release_guarantee`, only for an unbound
-guarantee). DeCCP never sees a plaintext amount: it holds the coverage
-commitment and a hash chain of DeFMI-attested transitions.
+    I["Issue receivable"] --> P["zkPI\nsettlement instruction"]
+    P --> D["DeFMI\nasset and cash settlement"]
 
-## Avalanche VM surface
-
-Eighteen consensus methods: the original ten Aethel methods,
-`issueAethelCredentialIssuer` and `issueAethelCredentialStatus` for DeKYX,
-`issueAethelGuaranteeRelease`, `issueAethelProviderKeyRotation`,
-`issueAethelProviderStatus`, and the DeCCP methods `issueDeccpClearingBook`,
-`issueDeccpMember` (DeKYX presentation for the clearing-membership scope; DeCCP
-stores a subject line, never a legal entity), and
-`issueDeccpGuaranteeFacility`. `issueAethelCreditDecision` and
-`issueAethelGuarantee` still take an optional `subjectProof`, a DeKYX
-`AnonymousPresentation`. Note that the VM's hex normalisation converts every
-64-character string field into bytes, so a DeKYX qualification namespace must
-not be exactly 64 characters long.
-
-## Build and test
-
-Inside the research tree, `aethel-core` depends on the sibling workspace
-`mvp/dekyx` by relative path (`../../../dekyx/crates/…`), and the Avalanche VM
-depends on `mvp/deccp` the same way; the QOMM `Makefile` remote-test target
-rsyncs both and mounts them at `/dekyx` and `/deccp` in the test container.
-The publication exporter rewrites those paths to the public `dekyx` and
-`deccp` repositories and publishes this crate as the `aethel` repository.
-Tests run only on OmenX or SoftBank:
-
-```sh
-# from mvp/qomm
-make remote-test REMOTE_TEST_COMMAND='cargo test -p aethel-core -p qomm-avalanche-vm'
+    I --> M{"Payment stream outcome"}
+    M -->|paid| X["Close receivable"]
+    M -->|default| A["Default attestation"]
+    A --> W["DeCCP\nguarantee claim / loss allocation"]
+    W --> D
 ```
 
-## Touch points outside this crate
+The diagram shows the full deployment model. The `aethel-core` crate owns the
+stream and receivable state transitions. DeKYX, DeCCP, zkPI, and DeFMI are
+separate modules connected by the host application.
 
-- `mvp/qomm/rust/Cargo.lock`: `dekyx-core`, `dekyx-aethel`, `deccp-core`,
-  `deccp-aethel`; `ed25519-dalek` is no longer a `qomm-zkpi` dependency.
-- `mvp/qomm/Makefile` `remote-test`: rsync and bind mount for `mvp/dekyx` and
-  `mvp/deccp`.
-- `mvp/qomm/rust/qomm-avalanche-vm`: `execution/deccp.rs` (DeCCP methods,
-  the VM `DeFmiPort`, the DeKYX `EligibilityPort`), `execution/aethel.rs`
-  (adapter calls, release, provider control), `state.rs` (`State::deccp`),
-  `transaction.rs`, and the tests.
-- `rust/qomm-harness/src/bin/export_repos.rs`: `dekyx`, `deccp`, and
-  `aethel` are published repositories; `defmi` takes `aethel-core`,
-  `deccp-core`, and `deccp-aethel` as Git dependencies.
+## Open provider model
 
-## Remaining work
+Every provider is registered with one or more narrowly scoped capabilities:
 
-- Cross-issuer anti-Sybil (shared registry or VOPRF) when a series accepts
-  more than one issuer namespace.
-- Issuer-unlinkable credentials (BBS+/CL) if issuance-record correlation must
-  be prevented.
-- Partial claims and partial releases; the VM still accepts full-cover
-  claims only.
+| Capability | Responsibility |
+|---|---|
+| `StreamAttestor` | Attest that a payment stream and its updates are valid |
+| `CreditAssessor` | Sign a credit decision for an eligible receivable |
+| `Guarantor` | Commit a guarantee backed by an external facility |
+| `LiquidityProvider` | Submit an executable funding quote |
+| `Servicer` | Perform permitted servicing actions |
+| `CredentialIssuer` | Vouch for a DeKYX issuer key without becoming a lender or guarantor |
+
+Capabilities do not imply one another. A credit assessment cannot silently act
+as a guarantee, and a guarantor cannot issue a funding quote unless separately
+authorized. Providers may be suspended or permanently revoked. Key rotation
+keeps artifacts signed while an older key was valid verifiable, while rejecting
+new artifacts under that retired key.
+
+## Core state model
+
+`AethelBook` is the validated aggregate state. Its main records are:
+
+- `RegisteredStream` and `StreamState`
+- `ReceivableSeries` and `SeriesPolicy`
+- `CreditDecision`
+- `GuaranteeCommitment` and `GuaranteeRelease`
+- `FundingQuote`
+- `ReceivableIssuance`
+- `DefaultAttestation` and `GuaranteeClaim`
+- `ProviderDefinition`
+
+Operations carry stable identifiers, validity windows, nonces, policy digests,
+and signatures. State transitions reject duplicate operations, unexpected
+versions, invalid provider capabilities, expired artifacts, and inconsistent
+series or stream references.
+
+## Qualification and confidentiality
+
+A series may require an anonymous DeKYX presentation before a credit decision
+or guarantee is accepted. The presentation is bound to the exact Aethel domain,
+action, unsigned artifact statement, nonce, and expiration. A valid proof for
+one decision cannot be replayed for a different decision or guarantee.
+
+Aethel stores only the verified subject-line binding returned by DeKYX. The
+credential, revocation policy, issuer keys, selective-disclosure proof, and
+presentation replay ledger remain DeKYX responsibilities.
+
+## Guarantees and settlement
+
+Aethel defines what a guarantee covers and how it relates to a receivable.
+DeCCP owns the guarantee facility and its remaining capacity. A deployment can
+reserve a DeCCP hold when the guarantee is accepted, bind the hold when the
+receivable is issued, and release or consume it when the obligation closes.
+
+The guarantee amount may remain confidential. In that mode, Aethel and DeCCP
+exchange commitments, state digests, identifiers, and verified transition
+receipts instead of a plaintext amount.
+
+When issuance or a claim moves assets, the host creates a typed zkPI and asks
+DeFMI to settle it. Aethel changes its final state only after the corresponding
+settlement evidence has been validated by the host.
+
+## Dependencies and integration
+
+Dependencies are deliberately separate from Aethel's product definition.
+
+```mermaid
+flowchart TB
+    DK["DeKYX\nidentity and qualification"] --> AC["aethel-core"]
+    AC --> APP["Host application / VM"]
+    CCP["DeCCP\nguarantee capacity"] --> APP
+    Z["zkPI\ntyped execution instruction"] --> APP
+    APP --> DF["DeFMI\nauthoritative settlement"]
+```
+
+| Module | Relationship |
+|---|---|
+| `dekyx-core` | Direct Rust dependency used for issuer directories and verified presentations |
+| `dekyx-aethel` | Direct Rust dependency that binds a DeKYX presentation to an Aethel artifact |
+| DeCCP | Runtime integration for guarantee capacity; not imported by `aethel-core` |
+| zkPI | Runtime integration for executable issuance and claim instructions |
+| DeFMI | Runtime integration for authoritative cash, asset, and facility state |
+
+The core crate can be embedded in any deterministic host that supplies durable
+state, authorization, and the external verification ports required by its
+deployment. Integration with one chain or one credit provider is not built into
+the Aethel domain model.
+
+## Complete product layout
+
+This repository ships the complete eight-crate distribution shown below. A
+deliberately reduced, core-only downstream package would contain only
+`crates/aethel-core`; such a package would not provide the tokenization,
+distribution, obligation-wallet, servicing, or composition paths.
+
+```text
+crates/
+├── aethel-types/              Shared identifiers, digests, time and signature checks
+├── aethel-provider-sdk/       Provider capabilities and signed artifacts
+├── aethel-core/               Stream, receivable, guarantee and issuance semantics
+├── aethel-tokenization/       Supply caps and external-ledger mint/burn intents
+├── aethel-distribution/       Circulation admission, venue fills and settlement binding
+├── aethel-obligation-wallet/  Bounded pre-authorization and payment retry queue
+├── aethel-servicing/          Payment evidence, delinquency, cure and default evidence
+└── aethel/                    Composition boundary and end-to-end tests
+```
+
+Use `cargo metadata --locked --no-deps --format-version 1` as the authoritative
+package inventory. A layout diagram is not evidence that a crate was shipped.
+
+## Enterprise PoC
+
+[Enterprise PoC guide (Japanese)](docs/ENTERPRISE_POC_JA.md) covers signed
+payment streams, external credit providers, guarantees, funding, tokenization,
+servicing, zkPI/DeFMI settlement, rejection tests and acceptance criteria.
+
+## Build and verification
+
+Run the checks on Linux with the locked dependency graph:
+
+```sh
+cargo test --workspace --locked
+cargo clippy --workspace --all-targets --locked -- -D warnings
+cargo fmt --all -- --check
+cargo build --workspace --release --locked
+```
+
+Passing these four gates is not a substitute for an independent cryptographic,
+financial, Rust state-machine, host-VM, and integration audit.
+
+## Current limits
+
+- The current anonymous credential contract is scope-pseudonymous; it does not
+  claim issuer-unlinkable credentials.
+- Cross-issuer anti-Sybil policy requires a shared governance or registry
+  decision outside this crate.
+- Guarantee claims and releases currently target full-cover transitions; more
+  granular partial transitions require an extended state model.
+- Legal assignment, perfection, tax, accounting, and bankruptcy treatment of a
+  receivable remain deployment-specific.

@@ -1,9 +1,13 @@
 use std::collections::BTreeSet;
 
-use ed25519_dalek::VerifyingKey;
 use serde::{Deserialize, Serialize};
 
-use crate::{digest, valid_window, AethelError, Commitment, Identifier, MAX_UNIX_TIME, ZERO};
+use aethel_types::{
+    digest, is_verifying_key, valid_window, verify_key_signature, Commitment, Identifier,
+    MAX_UNIX_TIME, ZERO,
+};
+
+use crate::ProviderError;
 
 const PROVIDER_DOMAIN: &[u8] = b"AETHEL:PROVIDER:v1";
 const PROVIDER_KEY_ROTATION_DOMAIN: &[u8] = b"AETHEL:PROVIDER-KEY-ROTATION:v1";
@@ -71,18 +75,18 @@ pub struct ProviderDefinition {
 
 impl ProviderDefinition {
     /// The registration form: sequence zero, active, and no key history.
-    pub fn validate_initial(&self) -> Result<(), AethelError> {
+    pub fn validate_initial(&self) -> Result<(), ProviderError> {
         if self.sequence != 0
             || self.status != ProviderStatus::Active
             || !self.retired_keys.is_empty()
         {
-            return Err(AethelError::InvalidProvider);
+            return Err(ProviderError::InvalidProvider);
         }
         self.validate()
     }
 
     /// The stored form after any number of rotations and status changes.
-    pub fn validate(&self) -> Result<(), AethelError> {
+    pub fn validate(&self) -> Result<(), ProviderError> {
         if [
             self.provider_id,
             self.participant_id,
@@ -94,20 +98,23 @@ impl ProviderDefinition {
             || !valid_window(self.valid_from, self.valid_until)
             || self.sequence < self.retired_keys.len() as u64
         {
-            return Err(AethelError::InvalidProvider);
+            return Err(ProviderError::InvalidProvider);
         }
-        VerifyingKey::from_bytes(&self.public_key).map_err(|_| AethelError::InvalidProviderKey)?;
+        if !is_verifying_key(&self.public_key) {
+            return Err(ProviderError::InvalidProviderKey);
+        }
         let mut keys = BTreeSet::from([self.public_key]);
         let mut last_retired_at = 0;
         for retired in &self.retired_keys {
-            VerifyingKey::from_bytes(&retired.public_key)
-                .map_err(|_| AethelError::InvalidProviderKey)?;
+            if !is_verifying_key(&retired.public_key) {
+                return Err(ProviderError::InvalidProviderKey);
+            }
             if !keys.insert(retired.public_key)
                 || retired.retired_at < last_retired_at
                 || retired.retired_at == 0
                 || retired.retired_at > MAX_UNIX_TIME
             {
-                return Err(AethelError::InvalidProvider);
+                return Err(ProviderError::InvalidProvider);
             }
             last_retired_at = retired.retired_at;
         }
@@ -116,8 +123,8 @@ impl ProviderDefinition {
             self.defmi_guarantor_id,
         ) {
             (true, Some(id)) if id != ZERO => Ok(()),
-            (true, _) => Err(AethelError::MissingGuaranteeAuthority),
-            (false, Some(_)) => Err(AethelError::InvalidProvider),
+            (true, _) => Err(ProviderError::MissingGuaranteeAuthority),
+            (false, Some(_)) => Err(ProviderError::InvalidProvider),
             (false, None) => Ok(()),
         }
     }
@@ -145,6 +152,39 @@ impl ProviderDefinition {
             .map(|retired| retired.public_key)
             .chain(std::iter::once(self.public_key))
     }
+
+    /// A new artifact must be signed by the provider's current key.
+    pub fn verify_new_signature(
+        &self,
+        statement: &Commitment,
+        signature: &[u8],
+    ) -> Result<(), ProviderError> {
+        verify_key_signature(&self.public_key, statement, signature)?;
+        Ok(())
+    }
+
+    /// An artifact already recorded was verified against the key that was
+    /// current when it was recorded; after a rotation that key is retired, so
+    /// state validation accepts the current key or any retired one.
+    pub fn verify_recorded_signature(
+        &self,
+        statement: &Commitment,
+        signature: &[u8],
+    ) -> Result<(), ProviderError> {
+        if signature.len() != ed25519_dalek::SIGNATURE_LENGTH {
+            return Err(ProviderError::InvalidSignature);
+        }
+        for public_key in self.signing_keys() {
+            match verify_key_signature(&public_key, statement, signature) {
+                Ok(()) => return Ok(()),
+                Err(aethel_types::SignatureError::InvalidKey) => {
+                    return Err(ProviderError::InvalidProviderKey)
+                }
+                Err(aethel_types::SignatureError::InvalidSignature) => {}
+            }
+        }
+        Err(ProviderError::InvalidSignature)
+    }
 }
 
 /// Moves a provider to a new artifact-signing key. The request is signed by
@@ -165,18 +205,26 @@ pub struct RotateProviderKey {
 }
 
 impl RotateProviderKey {
-    pub fn statement(&self) -> Result<Commitment, AethelError> {
+    pub fn statement(&self) -> Result<Commitment, ProviderError> {
         if [self.operation_id, self.provider_id, self.next_public_key].contains(&ZERO)
             || self.rotated_at == 0
             || self.rotated_at > MAX_UNIX_TIME
         {
-            return Err(AethelError::InvalidProvider);
+            return Err(ProviderError::InvalidProvider);
         }
-        VerifyingKey::from_bytes(&self.next_public_key)
-            .map_err(|_| AethelError::InvalidProviderKey)?;
+        if !is_verifying_key(&self.next_public_key) {
+            return Err(ProviderError::InvalidProviderKey);
+        }
         let mut unsigned = self.clone();
         unsigned.signature.clear();
-        digest(PROVIDER_KEY_ROTATION_DOMAIN, &unsigned)
+        Ok(digest(PROVIDER_KEY_ROTATION_DOMAIN, &unsigned)?)
+    }
+
+    /// Proof of possession: the request must be signed by the next key.
+    pub fn verify_possession(&self) -> Result<Commitment, ProviderError> {
+        let statement = self.statement()?;
+        verify_key_signature(&self.next_public_key, &statement, &self.signature)?;
+        Ok(statement)
     }
 }
 
@@ -194,14 +242,14 @@ pub struct SetProviderStatus {
 }
 
 impl SetProviderStatus {
-    pub fn statement(&self) -> Result<Commitment, AethelError> {
+    pub fn statement(&self) -> Result<Commitment, ProviderError> {
         if [self.operation_id, self.provider_id].contains(&ZERO)
             || self.effective_at == 0
             || self.effective_at > MAX_UNIX_TIME
         {
-            return Err(AethelError::InvalidProvider);
+            return Err(ProviderError::InvalidProvider);
         }
-        digest(PROVIDER_STATUS_DOMAIN, self)
+        Ok(digest(PROVIDER_STATUS_DOMAIN, self)?)
     }
 }
 
@@ -213,11 +261,11 @@ pub struct RegisterProvider {
 }
 
 impl RegisterProvider {
-    pub fn statement(&self) -> Result<Commitment, AethelError> {
+    pub fn statement(&self) -> Result<Commitment, ProviderError> {
         if self.operation_id == ZERO {
-            return Err(AethelError::InvalidProvider);
+            return Err(ProviderError::InvalidProvider);
         }
         self.provider.validate_initial()?;
-        digest(PROVIDER_DOMAIN, self)
+        Ok(digest(PROVIDER_DOMAIN, self)?)
     }
 }

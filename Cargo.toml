@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/aethel-core"]
+members = ["crates/aethel-types", "crates/aethel-provider-sdk", "crates/aethel-core", "crates/aethel-tokenization", "crates/aethel-distribution", "crates/aethel-obligation-wallet", "crates/aethel-servicing", "crates/aethel"]
 
 [workspace.package]
 version = "0.1.0"
@@ -33,3 +33,11 @@ rand = "0.8"
 regex = "1.13.1"
 openssl = "0.10"
 libc = "0.2"
+aethel-types = { path = "crates/aethel-types" }
+aethel-provider-sdk = { path = "crates/aethel-provider-sdk" }
+aethel-core = { path = "crates/aethel-core" }
+aethel-tokenization = { path = "crates/aethel-tokenization" }
+aethel-distribution = { path = "crates/aethel-distribution" }
+aethel-obligation-wallet = { path = "crates/aethel-obligation-wallet" }
+aethel-servicing = { path = "crates/aethel-servicing" }
+aethel = { path = "crates/aethel" }

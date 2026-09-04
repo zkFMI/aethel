@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{digest, AethelError, Commitment, Identifier, MAX_UNIX_TIME, ZERO};
+use aethel_types::{digest, Commitment, Identifier, MAX_UNIX_TIME, ZERO};
+
+use crate::ProviderError;
 
 const STREAM_STATE_DOMAIN: &[u8] = b"AETHEL:STREAM-STATE:v1";
 const STREAM_REGISTRATION_DOMAIN: &[u8] = b"AETHEL:STREAM-REGISTRATION:v1";
@@ -43,7 +45,7 @@ pub struct StreamState {
 }
 
 impl StreamState {
-    pub fn validate(&self) -> Result<(), AethelError> {
+    pub fn validate(&self) -> Result<(), ProviderError> {
         if [
             self.stream_id,
             self.payer_commitment,
@@ -59,17 +61,20 @@ impl StreamState {
             || self.as_of > MAX_UNIX_TIME
             || self.version == 0
         {
-            return Err(AethelError::InvalidStream);
+            return Err(ProviderError::InvalidStream);
         }
         Ok(())
     }
 
-    pub fn root(&self) -> Result<Commitment, AethelError> {
+    pub fn root(&self) -> Result<Commitment, ProviderError> {
         self.validate()?;
-        digest(STREAM_STATE_DOMAIN, self)
+        Ok(digest(STREAM_STATE_DOMAIN, self)?)
     }
 
-    pub(crate) fn valid_source_successor(&self, next: &Self) -> bool {
+    /// `next` is the attestor's successor of `self`: same identity and terms,
+    /// the pledged amount untouched (only an issuance moves it), the version
+    /// advanced by one, time advanced, and an allowed status transition.
+    pub fn valid_source_successor(&self, next: &Self) -> bool {
         next.stream_id == self.stream_id
             && next.payer_commitment == self.payer_commitment
             && next.payee_commitment == self.payee_commitment
@@ -85,18 +90,18 @@ impl StreamState {
     pub fn valid_issuance_successor(
         &self,
         after_pledged_commitment: Commitment,
-    ) -> Result<Self, AethelError> {
+    ) -> Result<Self, ProviderError> {
         if matches!(
             self.status,
             StreamStatus::Cancelled | StreamStatus::Defaulted | StreamStatus::Closed
         ) {
-            return Err(AethelError::StreamUnavailable);
+            return Err(ProviderError::StreamUnavailable);
         }
         let mut next = self.clone();
         next.version = next
             .version
             .checked_add(1)
-            .ok_or(AethelError::ArithmeticOverflow)?;
+            .ok_or(ProviderError::ArithmeticOverflow)?;
         next.pledged_commitment = after_pledged_commitment;
         Ok(next)
     }
@@ -126,7 +131,7 @@ pub struct RegisterStream {
 }
 
 impl RegisterStream {
-    pub fn statement(&self) -> Result<Commitment, AethelError> {
+    pub fn statement(&self) -> Result<Commitment, ProviderError> {
         if [
             self.operation_id,
             self.attestor_provider_id,
@@ -137,12 +142,12 @@ impl RegisterStream {
             || self.state.version != 1
             || self.state.status != StreamStatus::Active
         {
-            return Err(AethelError::InvalidStream);
+            return Err(ProviderError::InvalidStream);
         }
         self.state.validate()?;
         let mut unsigned = self.clone();
         unsigned.signature.clear();
-        digest(STREAM_REGISTRATION_DOMAIN, &unsigned)
+        Ok(digest(STREAM_REGISTRATION_DOMAIN, &unsigned)?)
     }
 }
 
@@ -159,7 +164,7 @@ pub struct StreamTransition {
 }
 
 impl StreamTransition {
-    pub fn statement(&self) -> Result<Commitment, AethelError> {
+    pub fn statement(&self) -> Result<Commitment, ProviderError> {
         if [
             self.operation_id,
             self.attestor_provider_id,
@@ -169,11 +174,11 @@ impl StreamTransition {
         ]
         .contains(&ZERO)
         {
-            return Err(AethelError::InvalidStreamTransition);
+            return Err(ProviderError::InvalidStreamTransition);
         }
         self.after_state.validate()?;
         let mut unsigned = self.clone();
         unsigned.signature.clear();
-        digest(STREAM_TRANSITION_DOMAIN, &unsigned)
+        Ok(digest(STREAM_TRANSITION_DOMAIN, &unsigned)?)
     }
 }

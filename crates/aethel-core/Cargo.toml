@@ -7,17 +7,19 @@ publish = false
 description = "Streaming-receivable protocol state for Aethel on DeFMI"
 
 [dependencies]
+aethel-types.workspace = true
+aethel-provider-sdk.workspace = true
 # DeKYX is the independent identity and qualification layer. These are sibling
 # workspaces under mvp/; a remote test run must transfer mvp/dekyx next to
 # mvp/qomm (see the Makefile remote-test target).
 dekyx-core = { git = "https://github.com/shukob/dekyx" }
 dekyx-aethel = { git = "https://github.com/shukob/dekyx" }
-ed25519-dalek.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 sha2.workspace = true
-hex.workspace = true
 thiserror.workspace = true
 
 [dev-dependencies]
+ed25519-dalek.workspace = true
+hex.workspace = true
 rand_core.workspace = true

@@ -1,0 +1,16 @@
+[package]
+name = "aethel-distribution"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "Venue-neutral circulation boundary for eligible receivable tokens: typed requests, venue fills, and settlement contexts"
+
+[dependencies]
+aethel-types.workspace = true
+aethel-tokenization.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

@@ -5,79 +5,25 @@
 //! the DeKYX-produced binding stored beside that artifact. Issuer trust, key
 //! epochs, credential signatures, qualifications, revocation, and the
 //! zero-knowledge presentation belong to DeKYX and are not re-implemented here.
+//! The requests a credential-issuer provider submits (`RegisterCredentialIssuer`,
+//! `PublishCredentialStatus`) are part of the provider contract in
+//! `aethel-provider-sdk`.
 
 use dekyx_aethel::{AethelEligibilityRequest, AethelSubjectBinding};
-use dekyx_core::{IssuerDefinition, PresentationContext, RevocationStatusList};
-use serde::{Deserialize, Serialize};
+use dekyx_core::{IssuerDefinition, PresentationContext};
 use sha2::{Digest, Sha256};
 
 use crate::{
-    digest, AethelError, Commitment, CreditDecision, GuaranteeCommitment, Identifier,
-    ReceivableSeries, ZERO,
+    AethelError, Commitment, CreditDecision, GuaranteeCommitment, Identifier, ReceivableSeries,
+    ZERO,
 };
 
-const CREDENTIAL_ISSUER_DOMAIN: &[u8] = b"AETHEL:CREDENTIAL-ISSUER:v1";
-const CREDENTIAL_STATUS_DOMAIN: &[u8] = b"AETHEL:CREDENTIAL-STATUS:v1";
 const CREDIT_DECISION_ACTION_DOMAIN: &[u8] = b"AETHEL:SUBJECT-ACTION:CREDIT-DECISION:v1";
 const GUARANTEE_ACTION_DOMAIN: &[u8] = b"AETHEL:SUBJECT-ACTION:GUARANTEE:v1";
 
 /// The record Aethel stores for an anonymous line. It is produced only by
 /// DeKYX verification; Aethel never constructs one from unverified input.
 pub type ConfidentialSubjectBinding = AethelSubjectBinding;
-
-/// A credential-issuer provider vouching for one DeKYX issuer key epoch.
-///
-/// The DeKYX issuer id is the Aethel provider id, so a credential names its
-/// vouching provider directly. The DeKYX signing key is separate from the
-/// provider's artifact key and rotates independently of it: a rotation is a
-/// second registration by the same provider with a higher epoch.
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
-pub struct RegisterCredentialIssuer {
-    pub operation_id: Identifier,
-    pub provider_id: Identifier,
-    pub issuer: IssuerDefinition,
-    /// `None` for the first key epoch. For a rotation, the last instant at
-    /// which credentials signed by earlier epochs stay acceptable; a value
-    /// before their `valid_from` retires them immediately, which is the
-    /// key-compromise path.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub previous_epochs_valid_until: Option<u64>,
-    pub signature: Vec<u8>,
-}
-
-impl RegisterCredentialIssuer {
-    pub fn statement(&self) -> Result<Commitment, AethelError> {
-        if self.operation_id == ZERO || self.issuer.issuer_id != self.provider_id {
-            return Err(AethelError::InvalidCredentialIssuer);
-        }
-        self.issuer.validate().map_err(AethelError::Credential)?;
-        let mut unsigned = self.clone();
-        unsigned.signature.clear();
-        digest(CREDENTIAL_ISSUER_DOMAIN, &unsigned)
-    }
-}
-
-/// An issuer-signed revocation status list for one DeKYX issuer key epoch.
-/// Its authenticity is the issuer key's; Aethel adds only replay protection.
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
-pub struct PublishCredentialStatus {
-    pub operation_id: Identifier,
-    pub status_list: RevocationStatusList,
-}
-
-impl PublishCredentialStatus {
-    pub fn statement(&self) -> Result<Commitment, AethelError> {
-        if self.operation_id == ZERO {
-            return Err(AethelError::InvalidCredentialStatus);
-        }
-        self.status_list
-            .statement_digest()
-            .map_err(AethelError::Credential)?;
-        digest(CREDENTIAL_STATUS_DOMAIN, self)
-    }
-}
 
 /// The provider artifact a subject presentation is bound to. The holder
 /// proves against the exact unsigned artifact, so a transcript cannot be moved
@@ -118,10 +64,10 @@ impl ConfidentialArtifact<'_> {
     }
 
     pub fn statement(&self) -> Result<Commitment, AethelError> {
-        match self {
-            Self::CreditDecision(decision) => decision.statement(),
-            Self::Guarantee(guarantee) => guarantee.statement(),
-        }
+        Ok(match self {
+            Self::CreditDecision(decision) => decision.statement()?,
+            Self::Guarantee(guarantee) => guarantee.statement()?,
+        })
     }
 
     pub fn action_digest(&self) -> Commitment {

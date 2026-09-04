@@ -7,9 +7,10 @@ use dekyx_core::{
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
+use aethel_provider_sdk::{ProviderError, ProviderRegistry};
+
 use crate::{
-    digest, id_key, subject::binding_is_well_formed, verify_key_signature,
-    verify_provider_signature, verify_recorded_provider_signature, ConfidentialArtifact,
+    digest, id_key, subject::binding_is_well_formed, ConfidentialArtifact,
     ConfidentialSubjectBinding, CreditDecision, DefaultAttestation, FundingQuote, GuaranteeClaim,
     GuaranteeCommitment, GuaranteeRelease, GuaranteeStatus, Identifier, ProviderCapability,
     ProviderDefinition, ProviderStatus, PublishCredentialStatus, ReceivableIssuance,
@@ -133,8 +134,7 @@ impl AethelBook {
         request: RotateProviderKey,
         now: u64,
     ) -> Result<[u8; 32], AethelError> {
-        let statement = request.statement()?;
-        verify_key_signature(&request.next_public_key, &statement, &request.signature)?;
+        let statement = request.verify_possession()?;
         self.ensure_operation_unused(&request.operation_id)?;
         let provider = self.provider(&request.provider_id)?;
         if provider.status == ProviderStatus::Revoked {
@@ -217,7 +217,7 @@ impl AethelBook {
             ProviderCapability::StreamAttestor,
             now,
         )?;
-        verify_provider_signature(provider, &statement, &request.signature)?;
+        provider.verify_new_signature(&statement, &request.signature)?;
         let key = id_key(&request.state.stream_id);
         if self.streams.contains_key(&key) {
             return Err(AethelError::DuplicateStream);
@@ -245,7 +245,7 @@ impl AethelBook {
             ProviderCapability::StreamAttestor,
             now,
         )?;
-        verify_provider_signature(provider, &statement, &request.signature)?;
+        provider.verify_new_signature(&statement, &request.signature)?;
         self.ensure_operation_unused(&request.operation_id)?;
         let key = id_key(&request.after_state.stream_id);
         let current = self.streams.get(&key).ok_or(AethelError::UnknownStream)?;
@@ -298,7 +298,7 @@ impl AethelBook {
             ProviderCapability::CreditAssessor,
             now,
         )?;
-        verify_provider_signature(provider, &statement, &decision.signature)?;
+        provider.verify_new_signature(&statement, &decision.signature)?;
         self.ensure_series_state(
             &decision.series_id,
             decision.stream_state_version,
@@ -342,7 +342,7 @@ impl AethelBook {
             ProviderCapability::CredentialIssuer,
             now,
         )?;
-        verify_provider_signature(provider, &statement, &request.signature)?;
+        provider.verify_new_signature(&statement, &request.signature)?;
         if request.issuer.valid_from < provider.valid_from
             || request.issuer.valid_until > provider.valid_until
         {
@@ -425,7 +425,7 @@ impl AethelBook {
         let statement = guarantee.statement()?;
         let provider =
             self.active_provider(&guarantee.provider_id, ProviderCapability::Guarantor, now)?;
-        verify_provider_signature(provider, &statement, &guarantee.signature)?;
+        provider.verify_new_signature(&statement, &guarantee.signature)?;
         self.ensure_series_state(
             &guarantee.series_id,
             guarantee.stream_state_version,
@@ -506,7 +506,7 @@ impl AethelBook {
         let statement = release.statement()?;
         let provider =
             self.active_provider(&release.provider_id, ProviderCapability::Guarantor, now)?;
-        verify_provider_signature(provider, &statement, &release.signature)?;
+        provider.verify_new_signature(&statement, &release.signature)?;
         if release.released_at != now {
             return Err(AethelError::InvalidGuaranteeRelease);
         }
@@ -542,7 +542,7 @@ impl AethelBook {
             ProviderCapability::LiquidityProvider,
             now,
         )?;
-        verify_provider_signature(provider, &statement, &quote.signature)?;
+        provider.verify_new_signature(&statement, &quote.signature)?;
         let stream = self.ensure_series_state(
             &quote.series_id,
             quote.stream_state_version,
@@ -680,7 +680,7 @@ impl AethelBook {
         let statement = attestation.statement()?;
         let provider =
             self.active_provider(&attestation.provider_id, ProviderCapability::Servicer, now)?;
-        verify_provider_signature(provider, &statement, &attestation.signature)?;
+        provider.verify_new_signature(&statement, &attestation.signature)?;
         let stream = self.stream(&attestation.stream_id)?;
         if stream.state.version != attestation.stream_state_version
             || stream.state.root()? != attestation.stream_state_root
@@ -805,7 +805,7 @@ impl AethelBook {
         for (key, decision) in &self.credit_decisions {
             let statement = decision.statement()?;
             let provider = self.provider(&decision.provider_id)?;
-            verify_recorded_provider_signature(provider, &statement, &decision.signature)?;
+            provider.verify_recorded_signature(&statement, &decision.signature)?;
             if key != &id_key(&decision.decision_id)
                 || !self.series.contains_key(&id_key(&decision.series_id))
                 || !provider
@@ -822,7 +822,7 @@ impl AethelBook {
             initial.bound_issuance_id = None;
             let statement = initial.statement()?;
             let provider = self.provider(&guarantee.provider_id)?;
-            verify_recorded_provider_signature(provider, &statement, &guarantee.signature)?;
+            provider.verify_recorded_signature(&statement, &guarantee.signature)?;
             let released = self.guarantee_releases.contains_key(key);
             if key != &id_key(&guarantee.guarantee_id)
                 || !provider
@@ -866,7 +866,7 @@ impl AethelBook {
             initial.bound_issuance_id = None;
             let statement = initial.statement()?;
             let provider = self.provider(&quote.provider_id)?;
-            verify_recorded_provider_signature(provider, &statement, &quote.signature)?;
+            provider.verify_recorded_signature(&statement, &quote.signature)?;
             if key != &id_key(&quote.quote_id)
                 || !self.series.contains_key(&id_key(&quote.series_id))
                 || !provider
@@ -1006,7 +1006,7 @@ impl AethelBook {
         for (key, release) in &self.guarantee_releases {
             let statement = release.statement()?;
             let provider = self.provider(&release.provider_id)?;
-            verify_recorded_provider_signature(provider, &statement, &release.signature)?;
+            provider.verify_recorded_signature(&statement, &release.signature)?;
             let guarantee = self.guarantees.get(key).ok_or(AethelError::InvalidState)?;
             if key != &id_key(&release.guarantee_id)
                 || guarantee.provider_id != release.provider_id
@@ -1021,7 +1021,7 @@ impl AethelBook {
         for (key, default) in &self.default_attestations {
             let statement = default.statement()?;
             let provider = self.provider(&default.provider_id)?;
-            verify_recorded_provider_signature(provider, &statement, &default.signature)?;
+            provider.verify_recorded_signature(&statement, &default.signature)?;
             if key != &id_key(&default.attestation_id)
                 || !provider
                     .capabilities
@@ -1493,4 +1493,39 @@ pub enum AethelError {
     Replay,
     #[error("arithmetic overflow")]
     ArithmeticOverflow,
+}
+
+impl From<ProviderError> for AethelError {
+    fn from(error: ProviderError) -> Self {
+        match error {
+            ProviderError::Encoding => Self::Encoding,
+            ProviderError::InvalidProvider => Self::InvalidProvider,
+            ProviderError::InvalidProviderKey => Self::InvalidProviderKey,
+            ProviderError::InvalidSignature => Self::InvalidSignature,
+            ProviderError::MissingGuaranteeAuthority => Self::MissingGuaranteeAuthority,
+            ProviderError::UnknownProvider => Self::UnknownProvider,
+            ProviderError::MissingProviderCapability => Self::MissingProviderCapability,
+            ProviderError::InvalidStream => Self::InvalidStream,
+            ProviderError::InvalidStreamTransition => Self::InvalidStreamTransition,
+            ProviderError::StreamUnavailable => Self::StreamUnavailable,
+            ProviderError::InvalidCreditDecision => Self::InvalidCreditDecision,
+            ProviderError::InvalidGuarantee => Self::InvalidGuarantee,
+            ProviderError::InvalidGuaranteeRelease => Self::InvalidGuaranteeRelease,
+            ProviderError::InvalidFundingQuote => Self::InvalidFundingQuote,
+            ProviderError::InvalidDefaultAttestation => Self::InvalidDefaultAttestation,
+            ProviderError::InvalidCredentialIssuer => Self::InvalidCredentialIssuer,
+            ProviderError::InvalidCredentialStatus => Self::InvalidCredentialStatus,
+            ProviderError::Credential(error) => Self::Credential(error),
+            ProviderError::ArithmeticOverflow => Self::ArithmeticOverflow,
+        }
+    }
+}
+
+/// The book is the authoritative provider registry of its deployment, so any
+/// verifier built on the provider SDK (a servicing book, a host adapter) can
+/// check artifacts against exactly the providers Aethel has admitted.
+impl ProviderRegistry for AethelBook {
+    fn provider(&self, provider_id: &Identifier) -> Option<&ProviderDefinition> {
+        self.providers.get(&id_key(provider_id))
+    }
 }

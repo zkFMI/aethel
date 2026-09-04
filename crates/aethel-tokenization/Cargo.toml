@@ -1,0 +1,16 @@
+[package]
+name = "aethel-tokenization"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "Receivable token series, supply caps, transfer restrictions, and supply intents for an external DeFMI asset ledger"
+
+[dependencies]
+aethel-types.workspace = true
+aethel-core.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

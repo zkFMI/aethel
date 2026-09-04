@@ -361,7 +361,9 @@ fn credit_decision_cannot_substitute_for_required_guarantee() {
 fn guarantor_capability_requires_a_defmi_guarantor_identity() {
     let key = signer(103);
     assert_eq!(
-        provider(3, &key, &[ProviderCapability::Guarantor], None).validate_initial(),
+        provider(3, &key, &[ProviderCapability::Guarantor], None)
+            .validate_initial()
+            .map_err(AethelError::from),
         Err(AethelError::MissingGuaranteeAuthority)
     );
 }
