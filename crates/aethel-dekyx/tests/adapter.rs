@@ -52,6 +52,8 @@ fn issue(
         issuer_key_epoch: definition.key_epoch,
         subject_kind: SubjectKind::LegalEntity,
         subject_commitment: witness.subject_commitment(),
+        holder_public_key: witness.holder_public_key(),
+        holder_suite: witness.holder_suite(),
         scope_digest: id(scope),
         policy_digest: id(policy),
         qualifications: vec![kyb()],
