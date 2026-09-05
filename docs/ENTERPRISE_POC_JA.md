@@ -70,7 +70,7 @@ cargo test --workspace --locked
 
 `--locked` で失敗した場合は、勝手に依存関係を更新せず、リポジトリが指定する `Cargo.lock` とRust版が一致しているかを確認してください。
 
-現行の公開リポジトリには、支払ストリームの中核だけでなく、後述する8クレートが
+この作業ツリーには、支払ストリームの中核だけでなく、後述する12クレートが
 すべて含まれます。取得した配布物が完全構成かどうかは、ディレクトリ名ではなく
 `cargo metadata --locked --no-deps --format-version 1` の結果で確認してください。
 
@@ -233,7 +233,7 @@ PoCの合格は本番運用の承認ではありません。技術検証、法�
 
 ### 11.1 Aethelを構成するモジュール
 
-Aethelの完全構成は、次の8クレートへ責務を分離します。一つの巨大なコントラクトへ
+Aethelの完全構成は、次の12クレートへ責務を分離します。一つの巨大なコントラクトへ
 与信、保証、債権管理、流通、回収を集約せず、各モジュールの入力、権限、状態遷移を
 個別に検証できるようにするためです。
 
@@ -246,9 +246,13 @@ Aethelの完全構成は、次の8クレートへ責務を分離します。一�
 | `aethel-distribution` | circulation request、venue fill、settlement context、適格性・譲渡制限digest | 募集管理、割当台帳、価格発見・matching、DeKYX資格の発行 |
 | `aethel-obligation-wallet` | 支払義務者向け予定、処理待ち、再試行、一意性の管理 | 銀行口座・DeFMI正本 |
 | `aethel-servicing` | installment別支払証拠、延滞、cure、不履行証拠とattestation受理 | 投資家別配分、allocation、保証claim、DeCCP保証枠の正本 |
-| `aethel` | 上記モジュールを一つのアプリケーション状態として組み合わせる境界 | Avalanche consensus、外部API |
+| `aethel` | 業務モジュールを一つのアプリケーション状態として組み合わせる境界 | Avalanche consensus、外部API |
+| `aethel-dekyx` | Aethelの資格要求とDeKYX検証結果の対応 | DeKYX資格証明の実装 |
+| `aethel-deccp` | Aethel保証とDeCCP holdの対応 | 清算・保証残額の正本 |
+| `aethel-zkpi` | 債権固有の指図文脈・wire・追加検証 | 汎用zkPI証明の実装 |
+| `aethel-defmi-host` | 業務状態と専用実行処理をDeFMIの汎用VMへ組み込む専用binary | 基盤からAethelへの依存 |
 
-完全な導入試験では、この8クレートを一つのCargo workspaceとして試験します。
+完全な導入試験では、この12クレートを一つのCargo workspaceとして試験します。
 中核機能だけを配布または導入する構成では、`aethel-core`の試験結果を、トークン化、
 流通、ウォレット、回収まで動作した証拠として扱ってはいけません。導入するモジュールと
 検証対象をPoC計画書へ明記します。
@@ -263,9 +267,13 @@ cargo metadata --locked --no-deps --format-version 1 > poc-output/cargo-metadata
 
 公開用workspaceの標準配置ではcrateが `crates/` 配下にあるため、必要なら
 `find crates -mindepth 1 -maxdepth 1 -type d` で目視できます。ただし配置名は正本ではない。
-`cargo metadata` の `packages[].name` に8クレートが揃っている場合だけ、本章の完全経路を
+`cargo metadata` の `packages[].name` に12クレートが揃っている場合だけ、本章の完全経路を
 実行します。`aethel-core`だけを導入した場合は、支払ストリーム、与信、保証、債権seriesの
 生成までを最小範囲とし、トークン化、流通、支払義務者ウォレット、回収は未検証と記録します。
+
+追加の4クレートはAethel所有の統合実装である。DeFMI、DeKYX、DeCCP、zkPI側からAethelをimportしない。
+ビルド時は `../defmi` を同じ作業セットとして配置する。旧snapshotとRPCの移行は
+[基盤分離の説明](FOUNDATION_INDEPENDENCE_JA.md)を参照する。
 
 ### 11.2 Aethelは単独で動く決済ネットワークではない
 
@@ -1153,7 +1161,7 @@ PoC完了時には、最低限次を残します。
 2. 全componentと運営主体を示す配置図。
 3. 物理ホスト、VM、container、cloud accountの共通障害点一覧。
 4. Git commit、Cargo.lock、Rust版、build artifact digest。
-5. 8クレートの有無と実施した機能範囲。
+5. 12クレートの有無と実施した機能範囲。
 6. provider登録・鍵・capability・policy版一覧。
 7. 正常系のstreamから回収までのtrace。
 8. 拒否・障害注入全ケースの結果。

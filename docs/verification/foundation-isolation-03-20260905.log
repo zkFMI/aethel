@@ -1,0 +1,282 @@
+started_at=2026-09-05T13:10:21Z
+sha256:0e2bcaef56d041a486784e54104a81aebe0da44bd03019bd70bc0401e42e4a97
+aethel_directory_absent=true
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+cargo 1.97.1 (c980f4866 2026-06-30)
+metadata_workspace=oclob
+    Updating git repository `https://github.com/shukob/defmi.git`
+    Updating git repository `https://github.com/shukob/qomm.git`
+true
+gate_workspace=defmi_binary
+   Compiling qomm-mpc v0.1.0 (/work/defmi/rust/qomm-mpc)
+   Compiling openssl v0.10.81
+warning: qomm-mpc@0.1.0: MP_SPDZ_ROOT is unset; building without the engine
+   Compiling qomm-transport v0.1.0 (/work/defmi/rust/qomm-transport)
+   Compiling qomm-defmi v0.1.0 (/work/defmi/rust/qomm-defmi)
+   Compiling qomm-avalanche-vm v0.1.0 (/work/defmi/rust/qomm-avalanche-vm)
+    Finished `release` profile [optimized] target(s) in 47.23s
+     Running `/work/.cache/target/release/qomm-avalanche-vm version`
+qomm-avalanche-vm/0.1.0
+   Compiling qomm-mpc v0.1.0 (/work/defmi/rust/qomm-mpc)
+warning: qomm-mpc@0.1.0: MP_SPDZ_ROOT is unset; building without the engine
+   Compiling qomm-transport v0.1.0 (/work/defmi/rust/qomm-transport)
+   Compiling qomm-defmi v0.1.0 (/work/defmi/rust/qomm-defmi)
+   Compiling qomm-avalanche-vm v0.1.0 (/work/defmi/rust/qomm-avalanche-vm)
+    Finished `release` profile [optimized] target(s) in 45.91s
+     Running `/work/.cache/target/release/qomm-avalanche-vm vmid`
+mDV3RhDBqCL8Vt7msBmMzNP2gAMjFXUktxEZsD66p7GGMiqa8
+gate_workspace=qomm/rust
+   Compiling syn v2.0.119
+    Checking getrandom v0.2.17
+   Compiling thiserror v2.0.20
+    Checking heapless v0.7.17
+    Checking rand_core v0.6.4
+    Checking ff v0.13.1
+    Checking group v0.13.0
+    Checking cobs v0.3.0
+    Checking rand_chacha v0.3.1
+    Checking either v1.18.0
+    Checking serdect v0.2.0
+    Checking rand v0.8.8
+    Checking itertools v0.14.0
+    Checking postcard v1.1.3
+    Checking hex v0.4.3
+    Checking ed25519 v2.2.3
+    Checking serde_json v1.0.151
+   Compiling zeroize_derive v1.5.0
+   Compiling curve25519-dalek-derive v0.1.1
+   Compiling thiserror-impl v1.0.69
+   Compiling derive-getters v0.5.0
+   Compiling visibility v0.1.1
+    Checking zeroize v1.9.0
+    Checking curve25519-dalek v4.1.3
+    Checking merlin v3.0.0
+    Checking frost-core v3.0.0
+    Checking thiserror v1.0.69
+    Checking bulletproofs v5.0.0
+    Checking ed25519-dalek v2.2.0
+    Checking frost-rerandomized v3.0.0
+    Checking frost-ristretto255 v3.0.0
+    Checking qomm-zk v0.1.0 (/work/qomm/rust/qomm-zk)
+    Checking qomm-proofs v0.1.0 (/work/qomm/rust/qomm-proofs)
+    Checking qomm-zkpi v0.1.0 (/work/qomm/rust/qomm-zkpi)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.41s
+   Compiling syn v2.0.119
+   Compiling getrandom v0.2.17
+   Compiling thiserror v2.0.20
+   Compiling heapless v0.7.17
+   Compiling rand_core v0.6.4
+   Compiling cobs v0.3.0
+   Compiling ff v0.13.1
+   Compiling group v0.13.0
+   Compiling rand_chacha v0.3.1
+   Compiling either v1.18.0
+   Compiling postcard v1.1.3
+   Compiling itertools v0.14.0
+   Compiling rand v0.8.8
+   Compiling serdect v0.2.0
+   Compiling hex v0.4.3
+   Compiling ed25519 v2.2.3
+   Compiling serde_json v1.0.151
+   Compiling zeroize_derive v1.5.0
+   Compiling curve25519-dalek-derive v0.1.1
+   Compiling thiserror-impl v1.0.69
+   Compiling visibility v0.1.1
+   Compiling derive-getters v0.5.0
+   Compiling zeroize v1.9.0
+   Compiling curve25519-dalek v4.1.3
+   Compiling merlin v3.0.0
+   Compiling frost-core v3.0.0
+   Compiling thiserror v1.0.69
+   Compiling bulletproofs v5.0.0
+   Compiling ed25519-dalek v2.2.0
+   Compiling frost-rerandomized v3.0.0
+   Compiling frost-ristretto255 v3.0.0
+   Compiling qomm-zk v0.1.0 (/work/qomm/rust/qomm-zk)
+   Compiling qomm-proofs v0.1.0 (/work/qomm/rust/qomm-proofs)
+   Compiling qomm-zkpi v0.1.0 (/work/qomm/rust/qomm-zkpi)
+    Finished `release` profile [optimized] target(s) in 12.60s
+     Running unittests src/lib.rs (/work/.cache/target/release/deps/qomm_zkpi-350f3c93bbcbf866)
+
+running 7 tests
+test cross_domain_dvp::tests::rejects_same_deployment_and_shared_public_leg_id ... ok
+test cross_domain_dvp::tests::creates_distinct_ledger_projections_from_one_private_dvp ... ok
+test handles::tests::a_handle_is_a_key_its_owner_can_prove ... ok
+test handles::tests::one_firm_gets_a_different_handle_at_each_venue ... ok
+test handles::tests::the_same_venue_gives_the_same_handle_back ... ok
+test handles::tests::two_firms_handles_at_one_venue_are_distinct ... ok
+test handles::tests::the_multiplicative_scheme_is_publicly_linkable_and_this_one_is_not ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/verify.rs (/work/.cache/target/release/deps/qomm_zkpi_verify-7985c79e95f6d460)
+
+running 2 tests
+test tests::generated_spec_update_fails_closed_without_both_markers ... ok
+test tests::generated_spec_update_preserves_the_reviewed_tail ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/instruction.rs (/work/.cache/target/release/deps/instruction-d4cd23d61e1bc36d)
+
+running 15 tests
+test a_deadline_beyond_the_venues_horizon_is_refused ... ok
+test a_payment_to_oneself_is_refused ... ok
+test a_deadline_inside_the_horizon_is_accepted ... ok
+test a_dkg_quorum_signs_an_instruction_with_no_dealer ... ok
+test a_second_venue_accepts_the_same_instruction ... ok
+test a_range_proof_from_elsewhere_does_not_cover_this_instruction ... ok
+test a_width_bulletproofs_does_not_take_is_refused_at_construction ... ok
+test a_signature_does_not_transfer_to_another_instruction ... ok
+test an_amount_outside_the_published_bounds_cannot_be_issued ... ok
+test a_signed_instruction_verifies_and_settles_once ... ok
+test a_tampered_field_breaks_the_signature ... ok
+test fewer_signers_than_the_threshold_cannot_sign ... ok
+test an_expired_instruction_is_refused ... ok
+test an_instruction_does_not_carry_to_another_venue ... ok
+test each_field_is_proved_at_its_own_width ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/threshold_instruction.rs (/work/.cache/target/release/deps/threshold_instruction-92b68ae5dee814f4)
+
+running 2 tests
+test a_production_venue_rejects_the_legacy_cleartext_issuer ... ok
+test threshold_ranges_round_trip_and_verify_without_openings ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.40s
+
+     Running tests/typed.rs (/work/.cache/target/release/deps/typed-85075f84313091d6)
+
+running 7 tests
+test context_only_wire_round_trips_and_rejects_trailing_bytes ... ok
+test payer_and_payee_must_match_the_trade_direction ... ok
+test a_typed_instruction_round_trips_and_settles_only_once ... ok
+test changing_the_reservation_or_quote_breaks_the_product_signature ... ok
+test typed_wire_refuses_trailing_and_invalid_context_bytes ... ok
+test v2_payment_and_execution_context_must_name_the_same_quote_proof ... ok
+test reserve_cannot_claim_a_future_rfq_and_settlement_cannot_omit_it ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+
+running 12 tests
+     Running tests/wire.rs (/work/.cache/target/release/deps/wire-b37dafdbf78742d7)
+test a_commitment_that_is_not_a_group_element_is_refused ... ok
+test a_byte_left_over_is_a_different_message ... ok
+test a_truncated_instruction_names_where_it_ran_out ... ok
+test checked_in_document_contains_the_exact_generated_section_and_reviewed_tail ... ok
+test a_flipped_bit_anywhere_in_the_body_is_caught_by_something ... ok
+test generated_spec_names_version_two_as_the_product_format ... ok
+test something_that_is_not_an_instruction_at_all_says_so ... ok
+test a_version_this_build_does_not_know_is_refused_and_not_guessed_at ... ok
+test an_instruction_survives_the_wire_unchanged ... ok
+test the_digest_the_signature_covers_survives_it_too ... ok
+test the_wire_is_the_size_the_table_says ... ok
+test every_shipped_vector_does_what_it_says ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.43s
+
+   Doc-tests qomm_zkpi
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+gate_workspace=zkpi/rust
+    Checking qomm-dsl v0.1.0 (https://github.com/shukob/qomm#972396e6)
+    Checking qomm-proofs v0.1.0 (/work/zkpi/rust/qomm-proofs)
+    Checking qomm-zkpi v0.1.0 (/work/zkpi/rust/qomm-zkpi)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.59s
+   Compiling qomm-dsl v0.1.0 (https://github.com/shukob/qomm#972396e6)
+   Compiling qomm-proofs v0.1.0 (/work/zkpi/rust/qomm-proofs)
+   Compiling qomm-zkpi v0.1.0 (/work/zkpi/rust/qomm-zkpi)
+    Finished `release` profile [optimized] target(s) in 7.78s
+     Running unittests src/lib.rs (/work/.cache/target/release/deps/qomm_zkpi-e855ebd9f7b50fea)
+
+running 7 tests
+test cross_domain_dvp::tests::rejects_same_deployment_and_shared_public_leg_id ... ok
+test handles::tests::one_firm_gets_a_different_handle_at_each_venue ... ok
+test cross_domain_dvp::tests::creates_distinct_ledger_projections_from_one_private_dvp ... ok
+test handles::tests::a_handle_is_a_key_its_owner_can_prove ... ok
+test handles::tests::the_same_venue_gives_the_same_handle_back ... ok
+test handles::tests::two_firms_handles_at_one_venue_are_distinct ... ok
+test handles::tests::the_multiplicative_scheme_is_publicly_linkable_and_this_one_is_not ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/verify.rs (/work/.cache/target/release/deps/qomm_zkpi_verify-7ed9e5ca91e1f503)
+
+running 2 tests
+test tests::generated_spec_update_fails_closed_without_both_markers ... ok
+test tests::generated_spec_update_preserves_the_reviewed_tail ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/instruction.rs (/work/.cache/target/release/deps/instruction-a56bcbfdd34954e6)
+
+running 15 tests
+test a_payment_to_oneself_is_refused ... ok
+test a_deadline_beyond_the_venues_horizon_is_refused ... ok
+test a_deadline_inside_the_horizon_is_accepted ... ok
+test a_dkg_quorum_signs_an_instruction_with_no_dealer ... ok
+test a_second_venue_accepts_the_same_instruction ... ok
+test a_range_proof_from_elsewhere_does_not_cover_this_instruction ... ok
+test a_width_bulletproofs_does_not_take_is_refused_at_construction ... ok
+test a_signature_does_not_transfer_to_another_instruction ... ok
+test an_amount_outside_the_published_bounds_cannot_be_issued ... ok
+test a_signed_instruction_verifies_and_settles_once ... ok
+test a_tampered_field_breaks_the_signature ... ok
+test fewer_signers_than_the_threshold_cannot_sign ... ok
+test an_expired_instruction_is_refused ... ok
+test an_instruction_does_not_carry_to_another_venue ... ok
+test each_field_is_proved_at_its_own_width ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/threshold_instruction.rs (/work/.cache/target/release/deps/threshold_instruction-4072564b24400562)
+
+running 2 tests
+test a_production_venue_rejects_the_legacy_cleartext_issuer ... ok
+test threshold_ranges_round_trip_and_verify_without_openings ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.40s
+
+     Running tests/typed.rs (/work/.cache/target/release/deps/typed-9a994c335d6e7c12)
+
+running 7 tests
+test context_only_wire_round_trips_and_rejects_trailing_bytes ... ok
+test payer_and_payee_must_match_the_trade_direction ... ok
+test a_typed_instruction_round_trips_and_settles_only_once ... ok
+test changing_the_reservation_or_quote_breaks_the_product_signature ... ok
+test typed_wire_refuses_trailing_and_invalid_context_bytes ... ok
+test v2_payment_and_execution_context_must_name_the_same_quote_proof ... ok
+test reserve_cannot_claim_a_future_rfq_and_settlement_cannot_omit_it ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/wire.rs (/work/.cache/target/release/deps/wire-749a6203e3a5e6df)
+
+running 12 tests
+test a_commitment_that_is_not_a_group_element_is_refused ... ok
+test a_byte_left_over_is_a_different_message ... ok
+test a_truncated_instruction_names_where_it_ran_out ... ok
+test checked_in_document_contains_the_exact_generated_section_and_reviewed_tail ... ok
+test a_flipped_bit_anywhere_in_the_body_is_caught_by_something ... ok
+test generated_spec_names_version_two_as_the_product_format ... ok
+test something_that_is_not_an_instruction_at_all_says_so ... ok
+test a_version_this_build_does_not_know_is_refused_and_not_guessed_at ... ok
+test an_instruction_survives_the_wire_unchanged ... ok
+test the_digest_the_signature_covers_survives_it_too ... ok
+test the_wire_is_the_size_the_table_says ... ok
+test every_shipped_vector_does_what_it_says ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.43s
+
+   Doc-tests qomm_zkpi
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+completed_at=2026-09-05T13:12:30Z

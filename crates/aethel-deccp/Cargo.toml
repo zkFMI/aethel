@@ -1,0 +1,15 @@
+[package]
+name = "aethel-deccp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version = "1.85"
+
+[dependencies]
+deccp-core = { git = "https://github.com/shukob/deccp", rev = "3660ebab170723d055be3cf26ea8e2f039d6514b" }
+sha2.workspace = true
+
+[dev-dependencies]
+ed25519-dalek.workspace = true
+serde_json.workspace = true
+rand_core = { version = "0.6.4", features = ["getrandom"] }

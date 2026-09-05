@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "id": "aethel-foundation-independence-20260905",
+  "verified_at": "2026-09-05T13:30:57.736Z",
+  "verdict": "verified_source_and_dependency_isolation",
+  "remote_host": "softbank-l40s",
+  "remote_directory": "~/work/aethel-independence-20260905",
+  "image": "rust:1.97-bookworm",
+  "image_sha256": "0e2bcaef56d041a486784e54104a81aebe0da44bd03019bd70bc0401e42e4a97",
+  "rustc": "1.97.1 (8bab26f4f 2026-07-14)",
+  "aethel_directory_absent_in_foundation_container": true,
+  "dependency_graphs": [
+    {
+      "repository": "deccp",
+      "all_features": true,
+      "package_count": 43,
+      "workspace_members": 1,
+      "aethel_references": 0,
+      "metadata_sha256": "51fcd15a604c1d02ffe436f730b37de9ed1e0d02411ce1f7e7b0f7482574f8eb"
+    },
+    {
+      "repository": "dekyx",
+      "all_features": true,
+      "package_count": 43,
+      "workspace_members": 1,
+      "aethel_references": 0,
+      "metadata_sha256": "34f0f338595bb60533d6f0270fff8da9929d5ae5cbc495f8ecdd93477c1d3930"
+    },
+    {
+      "repository": "defmi",
+      "all_features": true,
+      "package_count": 226,
+      "workspace_members": 14,
+      "aethel_references": 0,
+      "metadata_sha256": "1a9b36da879cc8e29005a49a10b1aab7b73edc6982ac1532f8e4cf2c5f473057"
+    },
+    {
+      "repository": "qomm",
+      "all_features": true,
+      "package_count": 123,
+      "workspace_members": 14,
+      "aethel_references": 0,
+      "metadata_sha256": "3aacf4ac397b44d570cb1ade3488076c8e0ab3d1a05a146377cfce92cb97550f"
+    },
+    {
+      "repository": "zkpi",
+      "all_features": true,
+      "package_count": 96,
+      "workspace_members": 5,
+      "aethel_references": 0,
+      "metadata_sha256": "b46c6cd08dcbe3d6f7d231d796a9d7ce35c91685531c8b55da69e9783f73e865"
+    },
+    {
+      "repository": "oclob",
+      "all_features": true,
+      "package_count": 132,
+      "workspace_members": 10,
+      "aethel_references": 0,
+      "metadata_sha256": "962700f29c2ddc86463a6dcdca87f806789c9a4eae44ae9c8e8effa0a8822101"
+    }
+  ],
+  "release_tests": {
+    "aethel_workspace": 57,
+    "deccp_workspace": 7,
+    "dekyx_workspace": 6,
+    "defmi_selected_packages": 366,
+    "qomm_zkpi_in_qomm": 45,
+    "qomm_zkpi_in_zkpi": 45,
+    "total": 526,
+    "failed": 0,
+    "ignored": 0
+  },
+  "checks": {
+    "format": "PASS",
+    "clippy_all_targets_warnings_denied": "PASS",
+    "source_bytes_match_remote": "PASS",
+    "default_vm_version": "qomm-avalanche-vm/0.1.0",
+    "default_vm_id": "mDV3RhDBqCL8Vt7msBmMzNP2gAMjFXUktxEZsD66p7GGMiqa8",
+    "aethel_host_version": "aethel-defmi-host/0.1.0",
+    "aethel_host_vm_id": "2UqLr8pgyVQRFqDr2EhC8416qiiCwSw5NiNAkxofNMe8aqxBno"
+  },
+  "defmi_packages": [
+    "qomm-defmi",
+    "qomm-avalanche-vm",
+    "zkpi-defmi-sdk",
+    "qomm-zkpi"
+  ],
+  "logs": [
+    {
+      "path": "integration-release-20260905.log",
+      "sha256": "cabadff49684f8fc0c6441587b43e0bf6df0edc4807f013ae0ba6fdbf2d8406b"
+    },
+    {
+      "path": "foundation-isolation-20260905.log",
+      "sha256": "4449a58a25b9da6db6b912f3a1da351a817df7e8dd3461c4af97376d6be5289b"
+    },
+    {
+      "path": "foundation-isolation-02-20260905.log",
+      "sha256": "6b364821df28df43cf9f2f498b7dfd4239851e28d82fb9a64eb24b30f20636b7"
+    },
+    {
+      "path": "foundation-isolation-03-20260905.log",
+      "sha256": "db1a3fd96a2e5ae21c448f5ac56d6ea0286e5304194366c0cb71b2e6976d0c74"
+    }
+  ],
+  "source_manifest": {
+    "path": "FOUNDATION_SOURCES_2026-09-05.json",
+    "sha256": "ce4320c7652c75dd6b6ff3413d9d4351025a8a9204b7c95cc4f55c1950dad21c"
+  },
+  "resolved_execution_issues": [
+    "First foundation gate omitted the ZKPI_WIRE.md compile-time test input; copied exact original specs and resumed incomplete checks.",
+    "Second gate passed all DeFMI checks/tests; cargo run required --bin qomm-avalanche-vm because the package has two binaries. Corrected the invocation and completed remaining checks without repeating passed tests."
+  ],
+  "limitations": [
+    "Local uncommitted multi-repository changes; no publication or deployment performed.",
+    "Old embedded Aethel/DeCCP snapshots are rejected; app roots/RPC envelopes change. No migration or chain reset performed.",
+    "MP_SPDZ_ROOT unset in this official Rust image. No live seven-node MPC, independent-operator, WAN or production acceptance run for the new host.",
+    "OCLOB metadata came from a read-only snapshot; its concurrent source was not changed or tested by this task."
+  ]
+}

@@ -1,0 +1,14 @@
+[package]
+name = "aethel-dekyx"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version = "1.85"
+
+[dependencies]
+dekyx-core = { git = "https://github.com/shukob/dekyx.git", rev = "67eb59a1548740d15585a42d9cff8bc06ae95c5e" }
+serde.workspace = true
+
+[dev-dependencies]
+ed25519-dalek.workspace = true
+rand_core.workspace = true

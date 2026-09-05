@@ -1,0 +1,3342 @@
+{
+  "captured_at": "2026-09-05T13:30:57.736Z",
+  "verification": "rsync --dry-run --checksum reported no differences against the tested isolated remote inputs",
+  "repositories": [
+    {
+      "repository": "aethel",
+      "head": "96b7e1647d39f38c044abe605f7cc485010d700a",
+      "files": [
+        {
+          "path": "Cargo.lock",
+          "sha256": "5526dc7aa5359071fbfbfbc2d91c60d946b92f7b476fbc12091d267e13122551"
+        },
+        {
+          "path": "Cargo.toml",
+          "sha256": "5814b70cb7b452fc9ab9676408bf195047680a15b186b25b80dfe67a4843adca"
+        },
+        {
+          "path": "crates/aethel-core/Cargo.toml",
+          "sha256": "d455e68dcf86913b83db7f2496790d7aada26d0fee0137b0b219f8e1b5c209fa"
+        },
+        {
+          "path": "crates/aethel-core/src/book.rs",
+          "sha256": "c1237757814a141837717cc2702de0fbe89abd9fd4de22a39d5ea589ff5704b3"
+        },
+        {
+          "path": "crates/aethel-core/src/lib.rs",
+          "sha256": "12b39f993358ccd8eac5221b6314f553848a0743a39ae00a1570bf69c0fef48a"
+        },
+        {
+          "path": "crates/aethel-core/src/receivable.rs",
+          "sha256": "12f464842f8598d907650c26b143ccbf6de7beee0a14ee50b15700f32013aae1"
+        },
+        {
+          "path": "crates/aethel-core/src/subject.rs",
+          "sha256": "5f6fd472e1992c1e25bf75621238a8ed9b7741c3ed1af3421a41456e4990f1a5"
+        },
+        {
+          "path": "crates/aethel-core/tests/protocol.rs",
+          "sha256": "9335a3ba9e3ade0435d1cebb4a50952b78bce5ddf8f913c85dcd7a2264231340"
+        },
+        {
+          "path": "crates/aethel-deccp/Cargo.toml",
+          "sha256": "acbea6379a20ca7d75ea0ef0eae656cf2bdb896c9982363d96b912980e70461e"
+        },
+        {
+          "path": "crates/aethel-deccp/src/lib.rs",
+          "sha256": "51e8a2291b0569393c3f6f3c273c04401d84775a956948f9b175ef990186a188"
+        },
+        {
+          "path": "crates/aethel-deccp/tests/adapter.rs",
+          "sha256": "ebef5761fbd8471921bd9c796f74a611c7227e890c8aca60d5301cb629579f1e"
+        },
+        {
+          "path": "crates/aethel-defmi-host/Cargo.toml",
+          "sha256": "b8fe1b4674850bc0289d30b81d499fb6b6c4a3616e98fa833639586b2acb29bd"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/clearing_state.rs",
+          "sha256": "0cabce81a3e53bacf1b40e75d31bdc311d6bdcc83f66524c7552784ece2f9edf"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/execution.rs",
+          "sha256": "b5bf1604a311e98a801a3029ef02e770f3cbffb1d911ce2d952ab9970fe0c4e3"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/execution/aethel.rs",
+          "sha256": "c560f2d241710358efb1b68bbbe7d55d6b9d7d86f1654466ac2cf9c359b7e9f5"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/execution/aethel_tests.rs",
+          "sha256": "07bca228d83a71c11269caaaf80fb18cd16d46e9e7bb72a2c9d843c07ce3789b"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/execution/deccp.rs",
+          "sha256": "9e6c123660dc3457bd37ffd10ddf99e1c92189ae992e75d2d8e2b80b4b3d9a7a"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/execution/deccp_tests.rs",
+          "sha256": "c9dbff6cadff0d4c0166bd57854361c11571e51340f02327f7323396d4d6a369"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/lib.rs",
+          "sha256": "93f5c69b8b71c8d62e59c3d768c6c6be10f21a515d590f2eb159749b226c6901"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/main.rs",
+          "sha256": "b735a0bb1642226eb6b5b4b7275c1be76340f006f27ebee0ed9f692d0aa800b5"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/methods.rs",
+          "sha256": "413c6fcd28980d5b242b3ada0ae77afa61e84a454540b59e4a941fac5149fa71"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/state.rs",
+          "sha256": "bd51fbf81ab60f8d1ba9ee6dd3d2fd0de5ded4a40947ca2875b9030d32ff4703"
+        },
+        {
+          "path": "crates/aethel-defmi-host/src/transaction.rs",
+          "sha256": "9e133931af27b547b652bc706d16a0b181fc663782319938b7bbee360a9edbb9"
+        },
+        {
+          "path": "crates/aethel-dekyx/Cargo.toml",
+          "sha256": "4e001b95f6d77a70c34ac2597cda8d12270db52d21995baff924c4b833cb0567"
+        },
+        {
+          "path": "crates/aethel-dekyx/src/lib.rs",
+          "sha256": "510c3a29c3ada16b4ea100c8f4af09e6ec555a8ebf2971de74c0275e46490583"
+        },
+        {
+          "path": "crates/aethel-dekyx/tests/adapter.rs",
+          "sha256": "bd331d78e737973f061e8cba04e9cf9f1bdd5e6d0e9449891e14fa1770cb4080"
+        },
+        {
+          "path": "crates/aethel-distribution/Cargo.toml",
+          "sha256": "5ed2272bcf1d5c37788538f8f2ac4ff115830766f6d11ecd0bc3e7bfe787b1d6"
+        },
+        {
+          "path": "crates/aethel-distribution/src/lib.rs",
+          "sha256": "6323e3aaccc9bba0eac3bf84b4e292bde2ea738e7eb455d5f1f7418dd2469937"
+        },
+        {
+          "path": "crates/aethel-obligation-wallet/Cargo.toml",
+          "sha256": "777f2902d91f824249f7bf74d2e88e471a6c12375cd6c3c33ae4588089045e06"
+        },
+        {
+          "path": "crates/aethel-obligation-wallet/src/lib.rs",
+          "sha256": "0c22f01019b4368e65fd2065281e914093b8401f0ea846b36ee61fac8c742baa"
+        },
+        {
+          "path": "crates/aethel-provider-sdk/Cargo.toml",
+          "sha256": "9441a20e1da6c8ee66688eda84532073ccdf2ece73316bff1937a8aee61a0eed"
+        },
+        {
+          "path": "crates/aethel-provider-sdk/src/artifacts.rs",
+          "sha256": "82d87ba591df202c0cfab09e390247f122f4c4fae54b85ec2d33d774be2ea3c2"
+        },
+        {
+          "path": "crates/aethel-provider-sdk/src/contract.rs",
+          "sha256": "99830003077654270a3f24bb5e69b54619a0a92ed897212bf382c342b940377c"
+        },
+        {
+          "path": "crates/aethel-provider-sdk/src/credential.rs",
+          "sha256": "67ab52c37526aae3dc651b3c14a24143bc874aa5342cce2791255942ba56df1b"
+        },
+        {
+          "path": "crates/aethel-provider-sdk/src/error.rs",
+          "sha256": "8b74a405ea2aee7b173443cba0d6789b8b37efc3ed4d8d7419324e8058f8b9ba"
+        },
+        {
+          "path": "crates/aethel-provider-sdk/src/lib.rs",
+          "sha256": "f5edfe808e83d6b991ee796ceb00c372ac26695978330638215df10211b11b70"
+        },
+        {
+          "path": "crates/aethel-provider-sdk/src/provider.rs",
+          "sha256": "565d37d7460e57b86dad52c8cc4a6ebaf9d302bb8213011254aae0f5c414da8b"
+        },
+        {
+          "path": "crates/aethel-provider-sdk/src/stream.rs",
+          "sha256": "74f38e19143c5a02c8919363693ca58d2c1bfcde0f80b515bb6dc88e678e09dd"
+        },
+        {
+          "path": "crates/aethel-servicing/Cargo.toml",
+          "sha256": "3358421d35f8bf53c2a5d0dd46e7443ec4b67e2ef6a923d61e9751c4e99a8e67"
+        },
+        {
+          "path": "crates/aethel-servicing/src/lib.rs",
+          "sha256": "a52ab5d7847b45616d974cf6a17305125743952bea4de98e774d06b2aca65af5"
+        },
+        {
+          "path": "crates/aethel-tokenization/Cargo.toml",
+          "sha256": "5057363c0ea2e3b7402827ce70ffda8908995d64013722ef30d39afe6cc040bb"
+        },
+        {
+          "path": "crates/aethel-tokenization/src/lib.rs",
+          "sha256": "cd8ab43b441beaa7d453294e133761c1641751ed91fb75e71d27b5854a1eb869"
+        },
+        {
+          "path": "crates/aethel-types/Cargo.toml",
+          "sha256": "e4a034014a46ba09e7af06073aa04ea554440a4fdd4eca90ec9280c6d7be6378"
+        },
+        {
+          "path": "crates/aethel-types/src/lib.rs",
+          "sha256": "412a8a611955c611d4751975961f1ba7ffe1f4df25f117ecfa7d9ca69a33840e"
+        },
+        {
+          "path": "crates/aethel-zkpi/Cargo.toml",
+          "sha256": "672cdadc73ff71e008ceccd2b31db64eca8462773de29bab93336e502d12a891"
+        },
+        {
+          "path": "crates/aethel-zkpi/src/lib.rs",
+          "sha256": "6448cbdc3e550f1d1c96f8798923bcf5c9b64e29f5ab59b46351baeaf4e05466"
+        },
+        {
+          "path": "crates/aethel-zkpi/src/receivable.rs",
+          "sha256": "51129da97677858f1df833f70aad5f3f69944f5daa86f06ed3e5ec64be81577b"
+        },
+        {
+          "path": "crates/aethel-zkpi/src/receivable_wire.rs",
+          "sha256": "7da96ecc0283dfd5fa58e2f9e01301eb2af01665b5046fce8803a2d80190110c"
+        },
+        {
+          "path": "crates/aethel-zkpi/tests/receivable.rs",
+          "sha256": "be1e37a23c955b859fe9078dcbd75d8c9e0ea6618d29e71a378fcb50b0199fec"
+        },
+        {
+          "path": "crates/aethel/Cargo.toml",
+          "sha256": "b8fb9966054e31ad064c549a75be791a54d2336d61e96061625de1ef2682b770"
+        },
+        {
+          "path": "crates/aethel/src/lib.rs",
+          "sha256": "b135293c36daebb0944b97444544780c8527943c2b48fa30959895bdc4c63642"
+        },
+        {
+          "path": "crates/aethel/tests/end_to_end.rs",
+          "sha256": "69bd8b65a2e86646adb3de51a3bba04d01440c3f5c4008a96f81ad8b8a07b0bc"
+        }
+      ]
+    },
+    {
+      "repository": "deccp",
+      "head": "3660ebab170723d055be3cf26ea8e2f039d6514b",
+      "files": [
+        {
+          "path": "Cargo.lock",
+          "sha256": "9240112ee9830396c8b01f6e53159f5995c80ffb0417b248163daf633bf44f83"
+        },
+        {
+          "path": "Cargo.toml",
+          "sha256": "c1ef63990404964f114b2d0433d05bcc821af332cc26daf50d67cf6db2beacfb"
+        },
+        {
+          "path": "crates/deccp-core/Cargo.toml",
+          "sha256": "ef562d0b9192285128831370ebb2244a4784f6d995488843e6a08f7371a9a2ff"
+        },
+        {
+          "path": "crates/deccp-core/src/lib.rs",
+          "sha256": "abefeff67e1460bef2ca6fe1529bd9ec10a55b6202f8b652ee34d164f8b7f1ae"
+        },
+        {
+          "path": "crates/deccp-core/tests/clearing.rs",
+          "sha256": "dd42d9f582c1f9db4802f61766a56a6554d4b53da843421b298cb919bbf22f03"
+        }
+      ]
+    },
+    {
+      "repository": "dekyx",
+      "head": "67eb59a1548740d15585a42d9cff8bc06ae95c5e",
+      "files": [
+        {
+          "path": "Cargo.lock",
+          "sha256": "a3d699433546985cd859d4f0c2e188e8bef3193da8d80f345303c085cd5cb6cc"
+        },
+        {
+          "path": "Cargo.toml",
+          "sha256": "446d15ecd0e09c2ce18f81609e50e6be651bae5a9b8cf6b046a708eeec06e5ac"
+        },
+        {
+          "path": "crates/dekyx-core/Cargo.toml",
+          "sha256": "7895c29eef629c25cadbfe5a5909cdfa0353c46411b171a97cb9d17c40114053"
+        },
+        {
+          "path": "crates/dekyx-core/src/lib.rs",
+          "sha256": "47896b64ea249fd9ffe55350a4e1096131ba443663c5212f779b5d8e0ba0a422"
+        },
+        {
+          "path": "crates/dekyx-core/tests/protocol.rs",
+          "sha256": "1fca9a832a12999e7278d4cb1c801c20cb5bca63c058dbbf9a29e743104fcdb3"
+        }
+      ]
+    },
+    {
+      "repository": "defmi",
+      "head": "4b07c2b7ec218b5b09ab20b6c4342710dfc23a83",
+      "files": [
+        {
+          "path": "ZKPI_WIRE.md",
+          "sha256": "9829affeafd8b41a646526ba3bd669d63a6ad4a30c76489fcb197ec57beff7c3"
+        },
+        {
+          "path": "rust/Cargo.lock",
+          "sha256": "141d9211c448f148454a0efa0a9cd02ef74cc01c3aa20433f77acbc4432e0405"
+        },
+        {
+          "path": "rust/Cargo.toml",
+          "sha256": "bd33f221be4de0cbb8f87af5fdbe2ee2204871bd3b9dd9f72d24772d6416009d"
+        },
+        {
+          "path": "rust/qomm-audit/Cargo.toml",
+          "sha256": "9b9cecc0012e6d16a40aec3c21dfb4738de444266a38188718fe4ccc3eafec83"
+        },
+        {
+          "path": "rust/qomm-audit/src/distributed_dp.rs",
+          "sha256": "4611b94fb7e9f309b8839b269f1b41e797fbc76c01903288a8e4a48b3a972d7f"
+        },
+        {
+          "path": "rust/qomm-audit/src/lib.rs",
+          "sha256": "4329f16c9d75583f306fb6df66691b5e90a58b6d54c6f574d35c8943e79a997d"
+        },
+        {
+          "path": "rust/qomm-audit/src/locate.rs",
+          "sha256": "c7f6a8a91536458e8b9ba66496294da5b92301a5a77c67fa91717827e8052313"
+        },
+        {
+          "path": "rust/qomm-audit/src/publication.rs",
+          "sha256": "43919b23803261cb6a5b715baddfae5adae0c73598447ccc4971e4514fd22d82"
+        },
+        {
+          "path": "rust/qomm-audit/src/publication_ledger.rs",
+          "sha256": "f83f205539f0bdbaa553d2d0d9f08701ce8e9739a7b52ffa424ed7153090a820"
+        },
+        {
+          "path": "rust/qomm-audit/src/receipts.rs",
+          "sha256": "0155a9d2a8cccef82d096028a6ca02b24ec3789c3c361797117655522694c736"
+        },
+        {
+          "path": "rust/qomm-audit/tests/distributed_dp.rs",
+          "sha256": "5a799fa998988002c2677cd53dd27490f929f0b5695eb12cea541342ea648f15"
+        },
+        {
+          "path": "rust/qomm-audit/tests/locate.rs",
+          "sha256": "73ae2632a743a50ef48b33ec5da6a8ae2418e110a4ca5f780468b30c2753f0dc"
+        },
+        {
+          "path": "rust/qomm-audit/tests/publication_ledger.rs",
+          "sha256": "189127d8b8ec7419dcca618e4b757cbc9fc604109e42e68ae3443c67bff49b0e"
+        },
+        {
+          "path": "rust/qomm-audit/tests/receipts.rs",
+          "sha256": "e77fbf330906a0cbc16654e3acffbb89fe5244f704433db5ef3933af6feafe5e"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/Cargo.toml",
+          "sha256": "8608eadf968f81e716cedaacf7ea90995963a46d6529ab5d4640decdc3d01295"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/application.rs",
+          "sha256": "348d0cba46bf7bb9757319e0b8d3580bc687d75af5fb3827b139ff33c1d1b91c"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/bin/qomm_defmi_network.rs",
+          "sha256": "fdc3c9ccdbff8293c9d67c068de4eecb31e778f7fd1686535b51e6bab4cf744f"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/block.rs",
+          "sha256": "55756d7bcd3ce8dbc587f986a83c9e52f6537e6e0d2757f5a1aa527d168ade22"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/execution.rs",
+          "sha256": "0e1715c6bf9c6948d40aeded4942bebcdc80952200745d56cd5826049d6d0659"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/execution/application_reservation.rs",
+          "sha256": "a04f05b826bbf707b6fa3cac8ed757b6420f35dda7f7cf367614169f2116fe19"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/execution/application_settlement.rs",
+          "sha256": "dcdb4200063413fdedff966c6f8a284721d9850d60399e015c1b5ce80ef25897"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/execution/cross_domain_tests.rs",
+          "sha256": "79d3416c02623517d6cc8112e1ab2c20088fb5af457635a733fd0becd88461b6"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/execution/participant.rs",
+          "sha256": "da63e9468d9214a4c31935aa4ed1383361e519c06ec7e8b2dfcb6c5b3c856e74"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/execution/participant_tests.rs",
+          "sha256": "595f6ac07427239230cc721a6118414afda9cfaad690a06221b9c93525726e0c"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/execution/tests/application_lifecycle.rs",
+          "sha256": "519ab3dca17d21a12bf3a01abf3838df44e5bc0c2526c86b822a5e41b60a37fb"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/genesis.rs",
+          "sha256": "1fb11b5be5c679a19c3265011ff48e48e76a8b33e820c328cefbe90a6ccaac3c"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/id.rs",
+          "sha256": "e7399ba69bf3ca03b70c3456ed116e42c593221faeec2292f20813c523f28499"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/lib.rs",
+          "sha256": "5f1d887df3b7d332aaf013494ecc01f09f3e01960a88ffb76893bdbfb571c610"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/main.rs",
+          "sha256": "ec74e81854f77b0d95e0d8e1b6f4762530c1a2744973e397c0c3abe738bce867"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/state.rs",
+          "sha256": "3630b91c0c3856170e2ef4cf03ee92e7b44b6cff66bc495cb9d84fa310d707f0"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/state_sync.rs",
+          "sha256": "566028ae25145ecd8fd3addb394e3ec5cdcac033c74c66c370ca5f904b809672"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/transaction.rs",
+          "sha256": "33b4e0c44a97f650a47ab006c02ac4663c750eae8f23322f62323d247949f835"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/src/vm.rs",
+          "sha256": "230e2e7b65619992d9ed1edb257043def94241a03b0bdf0892b725ffef4667ff"
+        },
+        {
+          "path": "rust/qomm-avalanche-vm/tests/application_boundary.rs",
+          "sha256": "d3c42afa52e49711ff8d5b05349590ce432b7795d5333950a38424b991fd3424"
+        },
+        {
+          "path": "rust/qomm-defmi/Cargo.toml",
+          "sha256": "0237a3e28cb9f94fdfa59e88c25923f9fc7cd449b8f46936ef624f288997d949"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/ccp.rs",
+          "sha256": "b680500837ec1f177d5cec93efb187ec745681c109108702760d99ccfd61a1d0"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/note_dvp.rs",
+          "sha256": "284a2bd671b91f37c558d0b4602fddbb954049aa76db8f6fbcdd18233a8d4e4f"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/pvp.rs",
+          "sha256": "48ae515cff8888c852e9b8c1ea1797de073c2238fe711f337abf78f3d0abc8fa"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/reconcile.rs",
+          "sha256": "95060d5cbc826ff840502bb77edd98d23c27b54e3adac5c335fecdfe03dc8a0d"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/rings.rs",
+          "sha256": "e7a768b16fb124453c0dca949d0ba381aa7934da6b832505ecf4a9f58a37482a"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/same_chain.rs",
+          "sha256": "cd3514888da804f9f218e85f8bdd733e7653641f6e0324242507dbfe93fdc9d6"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/settle.rs",
+          "sha256": "721e6bbf0445b1b54c3bed9c6f61fb16a7d48422938305e0c2ff7ab5b123c99d"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/vetting.rs",
+          "sha256": "53fee21831bc073ae6cb4c32f7b216eb804aca10af644e67f025390492aaadf0"
+        },
+        {
+          "path": "rust/qomm-defmi/src/application_reservation.rs",
+          "sha256": "f7afb77b5475651005b579fe3c808788521946a089c29572b9df3e9aa87e9575"
+        },
+        {
+          "path": "rust/qomm-defmi/src/application_settlement.rs",
+          "sha256": "033ff4254cff642156fd4f4648971fa7f1a681cc6bec1314084cdfff833b5305"
+        },
+        {
+          "path": "rust/qomm-defmi/src/application_settlement/batch.rs",
+          "sha256": "4b2c623802ea2b50f818abe8f4a4256a0b833a0ecb27c5ec62629279730f6bf4"
+        },
+        {
+          "path": "rust/qomm-defmi/src/asset_link.rs",
+          "sha256": "58b7f27ea9b3397f62f8da4003198979cce1bd69a5531bded58306de51c3ed8d"
+        },
+        {
+          "path": "rust/qomm-defmi/src/assets.rs",
+          "sha256": "2f9dd33b27b479270ba97cce3c2966143b6fa2c1ef96e2739f05b7a38c2f79cd"
+        },
+        {
+          "path": "rust/qomm-defmi/src/avalanche.rs",
+          "sha256": "b9887f26c12139ada629d2765c8bc93c2dcb7d8219fc36d41a23a5260ace845a"
+        },
+        {
+          "path": "rust/qomm-defmi/src/bin/settle_wasm.rs",
+          "sha256": "29f4be3f74057a8945406ed2631b618452abb3df7f3e45708b4ea9974fc199f8"
+        },
+        {
+          "path": "rust/qomm-defmi/src/ccp.rs",
+          "sha256": "56020b547e59ef98c44e5c18463c76370b914747eb3e78d9bbcacf17ea21b2e5"
+        },
+        {
+          "path": "rust/qomm-defmi/src/central_bank_liquidity.rs",
+          "sha256": "24620b7b47486b0e559ba9e3c2679bf2a358eb0704092e45442c39073a0cf3ed"
+        },
+        {
+          "path": "rust/qomm-defmi/src/chain.rs",
+          "sha256": "b5c0f2e2456b9281e6c975f0c8854658398fefba287346a2204b596844c1fb25"
+        },
+        {
+          "path": "rust/qomm-defmi/src/claim_redemption.rs",
+          "sha256": "71c1f303b0b0d2da20a22f6f9172fe483d08643f339cbee7454b5cf65a596420"
+        },
+        {
+          "path": "rust/qomm-defmi/src/credit.rs",
+          "sha256": "6f86dd72bf735d99ab6e7c79ac214868dd8a52d73da5dac3fe96658affadee2e"
+        },
+        {
+          "path": "rust/qomm-defmi/src/cross_domain.rs",
+          "sha256": "66323512070f2084b267f552642c141944d8f717ad370cccbb2dbf6a1224f949"
+        },
+        {
+          "path": "rust/qomm-defmi/src/cross_domain_finality.rs",
+          "sha256": "006406c5a9bc3fafed33063c7deaad64346c08ccca0f1575014310ec69b90588"
+        },
+        {
+          "path": "rust/qomm-defmi/src/facility.rs",
+          "sha256": "7d24186655dabf672a5d2a644e487cce42509137726946b80491eec6390e90d3"
+        },
+        {
+          "path": "rust/qomm-defmi/src/ledger.rs",
+          "sha256": "69e673080a291d5e5cabd004989cbb4da5f8e13aa397bdf36795af6d55f92ec6"
+        },
+        {
+          "path": "rust/qomm-defmi/src/lib.rs",
+          "sha256": "611cda1ff3ef5393f666f825f4953d344f10d98611ef5d56448fc5b7bcc85570"
+        },
+        {
+          "path": "rust/qomm-defmi/src/netting.rs",
+          "sha256": "4a8f4758ac6b38cf877cc6ba85b09f4e6b63fe5eb154439acf47dada8bb0fb05"
+        },
+        {
+          "path": "rust/qomm-defmi/src/note_chain.rs",
+          "sha256": "93e712d5a57e9526116323524b9dc2ae8e17b1c1f4150d9737e7024504fbe801"
+        },
+        {
+          "path": "rust/qomm-defmi/src/note_membership.rs",
+          "sha256": "469f7aa44f19de8eb6c287181bee72a58ab675e3bfa0cd133ed0e0697d89ed61"
+        },
+        {
+          "path": "rust/qomm-defmi/src/note_settlement.rs",
+          "sha256": "eed48821610e4093b44da9cd4e2f0c2245b40fa1fb91e0676e5610e601d41508"
+        },
+        {
+          "path": "rust/qomm-defmi/src/notes.rs",
+          "sha256": "e1b9707ca3efb960224b6a96526ed2fa8ecc42337d25fe824b5dcae84bd9dcd8"
+        },
+        {
+          "path": "rust/qomm-defmi/src/participant.rs",
+          "sha256": "99ea2b67f09a950ed6e141277529d0a6d678a7415324254a55c0ef4e14ee9d57"
+        },
+        {
+          "path": "rust/qomm-defmi/src/product.rs",
+          "sha256": "071412ca358ba60cf1c28073ca88ea5b5953baf212b1b9ea9a4bbe81c5c577c4"
+        },
+        {
+          "path": "rust/qomm-defmi/src/product_evidence.rs",
+          "sha256": "403e7c1c3a6d0b339e89a5863d86f0cd4ed0e47d1c7d3cfed54ad4f3df84ed59"
+        },
+        {
+          "path": "rust/qomm-defmi/src/pvp.rs",
+          "sha256": "72f525dff35620bd963f82e390f79284335a5b2540deb14826fe8b88592ca617"
+        },
+        {
+          "path": "rust/qomm-defmi/src/reconcile.rs",
+          "sha256": "58fdf7c8949e77148050f3a0066af75b01667b709a95b554f16eecefff4238c9"
+        },
+        {
+          "path": "rust/qomm-defmi/src/register.rs",
+          "sha256": "5666479d4e446e61d79d417deb7bd9f90c2451d10034aad4024947a93857cbec"
+        },
+        {
+          "path": "rust/qomm-defmi/src/settlement.rs",
+          "sha256": "528e95f79784e59baf733b8fc2f4c5708112f42e9b1f611e6bc75c43be99956c"
+        },
+        {
+          "path": "rust/qomm-defmi/src/settlement_verifier.rs",
+          "sha256": "7267a2fd8a41c5708dd2dc8ef91e5ff42f2b1c0527eebe6d8b93540fcbcd6f30"
+        },
+        {
+          "path": "rust/qomm-defmi/src/vetting.rs",
+          "sha256": "9b0dc9c4069995fab56b404ca6de873b9ab9b3601be9073e38a680fcdcc8328e"
+        },
+        {
+          "path": "rust/qomm-defmi/src/viewing.rs",
+          "sha256": "db925dc3766769dd28722622ace19630fe7c9ddbf668d7e28d7e5d02d68adb23"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/application_reservation.rs",
+          "sha256": "fb4a469b53a7c655abea874e60c0077e74955b999cac5761827b0759b1659005"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/atomic_transfer.rs",
+          "sha256": "50007c3f881298cbbaa38f9ff16e4a4357d50fe23f1b5eaa0b50d9dfe5050fe8"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/avalanche.rs",
+          "sha256": "adc869acb09b75ac9c4fede78b28bada0d0ead2b58dcf551497b4e3cef70e9a2"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/ccp.rs",
+          "sha256": "1006f0430393b825a228c08da80f2623ca3f6bace0334a4dbc71f48f3fc07e25"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/chain.rs",
+          "sha256": "0f4c393058cb1cda908237912554df3d45c6a9e85279fd3e10142792b58ccb3b"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/credit.rs",
+          "sha256": "bca766f2ff102811e73fe3ab27f4fa7c0471bee82e79bdd9d2e796f3454b70cc"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/cross_domain.rs",
+          "sha256": "d96a720c423cc88b9582c80dbddb86b6130ca35f445704ae91426e0b2ea3040d"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/dvp.rs",
+          "sha256": "bd8561f7a65a84f2a8079b79530674a0144bf275ea03f9f66aa2c887a33cd4ed"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/facility.rs",
+          "sha256": "9b13425aab170c769d512430ab66e67ab4b261b05f5f88f14b441ad2a852a66c"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/netting.rs",
+          "sha256": "bbac825a0a73f624a3d28596128efad47b917c92ed7cedd8d303f71e1cfa8c03"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/note_chain.rs",
+          "sha256": "2967bbbd2573bfea31c314125325f9be24eb2fce5cd02908fac94a91b5767d7f"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/note_security.rs",
+          "sha256": "b9cb3bdb299ec889de5bba1aa33f8157b8baa5bc8b736df43829173aded10122"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/note_settlement.rs",
+          "sha256": "d54ce8ad765dbad8d2d3721af35c520bca2a6e91084a9a54a8df68590cd571b5"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/notes.rs",
+          "sha256": "ca05d4d2eba72d90d411e4a878d9124cfd0cb4397a03a4d8b02122744208e4d6"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/pvp.rs",
+          "sha256": "0cdc693df4db31728a19f5944ba40447166651641982f8f8cf16e8fc3324102a"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/reconcile.rs",
+          "sha256": "763924625c71d0e7cfd0ba2d522913dfb721e49b29d47b706ebddea38f8997d9"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/register.rs",
+          "sha256": "00521ffa6cb6685f310b10a66fbfbd36066ce427198a012cce316ccf65909136"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/vetting.rs",
+          "sha256": "a51a19881925041aba8d4c3414d997712667b502f4e7b9c21644a74e6b3e4a46"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/viewing.rs",
+          "sha256": "984911e3e3a690420d2cd590fba43ef70aba151839be209924185a597140e7ac"
+        },
+        {
+          "path": "rust/qomm-dsl/Cargo.toml",
+          "sha256": "24f146016304f6c4cc8487df8a7952fc4bbeab81ffbb2393e5dbca9dbd3a9095"
+        },
+        {
+          "path": "rust/qomm-dsl/src/emit.rs",
+          "sha256": "c87d7af001a8ab14534b32eaa95c49c809e86d50958560cd38982dd58e11ba71"
+        },
+        {
+          "path": "rust/qomm-dsl/src/interval.rs",
+          "sha256": "15cec7cf9b0e1b1c925837d00c2cd981578265167d9419b3ab32798d22b328f8"
+        },
+        {
+          "path": "rust/qomm-dsl/src/lib.rs",
+          "sha256": "4260f76cfc3d7ff663f23b316c89d98974fc3897be3988b92b62ebc7234aeb66"
+        },
+        {
+          "path": "rust/qomm-dsl/src/parse.rs",
+          "sha256": "a1bc3094014d5e02602c589049f32a86a200c37e64a25446ffa920d3d3039782"
+        },
+        {
+          "path": "rust/qomm-dsl/src/registry.rs",
+          "sha256": "6b2aca6a62ce9dcf0f5fdeadcd569b5139d58d15f55e53ea66b9fecb05f4b141"
+        },
+        {
+          "path": "rust/qomm-dsl/src/rule.rs",
+          "sha256": "e3dfbf3203df4b6a25d632fd0fb627f79b3f379d92361fc10e3eef41ad918378"
+        },
+        {
+          "path": "rust/qomm-dsl/tests/language.rs",
+          "sha256": "8c42b5b9d154694fbc19c5f1d3ae8c75834554abf228d3088fd681222142fd59"
+        },
+        {
+          "path": "rust/qomm-dsl/tests/registry.rs",
+          "sha256": "12db953c0d25a0a80d7a6005212a05a46e62bb1a0b740dcf039acd5cd4aab94c"
+        },
+        {
+          "path": "rust/qomm-harness/Cargo.toml",
+          "sha256": "c5bf733a18ab9dd0e037fa3a13c8e04805288bc3fea81ff94dd11585ba342ded"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/build_defmi_doc.rs",
+          "sha256": "11bce92ea57c896a5a52ca55136c91b0c77084d2716a191ef212b856a72a09b7"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/build_settlement_contexts.rs",
+          "sha256": "4be7f542218601c3f5837a51b6c475a587fa8852393ea9b580ad91f695af067d"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/issue_external_kyb.rs",
+          "sha256": "7a324755e2901f97bea02dd90b5d4e52017f5f6bb73c47f0e08baa0a51dcef38"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/qomm_hsm_signer.rs",
+          "sha256": "c401c4b4c862bf852022603351847cca2aed1687b767b93bbd9c0f60812c5b99"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_avalanche_l1_acceptance.rs",
+          "sha256": "b46000953888718bbfc187ae2793f604cd1d7e7c9c1ac74afff72137d2d1fa63"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_deccp.rs",
+          "sha256": "0573438ef0522b64773b9d4e3433deb146e185273d56e824ac7fce5f08d99284"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_defmi.rs",
+          "sha256": "028ea2c5067437781bf1162de97cad820f260374a859289dd3155e6333a0b6fd"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_pretrade_reservations.rs",
+          "sha256": "ec6290c1d7140382ee5de9454447b4789b86f31d205ec6136b753a91c5cdc5d3"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_reconcile.rs",
+          "sha256": "2307402c73ca638a09277fdf8126e9935448a565c3765f5d2e7f432cc60040fe"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_viewing.rs",
+          "sha256": "4a8aa7c3bd663dc3aedb0222c089a0b9c26a85d37f664a31a6d08023ba1fc105"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/settle_finalized_batch.rs",
+          "sha256": "e634b1eeba6468b81f598908edf0eeb285682eaf967df0dfdb81ca4b11576f4f"
+        },
+        {
+          "path": "rust/qomm-harness/src/defmi_cycle.rs",
+          "sha256": "f023a68d07e04a5159adbbf9d47d2f680b6682feb282dacc721c0dd8ccae54ee"
+        },
+        {
+          "path": "rust/qomm-harness/src/lib.rs",
+          "sha256": "b74ada20a19447c58e917fcc4d20ea9272b11b239b33ce8990abe66a52c56d83"
+        },
+        {
+          "path": "rust/qomm-measure/Cargo.toml",
+          "sha256": "421361d2aeb736d797e95ade26c3d5e538d5736ac9d77d554c5cdcdb8597e6eb"
+        },
+        {
+          "path": "rust/qomm-measure/src/beta.rs",
+          "sha256": "d4400dc5d205a744535656e6c31a63d7d91168a011ea267cafa7caca10fa8589"
+        },
+        {
+          "path": "rust/qomm-measure/src/bin/host_label.rs",
+          "sha256": "a60c9d0e44d334db87a35839036f7ad3f72a5b19457249e84ed19a9b9f1ed3c7"
+        },
+        {
+          "path": "rust/qomm-measure/src/deterministic_random.rs",
+          "sha256": "38a440aebc8817ea61a2f2679d85a9a700f0c9f61b537d7db031208ec9eb3486"
+        },
+        {
+          "path": "rust/qomm-measure/src/fsum.rs",
+          "sha256": "e8fe4283ccc945175094e5a04c5ef52377ca13a33488856d06dcad427d1cafd6"
+        },
+        {
+          "path": "rust/qomm-measure/src/hosts.rs",
+          "sha256": "0a7a86b93822ebe20297f28f53388a6b5f2c928b16614703731e93d8d753faa9"
+        },
+        {
+          "path": "rust/qomm-measure/src/lib.rs",
+          "sha256": "d881c16ce48bed1f369cf0163e2a4a453d3ed179a4af9af931c2d27f4883e326"
+        },
+        {
+          "path": "rust/qomm-measure/src/rounding.rs",
+          "sha256": "4f1090d225978f55eed214231f35b6fadaef76178309064c11757b12c297c45e"
+        },
+        {
+          "path": "rust/qomm-mpc/Cargo.toml",
+          "sha256": "3b982234bcc393fbee7fc0f356d7687ac3789ce7d18944292533dd326ec888e9"
+        },
+        {
+          "path": "rust/qomm-mpc/build.rs",
+          "sha256": "35425f8b535e13d87589b0a149cc5a59d9278b0312a6fb21608522a64eaf92c7"
+        },
+        {
+          "path": "rust/qomm-mpc/src/bin/gen.rs",
+          "sha256": "3123b9d2085b7fdfbd8f062db16b572a1d5eaf106b61db48d874da136f8fc07b"
+        },
+        {
+          "path": "rust/qomm-mpc/src/bin/party.rs",
+          "sha256": "4bba05b925a30907631c47237430ffebb6c0b9571d66812282e914cd28b1be4a"
+        },
+        {
+          "path": "rust/qomm-mpc/src/bin/rounds.rs",
+          "sha256": "4dec7311ade593ee6e289aab228db4ace5c6978e0184f7a817afb8d72d53c91e"
+        },
+        {
+          "path": "rust/qomm-mpc/src/compiler.rs",
+          "sha256": "e1e646cc35eefa36b14c73b70c34614e5cd8fdce44b35a30b91883af4b34eed8"
+        },
+        {
+          "path": "rust/qomm-mpc/src/inputs.rs",
+          "sha256": "6132c99fa13eb5c48fab3096ae0f6801d610d636058496cb36b3a202374383d2"
+        },
+        {
+          "path": "rust/qomm-mpc/src/lib.rs",
+          "sha256": "7079fc5d27474352c0c2ba0eb7e48b305318f193eec605f75b70c510b8023102"
+        },
+        {
+          "path": "rust/qomm-mpc/src/persistence.rs",
+          "sha256": "6f1f1a72405bfbd5641a75728c010117da3c5fe624db97d7033d22f7b5f516ea"
+        },
+        {
+          "path": "rust/qomm-mpc/src/program.rs",
+          "sha256": "19d9dadb1a7084af9cf80954a396a8c138d9fc50e31b8d9b4d5a35ab47e47a45"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/all_files_parity.rs",
+          "sha256": "463f212f1c64b47281010fa978594f9b5b6114c240ab5348a9da787c0489b05a"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/circuit_is_oblivious.rs",
+          "sha256": "950de69e5bfb55f5cf0ca392137e2cfd8bc4a0e4b3d8112c74db89190ee33977"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/dvp_handoff.rs",
+          "sha256": "aa5382ce33b35507fcf11c954da28d39bf8ab3686f05b584674d5b3b1a09fa06"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/fill_fold.rs",
+          "sha256": "ef3129134c5fdd27472c3825e03c4ca905b6246138038760a87cbcb8ca0e367e"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/policy_binding.rs",
+          "sha256": "94c744bedfda93058c518399ff384418c96cffe2d46900b9aa91d61ee30e7065"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/program_parity.rs",
+          "sha256": "a618b9ec69e0eff7c0b627ff7972fe09b13b7f01acb183168ea3e0b7395bb0b3"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/reference_invariance.rs",
+          "sha256": "5b8b88babe6f6f6813b4842c9b4bfa8034619426ce68234db1326491bb49b66d"
+        },
+        {
+          "path": "rust/qomm-proofs/Cargo.toml",
+          "sha256": "75f2855ed4c2d853e8e258a9173be26fbcc272a02a653bd4d557dc8be7640ccf"
+        },
+        {
+          "path": "rust/qomm-proofs/src/kyb.rs",
+          "sha256": "dd42172c137de4083ede9d1e20ea271ff5760b981906f4f0332de36191285ded"
+        },
+        {
+          "path": "rust/qomm-proofs/src/lib.rs",
+          "sha256": "9c1a39fc947e211fdf1b39ac4f4ade52e438ed1f34ea7fa611fafe9012e3db13"
+        },
+        {
+          "path": "rust/qomm-proofs/src/liquidity.rs",
+          "sha256": "59ece7dfed9331adfe1d8bb8d45c0811d3ac5df89690562f14dd224241fa988e"
+        },
+        {
+          "path": "rust/qomm-proofs/src/opening_envelope.rs",
+          "sha256": "84ada868ecbb99c4d45cec77caca6ae86cbe77b6bb08e0a53425ebe6f432ac32"
+        },
+        {
+          "path": "rust/qomm-proofs/src/policy_audit.rs",
+          "sha256": "11b346c41c6bf2c8edc2574706e9def0204d1bafd78e7567d209845ef0eee6b5"
+        },
+        {
+          "path": "rust/qomm-proofs/src/price_limit.rs",
+          "sha256": "72554d2713f6db8da725498ff170959e5e09b459ab3f3373ceb2b31b61b9d41a"
+        },
+        {
+          "path": "rust/qomm-proofs/src/quote_proof.rs",
+          "sha256": "53604fffb8c2872e243df9a718843246c1e93e004cb1f2e537377ef1e8696f70"
+        },
+        {
+          "path": "rust/qomm-proofs/src/rule_audit.rs",
+          "sha256": "e28a2491321501f846b12d7d97424edf9f4f8cd4f6bc5c7747b6476b377d46a3"
+        },
+        {
+          "path": "rust/qomm-proofs/src/state_audit.rs",
+          "sha256": "c63324a7564a4a7079a7ae20f57b407630ec78a5a8aa5cb90f6d0ab8b6a4a12d"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_gadgets.rs",
+          "sha256": "0373548a026d64ac3bd99c9e413a9638c0a8f09f034b3720aefe62f64380b99e"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_quote.rs",
+          "sha256": "c55b67290fbbe8c819c1b36c5e9b030bb5b416c95c38f23faf5666272f36893b"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_range.rs",
+          "sha256": "3de1f1a03226a12f81b676819ee404916bc10d87686a47d363aa92532b746c16"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_sigma.rs",
+          "sha256": "1eaff3117124f46e0c09c3886407a360d17656ddf4757749259b4a853209d183"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/distributed_product_rounds.rs",
+          "sha256": "829323a0eb59eacf8e757ea009f1709f5e960dd2c8213889bb0af1f71de37b0b"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/joint_nonce.rs",
+          "sha256": "1243e1b8430697001c51787e26c86a8cde8cf329e687b2812b4dd2270a0ff990"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/kyb.rs",
+          "sha256": "ef3dc730e5e08b3e7ef065a5d7fae18d3bfd9894f76118f0a96f9aafa5176f24"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/liquidity.rs",
+          "sha256": "06eda6d7beb016c58ac416c56f115c5922384e86183cb928ddb39b297377bee8"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/paper_artifact_node_boundary.rs",
+          "sha256": "d0b6c5ddd06ef9e0e801bb8e0090152604e1a00021076ff097fd0535408269e1"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/policy_audit.rs",
+          "sha256": "390e97954e294005cf95d4be2e724849c5b9d99e0f7c3d5d652322c8360d3597"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/policy_kyb_contract.rs",
+          "sha256": "809152a8954475113bd19e953af529d282105c1a58079b3d6860f53a81bc324f"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/price_limit.rs",
+          "sha256": "70d5c91c229f805128a0c573ecab9343baa633656ae951cb5597658030dda418"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/product_attribution.rs",
+          "sha256": "15bc30b3a1c149c097c98645a7a2a5a69dae1b8b8b6ae0088facc00aff6026e6"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/quote_proof.rs",
+          "sha256": "14b01d9b6ca6b9ad3d0229f2106fb8de9b3feb889cb34e40b1662badfe2a5675"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/rule_audit.rs",
+          "sha256": "d6391e61105dc9d909e8db35795235947a5687fc698218f415333ea61b1bb8d6"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/slot_collision.rs",
+          "sha256": "a056604126cc41aa6c6e2fd75e5ae633244215cc71e16947004695a25128f7fe"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/state_audit.rs",
+          "sha256": "411b131cc0ad82a4c5c4735d839633613490380a39bba02e894a6dca3d4d011a"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/threshold_quote.rs",
+          "sha256": "6a18ddb9ca89e2e73874bb0af18e787189dda95ee13d702e10ce30e9bdb64fcf"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/threshold_range.rs",
+          "sha256": "d36c3d3f8a8fd1571637c822c23ea2ace006a4ab24f593f6035b82ebd20c4fd8"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/threshold_sigma.rs",
+          "sha256": "81bb00cc8b1825f1820811f99cf9954eead75c15d0615a47884981ee98e4c753"
+        },
+        {
+          "path": "rust/qomm-sim/Cargo.toml",
+          "sha256": "4224bdf956895dbf10ca2f3f699a50393531392ff9fb49e73f98ea6777715203"
+        },
+        {
+          "path": "rust/qomm-sim/src/attackers.rs",
+          "sha256": "95e6f5b329bb6c7f25319c3dad4272a2147ece9904a5902cf627e3057a7d0d79"
+        },
+        {
+          "path": "rust/qomm-sim/src/audit.rs",
+          "sha256": "72cdd5b4dc11c116a3f7d2e3826290cdd5327b610f060a1b18d578b8a1d68c47"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/attackdump.rs",
+          "sha256": "282137829a30e7abfc8604a8b63381de1a2ab2b28117ddd35bd69e31ea4be0d8"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/auditdump.rs",
+          "sha256": "c4888b961fc461df1c14a6a17a09d37d8609fbe99f7d3e01ff7d6262d7aa60ae"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/enginedump.rs",
+          "sha256": "f9ce635a37a931c1ecb4be75c64955308e76b733a67018608c54475454d1dba3"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/experiment.rs",
+          "sha256": "86a6a7cdeba68baf467f9fab251c84e80b14ff2e7ba87c5da8cde726f4c44776"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/marketdump.rs",
+          "sha256": "516f7c7bd09319c570d49e60b118bddf33c1e4900b4c7ab9506b78c861c2d484"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/middump.rs",
+          "sha256": "6b4ee1c3bf7f551c4baa6d90995258bb2309ff95aa1ced81b767811b92ff2563"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/rngdump.rs",
+          "sha256": "40efb2d88e679af5ca2b8ee39b976622c9d42bfa0b4a6aeb44c2190ef224b297"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/tapedump.rs",
+          "sha256": "3bf1df14fdc4d0a04f6145780911f841dd5b0e0a86b2dd834c794935f26aed95"
+        },
+        {
+          "path": "rust/qomm-sim/src/disclosure.rs",
+          "sha256": "08f673ed17fee5d8bf457a97d26848cadf2d41d8d6c906d40bde18ea6a2be423"
+        },
+        {
+          "path": "rust/qomm-sim/src/engine.rs",
+          "sha256": "03978808d18230887d7ee9affdc5fdcaba5f411a4ff29430e9194f26f9277027"
+        },
+        {
+          "path": "rust/qomm-sim/src/experiment.rs",
+          "sha256": "191b9bc6d5f1fd758bd02c21aaf290fa844590f745033fb58c70c645cdbb429e"
+        },
+        {
+          "path": "rust/qomm-sim/src/lab.rs",
+          "sha256": "be217f5b676a06c58a18a65ce831e29e6b59ca64151ddb00ea494728899f5c47"
+        },
+        {
+          "path": "rust/qomm-sim/src/lib.rs",
+          "sha256": "8bdd7739f8564ab08859ad390a2592563a6003e222667b9065b2ab384951c982"
+        },
+        {
+          "path": "rust/qomm-sim/src/market.rs",
+          "sha256": "c0975c4633f66d1af788e2cc320fe5c09816bce2c5f23dc8274987d40f569c7d"
+        },
+        {
+          "path": "rust/qomm-sim/src/queries.rs",
+          "sha256": "3ada518fa1082ddae7499a70a5297cedc4600543659d0bf78aab141fb0df8fd1"
+        },
+        {
+          "path": "rust/qomm-sim/src/tapes.rs",
+          "sha256": "097a8df8d0b952fd3fd4b65a44383f688d3927ced149b8b969ed5b1dfab909da"
+        },
+        {
+          "path": "rust/qomm-sim/tests/attack_contract.rs",
+          "sha256": "c0419f2c215e41d9f0b279643479c4c4f66f61ea757f5506adce56b43cc730ac"
+        },
+        {
+          "path": "rust/qomm-sim/tests/attackers_sampling.rs",
+          "sha256": "b1f9d486252f5fe0208c6464053bcaf4da7f0d80836e4a7dd0b522650df83874"
+        },
+        {
+          "path": "rust/qomm-sim/tests/audit.rs",
+          "sha256": "1854d3a7c52db0da93293601d52269a8f113b19c51890663d316f2239e81ec40"
+        },
+        {
+          "path": "rust/qomm-sim/tests/block_range_queries.rs",
+          "sha256": "7e35d045435b1a029dbfc414542dbb6ba9b879ea64a0adaddb0eeab401517359"
+        },
+        {
+          "path": "rust/qomm-sim/tests/deterministic_contract.rs",
+          "sha256": "d32b39352d96be80dcf053338c53e47457b66ed44de157600511e703afd9ff40"
+        },
+        {
+          "path": "rust/qomm-sim/tests/disclosure_contract.rs",
+          "sha256": "f0b3401c3f5544dedb9ce519a29814cd618881cc043fde0c09744b5b7991f4ea"
+        },
+        {
+          "path": "rust/qomm-sim/tests/dp_adjacency_is_the_released_one.rs",
+          "sha256": "0921754f63056964c93a56a134040bb0a5d8f2a6e4f2da5e5d93f27f47327661"
+        },
+        {
+          "path": "rust/qomm-sim/tests/lab.rs",
+          "sha256": "28b175d7d81748468b72a896ccdf4a00eda827adbfbd1cb6b4ac173c3c94fd56"
+        },
+        {
+          "path": "rust/qomm-sim/tests/range_queries.rs",
+          "sha256": "e9a4f45cfaa331d4e0dc516f53aa612ac27b611f66ba590d43994d450054051e"
+        },
+        {
+          "path": "rust/qomm-sim/tests/selective_disclosure.rs",
+          "sha256": "04e2e31a5cb6b669d3136d7bb67b6dce8d7a5c7deb97f699819d1de7a5924940"
+        },
+        {
+          "path": "rust/qomm-sim/tests/tapes.rs",
+          "sha256": "3c1b1e90ec5c14ce6c2ede8f482a4c46045df0c73998aa7c5d114e7eaf451d6f"
+        },
+        {
+          "path": "rust/qomm-transport/Cargo.toml",
+          "sha256": "5ef7867d4560e2bbcf2ace4de16f4bb58b162cf2958121bd4873629e467cbe30"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/discover_wan_inventory.rs",
+          "sha256": "57929e0f39a6915dd70938d309daf79deb60eb52a01a49fdbe4674e3648ff90a"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/prepare_wan_deployment.rs",
+          "sha256": "129f5be55e447ee20db6a701e2bb7707d1663c952515109538825b527c96ff7a"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/provision_frost_cluster.rs",
+          "sha256": "82575aa75abd8fc59c3d4b8123d504663654ae3e49739b0ca3e6bef073382c84"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/qomm_node_party.rs",
+          "sha256": "710dee00a65767e22270d291095bea50d3677ca0c39a4f370e161be70eba8012"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/serve_node.rs",
+          "sha256": "af249456cd8c43b3ef371a16602c67e902e08968ff37197442fd7fb10028becc"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/serve_proof_party.rs",
+          "sha256": "48d5fccf4094d5b077c1e3858d1310c6778f2b93eca448e10830ca62cea58690"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/serve_qomm.rs",
+          "sha256": "97f70e8de73d62a8cd9094bb9e0053312e6c7127f4e70ad63c50ec633c123900"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/seven_node_cluster.rs",
+          "sha256": "bdff91fd85db8a497ab2a63159b6f931c945e500bc59f8ad232680ff4acbefe7"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/wan_acceptance.rs",
+          "sha256": "841942ad5a3085b374e0b3240cc52df83f46c2185cdbc75a40d69010014ca8f2"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/wan_proxy.rs",
+          "sha256": "60fffa769094492765540b2f6fa8f713d703e319258ceff69f7a9304da3e2756"
+        },
+        {
+          "path": "rust/qomm-transport/src/binding.rs",
+          "sha256": "f4a8956159fe78bc906c15dbe482a7cd1cfc12e3ca9906330d3b24d84e8b1503"
+        },
+        {
+          "path": "rust/qomm-transport/src/client.rs",
+          "sha256": "7ba1a97efdb86dc321144738368b6e0f7e52d9b9fc6da9ea32ca9f93beb80583"
+        },
+        {
+          "path": "rust/qomm-transport/src/corporate_outbox.rs",
+          "sha256": "f4e45487f56acc1fc79a0369c05a5a4749ad15353559223b973ab2477cd1fa4a"
+        },
+        {
+          "path": "rust/qomm-transport/src/dvp_issuer.rs",
+          "sha256": "a5faf7b18692c955b160d58281049d12efe818aa3facc2a31447b2dfa52d7642"
+        },
+        {
+          "path": "rust/qomm-transport/src/dvp_wire.rs",
+          "sha256": "9eb77ff803547147911d302881a9d16386519e4c07c4dd05efe98261ba34c324"
+        },
+        {
+          "path": "rust/qomm-transport/src/ethereum_rpc.rs",
+          "sha256": "017f3d0599ea159db10b7cefcf3c08ea9fee3056fa907e1a424f1818de152891"
+        },
+        {
+          "path": "rust/qomm-transport/src/executor.rs",
+          "sha256": "d02cdfbc71dfcc4190f25985da87507a4f9ceb1f7e3576d56ff39dade18614fc"
+        },
+        {
+          "path": "rust/qomm-transport/src/external_kyb.rs",
+          "sha256": "e7499af5f4fc36d9a22ba22341e7af542c25f9fdabd81f087747b646d15fb53d"
+        },
+        {
+          "path": "rust/qomm-transport/src/external_signer.rs",
+          "sha256": "9b95d7de0736ad34dde25ee69107d066737db33575f57fa79d8933a24e654df0"
+        },
+        {
+          "path": "rust/qomm-transport/src/frost_cluster.rs",
+          "sha256": "9cc5ef22250deb1962843deed19e6ea76112c18888609c4d5b892c1f9f385682"
+        },
+        {
+          "path": "rust/qomm-transport/src/frost_coordinator.rs",
+          "sha256": "87bde035b7fe29a1d8a6bd4369be8c1aa074f2e43bbf0eeb485da5c980cfd464"
+        },
+        {
+          "path": "rust/qomm-transport/src/key_management.rs",
+          "sha256": "507735dd44c7796a4e265456b20465f8ae2f82554d99c9f07d614f6764528a04"
+        },
+        {
+          "path": "rust/qomm-transport/src/kyb_lifecycle.rs",
+          "sha256": "6c1f4ba392ae2d0bbe74c2d9d711079c363f03548260bdbb24943a2e69477380"
+        },
+        {
+          "path": "rust/qomm-transport/src/kyb_wire.rs",
+          "sha256": "ee71a2f91b8c3c461ebeb645668379164db7a71fec3663d29021d00f8afd41e6"
+        },
+        {
+          "path": "rust/qomm-transport/src/lib.rs",
+          "sha256": "42907cb41e43c262199f67f95b47f71dc9f9936ea6d062903f075fc913630a7f"
+        },
+        {
+          "path": "rust/qomm-transport/src/limit_issuer.rs",
+          "sha256": "469491c3a0ff583073117acd25bbaedd33479d241b3693474c3e276027e95fb7"
+        },
+        {
+          "path": "rust/qomm-transport/src/limit_wire.rs",
+          "sha256": "38d02c33da78045cb0329a79b7aa3e0d2801bc4cf9c913ed8603fdc6ca84dc64"
+        },
+        {
+          "path": "rust/qomm-transport/src/mandate.rs",
+          "sha256": "b9f5d0c72536b5079ab2f5b89b40cceb47137e041dcf7da9cef42a2a07184859"
+        },
+        {
+          "path": "rust/qomm-transport/src/mpc_result.rs",
+          "sha256": "e5472187805cf056beca93f094cea9c26ce581ceddc630f194cdbb63df2b936c"
+        },
+        {
+          "path": "rust/qomm-transport/src/node_service.rs",
+          "sha256": "af20f7dd90d191daaf62d200a9cfe50de9d93931942d43d3cd652d6ca1338df4"
+        },
+        {
+          "path": "rust/qomm-transport/src/order.rs",
+          "sha256": "4018ff6b49a136bf11d5ecf032de6661c3e2bd171c7c0126a0f01ad77816849a"
+        },
+        {
+          "path": "rust/qomm-transport/src/pretrade_authority.rs",
+          "sha256": "52c374af7e8e3d1281ef81c9ab04be9c5412d1ded483cd4374a7a94d5a71e343"
+        },
+        {
+          "path": "rust/qomm-transport/src/product_proof_coordinator.rs",
+          "sha256": "51d6d1a738b253584db84b5362b9db6d33565919ac6582390175541aceeb410a"
+        },
+        {
+          "path": "rust/qomm-transport/src/proof_client.rs",
+          "sha256": "3e02e3184f8b52e429758782713036355ee67da5c41e04c7411987cd124f0527"
+        },
+        {
+          "path": "rust/qomm-transport/src/proof_codec.rs",
+          "sha256": "9681e88c7ee52eceb36078c577e1b45a874b49cfbacc052587a25dbbd3575a95"
+        },
+        {
+          "path": "rust/qomm-transport/src/proof_party.rs",
+          "sha256": "7170415c0dc59bf8e9d6d93b980c4e7cc866138cdce06f28b70f33eeeef15b58"
+        },
+        {
+          "path": "rust/qomm-transport/src/proof_party_application_tests.rs",
+          "sha256": "476b81a9a7f5e696c317ff8a58647df17e5e2c52cd1d21046cd30dc495aec7f2"
+        },
+        {
+          "path": "rust/qomm-transport/src/quote_issuer.rs",
+          "sha256": "1ad330ef67539ef07d4af03b950711e0d302e2b59a7a145be411f31885141228"
+        },
+        {
+          "path": "rust/qomm-transport/src/quote_wire.rs",
+          "sha256": "9438ded27c1ae478f5f40844f41f3ffe8ee1115ab27899321fa9ef6e92c897c1"
+        },
+        {
+          "path": "rust/qomm-transport/src/relay.rs",
+          "sha256": "ed6af041cca9ba2a965dfdd6d61180ef7f9d6723ad7b50799b235f59cc741fb8"
+        },
+        {
+          "path": "rust/qomm-transport/src/resident_mpc.rs",
+          "sha256": "07fc7e3384931f84fba8e9790e1caade11bcacf499b4ed057b19d4287a380a5f"
+        },
+        {
+          "path": "rust/qomm-transport/src/resident_quote.rs",
+          "sha256": "ab44ad6534b6d8a1ea253a3ee0fdd76d7110734573c3ff924b7e06eee6794705"
+        },
+        {
+          "path": "rust/qomm-transport/src/rfq_frame.rs",
+          "sha256": "4515c12ed5dfb1d901530de5efe4fa86ddd6a30f0b273f194bf57aae44988f00"
+        },
+        {
+          "path": "rust/qomm-transport/src/roles.rs",
+          "sha256": "f5aaa61b640f8a7d0a91ad4b478b01e838cf5adf4a25b7ea31bde4c029bbf4f5"
+        },
+        {
+          "path": "rust/qomm-transport/src/rtt.rs",
+          "sha256": "e87fb1245bf3ab33984f374dc525ef90c0bb73f89dfbbfdb7a39f7578bb5ed17"
+        },
+        {
+          "path": "rust/qomm-transport/src/selective_disclosure.rs",
+          "sha256": "669b7f13562fa3a2a8b2f886be3202ef4d2a5f5d9443fea3dfdf531ed33235a4"
+        },
+        {
+          "path": "rust/qomm-transport/src/settlement_finalization.rs",
+          "sha256": "517f792edfce0c031e36ee6c134486ec9597872f58755c39b41b4c50999e8a91"
+        },
+        {
+          "path": "rust/qomm-transport/src/settlement_handoff.rs",
+          "sha256": "d9d65c0b9ae5e266a29f073a23c54976c5d2e1bc6c84d49a56ba6619bb30fc70"
+        },
+        {
+          "path": "rust/qomm-transport/src/standing_pool.rs",
+          "sha256": "8a8dfe2805e2cc164d8aedf457e48204af3b8efd7a92b747058b2f66e3c8362a"
+        },
+        {
+          "path": "rust/qomm-transport/src/wan_deployment.rs",
+          "sha256": "34f6d7b56b50617b167c5d3de3173d065ac6359c1af376a50ce0cb0ec99325d9"
+        },
+        {
+          "path": "rust/qomm-transport/src/wire.rs",
+          "sha256": "ebc0ffa531edec04e89fabf978e19a286082512dce22e7a76bd5a9ee2d037b43"
+        },
+        {
+          "path": "rust/qomm-transport/src/zkpi_issuer.rs",
+          "sha256": "d518137f5eefc8c26e585caa901abc9d4fc1dc3c1b6ae2cef4ffb143288ecdc5"
+        },
+        {
+          "path": "rust/qomm-transport/src/zkpi_wire.rs",
+          "sha256": "ab69e0961b701caf85bde2fc28e7d19e1fad33c27b1ce1f7b297104813feae5b"
+        },
+        {
+          "path": "rust/qomm-transport/tests/dvp_issuer.rs",
+          "sha256": "af24881a4a0fae1331716d593baa0c3ae17e6623eb280c75f70b414ee923b5dd"
+        },
+        {
+          "path": "rust/qomm-transport/tests/executor.rs",
+          "sha256": "aa010dead76b1f10b3ad46deccb6711b2116587b3038c888b8dca599590e9db8"
+        },
+        {
+          "path": "rust/qomm-transport/tests/external_kyb.rs",
+          "sha256": "d3058608e5289d2f5fe43c99e41c9515a0120131721048eff7f8fe4c125f62e6"
+        },
+        {
+          "path": "rust/qomm-transport/tests/external_signer.rs",
+          "sha256": "df91fcc7718ba42884aa35a45314d109318765c4896ed01fae274a9c2e57cf9e"
+        },
+        {
+          "path": "rust/qomm-transport/tests/fixed_order.rs",
+          "sha256": "bb2ee67ea16bcada25d71ee534e01784da7e76a1c69aa571c900cd790ececbca"
+        },
+        {
+          "path": "rust/qomm-transport/tests/frost_dkg_recovery.rs",
+          "sha256": "769072cf76b37be855c6d035ac07d48fbd2e3e70caa11672d70c737bf77e7e5d"
+        },
+        {
+          "path": "rust/qomm-transport/tests/key_management.rs",
+          "sha256": "5f48019f8deb0b9fdca020bf1a58d1715d835440819634cc30739c808aa51ebd"
+        },
+        {
+          "path": "rust/qomm-transport/tests/kyb_lifecycle.rs",
+          "sha256": "306ece5df9f9f1178264431143740680c9680eb7211bf0a001ac9428b94ae19c"
+        },
+        {
+          "path": "rust/qomm-transport/tests/kyb_wire.rs",
+          "sha256": "4bf940561f0d27edf241d275acd2d7e41cca1dabd980162a96d7282c9e506d3d"
+        },
+        {
+          "path": "rust/qomm-transport/tests/mandate.rs",
+          "sha256": "f33e711aeaaf66ad80c19f044949f6dd3cafdf4048def53c2f9d9ab2fc28732e"
+        },
+        {
+          "path": "rust/qomm-transport/tests/node_service.rs",
+          "sha256": "f3d2ba92a47c67ba254aec3b948ae8e5433f8873955730924facb9687b8132ff"
+        },
+        {
+          "path": "rust/qomm-transport/tests/pretrade_authority.rs",
+          "sha256": "3bdadbccae129dfeafba1346d6c9342931c459d3303e83433287c232b3737855"
+        },
+        {
+          "path": "rust/qomm-transport/tests/quote_proof_codec.rs",
+          "sha256": "8aef541fd8ac1e458c219b694004faa90b6b25adb1194d4202d06b7e3f36b214"
+        },
+        {
+          "path": "rust/qomm-transport/tests/rfq_frame.rs",
+          "sha256": "4dc392331c9f468f6d5396f846ba8941bb2b87942a8c4e99f4f8943c5587a512"
+        },
+        {
+          "path": "rust/qomm-transport/tests/roles_binding.rs",
+          "sha256": "59e6c8fbb9bd581337581f87cf4179a73bc73769691f8bd859ba47f9a5cc31e3"
+        },
+        {
+          "path": "rust/qomm-transport/tests/selective_disclosure.rs",
+          "sha256": "52eb8c8ce2746776e9ee2073d9dd822ec906c92539755d851406fec0c17e2a7f"
+        },
+        {
+          "path": "rust/qomm-transport/tests/wan_deployment.rs",
+          "sha256": "426555bed6bc35b6340ab090478bfb96925254a261035028c8273776721a1600"
+        },
+        {
+          "path": "rust/qomm-transport/tests/wire.rs",
+          "sha256": "3f533c8d9742eda3fc548e41ecb65e1b4d1466b41d585a5d9b27a57ffc23f090"
+        },
+        {
+          "path": "rust/qomm-transport/tests/zkpi_issuer.rs",
+          "sha256": "14a5322e5a82e341be4086902cc1c19edcb5689a48f313d0ba947307e5c459b2"
+        },
+        {
+          "path": "rust/qomm-zk/Cargo.toml",
+          "sha256": "6e560fe685ac39f9b3af5bae2bc3e4c519135d7d5abbb7a9c4471b9cd89c7535"
+        },
+        {
+          "path": "rust/qomm-zk/examples/range_compare.rs",
+          "sha256": "2f3829a40e2436a17ef0834f9cd794cf881cc948e883b47fe6f6305fd56fbdc6"
+        },
+        {
+          "path": "rust/qomm-zk/src/adaptor.rs",
+          "sha256": "e32d36371c30740568765d06598d29beae58f7e942290aa6af047f5c86d7ee2d"
+        },
+        {
+          "path": "rust/qomm-zk/src/bitrange.rs",
+          "sha256": "1280829e3e403c6a782637fe9824020f22ae2bddf88730686f44ac8c251f307c"
+        },
+        {
+          "path": "rust/qomm-zk/src/lib.rs",
+          "sha256": "33134a1e37c8ae35f28d3e47d7021b6e56be0ff8deb38b0ec02ef1386efa8a06"
+        },
+        {
+          "path": "rust/qomm-zk/src/oneofmany.rs",
+          "sha256": "ba221bef1b084ffcedf91462feab75d595c6ed60328646665716724bd1425f18"
+        },
+        {
+          "path": "rust/qomm-zk/src/or_dleq.rs",
+          "sha256": "c905ca2650a9367eda4f1681d53ad588a8bd0d29e0817719ea54fa495ce5e6f5"
+        },
+        {
+          "path": "rust/qomm-zk/src/pedersen.rs",
+          "sha256": "e35204cc73e143d32754081d15303ab3b1d04c2b7cdef278cc4b4d9e531fb129"
+        },
+        {
+          "path": "rust/qomm-zk/src/range.rs",
+          "sha256": "4ab04c9683aef373658700584eaea6a7ae62589f9b4c76a9517ebb3699b32807"
+        },
+        {
+          "path": "rust/qomm-zk/src/shamir.rs",
+          "sha256": "076458120ee4c45f13d8e264aeafded937bd1d35f8de8c12d531d74c3b75d1ca"
+        },
+        {
+          "path": "rust/qomm-zk/src/sigma.rs",
+          "sha256": "86d4e95c51c9f907c790007a34c9be5242f536532c8555264d24daa9ab9c06a4"
+        },
+        {
+          "path": "rust/qomm-zk/tests/bitrange.rs",
+          "sha256": "fa8c506203ba5da3ad64ae86e760aa9dfb01cbd4546d9f5644efe7a2ad7ddd70"
+        },
+        {
+          "path": "rust/qomm-zk/tests/oneofmany.rs",
+          "sha256": "650eb266c37b77a4aa0ea26f8e468575657fd20bcac20ce514a6a57f856ca102"
+        },
+        {
+          "path": "rust/qomm-zk/tests/shamir.rs",
+          "sha256": "63bc8ccbe346ae8ce136e29e0ee2e295433e9da7486c92fadd788964f9690a57"
+        },
+        {
+          "path": "rust/qomm-zk/tests/sigma.rs",
+          "sha256": "5152324199f91721502f8f73a793a40e0fd01f3776b79b6f5ba5996f982fc9c7"
+        },
+        {
+          "path": "rust/qomm-zkpi/Cargo.toml",
+          "sha256": "74bc3b62a74bb4b9322df4b1cb1f2547c994592ff02ed7c71e6c11b526798c7e"
+        },
+        {
+          "path": "rust/qomm-zkpi/benches/wire.rs",
+          "sha256": "696bd5bfb890aba383120051210e12426f9e65550db91fc22a67c549faa5417f"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/bin/verify.rs",
+          "sha256": "57f4b1018ed5ba4c0156512c7b6d5d7289eb862c1425f7341a04787cc93e5e88"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/cross_domain_dvp.rs",
+          "sha256": "af71c1be0c62b19895ae421ef43aa587c1a5942f827c893e1c64f96fb77f04db"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/handles.rs",
+          "sha256": "14faf89feb33088fa5998d1b03b7b9902cd93886a436eca66b68669c8f3e692e"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/lib.rs",
+          "sha256": "91e4744a834877c7c8ef3665967f7bfdbcc29ac168ff8a5a628cc7f18e3d8288"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/typed.rs",
+          "sha256": "58a4e828fb4ed94baab88ba14ec5025a7c6a5c73e98da8fb71ca0fb86ad46d96"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/typed_wire.rs",
+          "sha256": "5468dd3a1e81dac8643a500a386c17b144a95a26128ca44bcf89224dd9f2f918"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/wire.rs",
+          "sha256": "801bab73d1bbc9d2b7abce8b296d1f4ceca192109672e115fa26ff3c5a165fa2"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/wire_vectors.rs",
+          "sha256": "6cd9254ffa44284e694dd594b9851a8dd284683abd75fe85db48d35ad44d6cfa"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/instruction.rs",
+          "sha256": "e00e3031cd7c92c3a9281310f09f35415ebc729d8f751c26df713c6441881d6d"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/threshold_instruction.rs",
+          "sha256": "7159bd98adfd0171c915d99381244f88218ce0f8c67ebfdb7d7d2bb4f230c999"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/typed.rs",
+          "sha256": "54cbe65e3a5499fbac3cd8ab5a276b260ba936c1a4e668a98833a12d8a7e2285"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/wire.rs",
+          "sha256": "3b779b6ddf088eee6e6658154021d91ef851c89a3881005f4462a074282ce1d1"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/Cargo.lock",
+          "sha256": "88dc2f855a5d50557fc1afacdc86dec526b79d2a9fd061bd9cc5cf12fc6b9359"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/Cargo.toml",
+          "sha256": "b61815b6570a3951c27d6e52d052592c96502a3a2a15b91ebc481aa3ce3047a7"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/build.rs",
+          "sha256": "f90929ba91b56a4a76d7ae659a8d524467f0e134c0ed079ef0e23fa0dab472f6"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/appsender/appsender.proto",
+          "sha256": "d602625b899102d0bc6e126070771c51955ab73427c77948a91cbddfca658ff3"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/google/protobuf/duration.proto",
+          "sha256": "a3f7301ff2956ec2e30c2241ece07197e4a86c752348d5607224819d4921c9fe"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/google/protobuf/empty.proto",
+          "sha256": "ecef3d54cc9e079673b9816c67bac770f7f3bf6dada2d4596ba69d71daa971e6"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/google/protobuf/timestamp.proto",
+          "sha256": "fa6c44dca2c90a2aaf3a1e4776cef2e9177f70fba365f236269f0f41ac166c96"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/http/http.proto",
+          "sha256": "ca846ce89a5dbb3e730894b92121439ec843deaf265193f4c1c3f423aa29b00a"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/http/responsewriter/responsewriter.proto",
+          "sha256": "e27e03d5ba7c485a7f8a96c8b7b069c110a09ad800bb81bf713c7ad581c83f1c"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/io/prometheus/client/metrics.proto",
+          "sha256": "5d0c331fb3ec69ec36138a3b3968c042b96e0023774bb06b97a7a17cf1c5266e"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/io/reader/reader.proto",
+          "sha256": "48f034ae2225bf0fda8916c7c0cc059626b67d7bcc71846cae48b96f293fc75a"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/rpcdb/rpcdb.proto",
+          "sha256": "2cb00a2549391b12ff0bb6c73b104779205400f0d9383e50fd5a79457b6be6a2"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/vm/runtime/runtime.proto",
+          "sha256": "5530ad2e8bea633fe8150d2cbccd67a597633221a5de180016d520af5d408f9a"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/proto/vm/vm.proto",
+          "sha256": "269a23fdae5ef98511998ad895a780c8be5b6ec6e4b43cc3aeb2f00cd418afd4"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/src/app_sender.rs",
+          "sha256": "3eec90af51be600a10d2e58c029b66f98fbaed42c50b8d2690a25f706be59db2"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/src/database.rs",
+          "sha256": "e2f6017110f1ec8cdb3f72c55cd6936442679c3fcfebb885957193e529b7b37e"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/src/http_bridge.rs",
+          "sha256": "90e63547604247d6b803b924542255b40f3264411c2e6310e4d94525726b1df9"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/src/lib.rs",
+          "sha256": "40b3f536debd2f401e6f9520fddb99bc5f53de48a590a076927dfde893b623c8"
+        },
+        {
+          "path": "rust/vendor/avalanche-rs-qomm/crates/avalanche-rpcchainvm/src/plugin.rs",
+          "sha256": "44a3b64b8865561aeca592d052b6186fc8e45bf031d9fd66322bf584843e4a6f"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/Cargo.toml",
+          "sha256": "f0c9d5fbe4770ef7eaa894f602d3976dbe3d5c2187a58cc1d9298fb230208e55"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/src/admission.rs",
+          "sha256": "25bb6294e244c07e14fddbb40c3d0d2a90776b821c15885e79a9a6d0a6f8b6fb"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/src/application.rs",
+          "sha256": "67189613b96812fb547d21f7c5dde34ce37848c16c144ca2154d980a283ccdd4"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/src/execution.rs",
+          "sha256": "8170e34e2d7bae689a9358583d8431923c0c64104e7286eb658055ea041f9bd5"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/src/finality.rs",
+          "sha256": "9577481d61cb9d11b883092a314a7363f531b4903006b1d73abb902c0926c1c4"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/src/lib.rs",
+          "sha256": "6d7d3aab2278101f78f00a5fa21018405a29bb01a34e1e2d91cba6eec073e6be"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/src/reservation.rs",
+          "sha256": "b820b22c8ce6a235f46b6fe4ebdb041254b2de7aa5920e1f8b2c94a24a337f7f"
+        }
+      ]
+    },
+    {
+      "repository": "qomm",
+      "head": "bd8674fd1b95901eb5a0f59f7fb934faf9f7927b",
+      "files": [
+        {
+          "path": "ZKPI_WIRE.md",
+          "sha256": "9829affeafd8b41a646526ba3bd669d63a6ad4a30c76489fcb197ec57beff7c3"
+        },
+        {
+          "path": "rust/Cargo.lock",
+          "sha256": "9cafe08a85583d21a6abf503b0ccf30178fe62f0c53e0d8019d44dfa00336cdb"
+        },
+        {
+          "path": "rust/Cargo.toml",
+          "sha256": "ec68fbbb28dd4eb27f9a99270d4c5c8015c0e511c8209368b8e3a97fe5376b28"
+        },
+        {
+          "path": "rust/qomm-audit/Cargo.toml",
+          "sha256": "9b9cecc0012e6d16a40aec3c21dfb4738de444266a38188718fe4ccc3eafec83"
+        },
+        {
+          "path": "rust/qomm-audit/src/distributed_dp.rs",
+          "sha256": "4611b94fb7e9f309b8839b269f1b41e797fbc76c01903288a8e4a48b3a972d7f"
+        },
+        {
+          "path": "rust/qomm-audit/src/lib.rs",
+          "sha256": "4329f16c9d75583f306fb6df66691b5e90a58b6d54c6f574d35c8943e79a997d"
+        },
+        {
+          "path": "rust/qomm-audit/src/locate.rs",
+          "sha256": "c7f6a8a91536458e8b9ba66496294da5b92301a5a77c67fa91717827e8052313"
+        },
+        {
+          "path": "rust/qomm-audit/src/publication.rs",
+          "sha256": "43919b23803261cb6a5b715baddfae5adae0c73598447ccc4971e4514fd22d82"
+        },
+        {
+          "path": "rust/qomm-audit/src/publication_ledger.rs",
+          "sha256": "f83f205539f0bdbaa553d2d0d9f08701ce8e9739a7b52ffa424ed7153090a820"
+        },
+        {
+          "path": "rust/qomm-audit/src/receipts.rs",
+          "sha256": "0155a9d2a8cccef82d096028a6ca02b24ec3789c3c361797117655522694c736"
+        },
+        {
+          "path": "rust/qomm-audit/tests/distributed_dp.rs",
+          "sha256": "5a799fa998988002c2677cd53dd27490f929f0b5695eb12cea541342ea648f15"
+        },
+        {
+          "path": "rust/qomm-audit/tests/locate.rs",
+          "sha256": "73ae2632a743a50ef48b33ec5da6a8ae2418e110a4ca5f780468b30c2753f0dc"
+        },
+        {
+          "path": "rust/qomm-audit/tests/publication_ledger.rs",
+          "sha256": "189127d8b8ec7419dcca618e4b757cbc9fc604109e42e68ae3443c67bff49b0e"
+        },
+        {
+          "path": "rust/qomm-audit/tests/receipts.rs",
+          "sha256": "e77fbf330906a0cbc16654e3acffbb89fe5244f704433db5ef3933af6feafe5e"
+        },
+        {
+          "path": "rust/qomm-defmi/Cargo.toml",
+          "sha256": "693cd10c2105da5c67fcfe85b85bda95fbb3efdbbfdd63635ad7d708f3c912fc"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/ccp.rs",
+          "sha256": "b680500837ec1f177d5cec93efb187ec745681c109108702760d99ccfd61a1d0"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/note_dvp.rs",
+          "sha256": "d237c976bfa737dd8c48b215ecc13ea003d208b7288479ddc3e39bc2c9efd95e"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/pvp.rs",
+          "sha256": "48ae515cff8888c852e9b8c1ea1797de073c2238fe711f337abf78f3d0abc8fa"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/reconcile.rs",
+          "sha256": "95060d5cbc826ff840502bb77edd98d23c27b54e3adac5c335fecdfe03dc8a0d"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/rings.rs",
+          "sha256": "e7a768b16fb124453c0dca949d0ba381aa7934da6b832505ecf4a9f58a37482a"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/same_chain.rs",
+          "sha256": "cd3514888da804f9f218e85f8bdd733e7653641f6e0324242507dbfe93fdc9d6"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/settle.rs",
+          "sha256": "721e6bbf0445b1b54c3bed9c6f61fb16a7d48422938305e0c2ff7ab5b123c99d"
+        },
+        {
+          "path": "rust/qomm-defmi/benches/vetting.rs",
+          "sha256": "53fee21831bc073ae6cb4c32f7b216eb804aca10af644e67f025390492aaadf0"
+        },
+        {
+          "path": "rust/qomm-defmi/src/asset_link.rs",
+          "sha256": "58b7f27ea9b3397f62f8da4003198979cce1bd69a5531bded58306de51c3ed8d"
+        },
+        {
+          "path": "rust/qomm-defmi/src/assets.rs",
+          "sha256": "7dd7b8f30121ccd6235d27d7497c01848804caabf2480232b540b6d631697832"
+        },
+        {
+          "path": "rust/qomm-defmi/src/avalanche.rs",
+          "sha256": "97abbcf2660f54c997e8466dc5f5757dc7ca1bcf63dcbc2a4aa7be6d237f7e6c"
+        },
+        {
+          "path": "rust/qomm-defmi/src/bin/settle_wasm.rs",
+          "sha256": "29f4be3f74057a8945406ed2631b618452abb3df7f3e45708b4ea9974fc199f8"
+        },
+        {
+          "path": "rust/qomm-defmi/src/ccp.rs",
+          "sha256": "56020b547e59ef98c44e5c18463c76370b914747eb3e78d9bbcacf17ea21b2e5"
+        },
+        {
+          "path": "rust/qomm-defmi/src/central_bank_liquidity.rs",
+          "sha256": "24620b7b47486b0e559ba9e3c2679bf2a358eb0704092e45442c39073a0cf3ed"
+        },
+        {
+          "path": "rust/qomm-defmi/src/chain.rs",
+          "sha256": "b5c0f2e2456b9281e6c975f0c8854658398fefba287346a2204b596844c1fb25"
+        },
+        {
+          "path": "rust/qomm-defmi/src/credit.rs",
+          "sha256": "6f86dd72bf735d99ab6e7c79ac214868dd8a52d73da5dac3fe96658affadee2e"
+        },
+        {
+          "path": "rust/qomm-defmi/src/cross_domain.rs",
+          "sha256": "66323512070f2084b267f552642c141944d8f717ad370cccbb2dbf6a1224f949"
+        },
+        {
+          "path": "rust/qomm-defmi/src/cross_domain_finality.rs",
+          "sha256": "006406c5a9bc3fafed33063c7deaad64346c08ccca0f1575014310ec69b90588"
+        },
+        {
+          "path": "rust/qomm-defmi/src/facility.rs",
+          "sha256": "2a2ee80d98a0adbed38a1ac91119be6c10f86e868e4e9546a5256254706a6980"
+        },
+        {
+          "path": "rust/qomm-defmi/src/ledger.rs",
+          "sha256": "d40777d23f88d702335f49f9d34a8fcd8ecee975036b365294b8743dfbccbec3"
+        },
+        {
+          "path": "rust/qomm-defmi/src/lib.rs",
+          "sha256": "5e047b0bac4199f481c73766db9069c7fb45f6065c5685eda885e3fb8b721f7b"
+        },
+        {
+          "path": "rust/qomm-defmi/src/netting.rs",
+          "sha256": "4a8f4758ac6b38cf877cc6ba85b09f4e6b63fe5eb154439acf47dada8bb0fb05"
+        },
+        {
+          "path": "rust/qomm-defmi/src/note_chain.rs",
+          "sha256": "42e390e85a777be998ae590cea9c46ee40bed05ead303466e24fadcd0060e971"
+        },
+        {
+          "path": "rust/qomm-defmi/src/note_settlement.rs",
+          "sha256": "eed48821610e4093b44da9cd4e2f0c2245b40fa1fb91e0676e5610e601d41508"
+        },
+        {
+          "path": "rust/qomm-defmi/src/notes.rs",
+          "sha256": "3b5afa739081305cc6f18d54b624cbbd6cc42385d7f253802613ee766d51035d"
+        },
+        {
+          "path": "rust/qomm-defmi/src/participant.rs",
+          "sha256": "99ea2b67f09a950ed6e141277529d0a6d678a7415324254a55c0ef4e14ee9d57"
+        },
+        {
+          "path": "rust/qomm-defmi/src/product.rs",
+          "sha256": "071412ca358ba60cf1c28073ca88ea5b5953baf212b1b9ea9a4bbe81c5c577c4"
+        },
+        {
+          "path": "rust/qomm-defmi/src/product_evidence.rs",
+          "sha256": "403e7c1c3a6d0b339e89a5863d86f0cd4ed0e47d1c7d3cfed54ad4f3df84ed59"
+        },
+        {
+          "path": "rust/qomm-defmi/src/pvp.rs",
+          "sha256": "72f525dff35620bd963f82e390f79284335a5b2540deb14826fe8b88592ca617"
+        },
+        {
+          "path": "rust/qomm-defmi/src/reconcile.rs",
+          "sha256": "58fdf7c8949e77148050f3a0066af75b01667b709a95b554f16eecefff4238c9"
+        },
+        {
+          "path": "rust/qomm-defmi/src/register.rs",
+          "sha256": "5666479d4e446e61d79d417deb7bd9f90c2451d10034aad4024947a93857cbec"
+        },
+        {
+          "path": "rust/qomm-defmi/src/settlement.rs",
+          "sha256": "4428863d3fbb675559122a4b62eb2268409ce519af30cda51ac3660b77a0b5eb"
+        },
+        {
+          "path": "rust/qomm-defmi/src/settlement_verifier.rs",
+          "sha256": "7267a2fd8a41c5708dd2dc8ef91e5ff42f2b1c0527eebe6d8b93540fcbcd6f30"
+        },
+        {
+          "path": "rust/qomm-defmi/src/vetting.rs",
+          "sha256": "9b0dc9c4069995fab56b404ca6de873b9ab9b3601be9073e38a680fcdcc8328e"
+        },
+        {
+          "path": "rust/qomm-defmi/src/viewing.rs",
+          "sha256": "db925dc3766769dd28722622ace19630fe7c9ddbf668d7e28d7e5d02d68adb23"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/atomic_transfer.rs",
+          "sha256": "50007c3f881298cbbaa38f9ff16e4a4357d50fe23f1b5eaa0b50d9dfe5050fe8"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/avalanche.rs",
+          "sha256": "adc869acb09b75ac9c4fede78b28bada0d0ead2b58dcf551497b4e3cef70e9a2"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/ccp.rs",
+          "sha256": "1006f0430393b825a228c08da80f2623ca3f6bace0334a4dbc71f48f3fc07e25"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/chain.rs",
+          "sha256": "0f4c393058cb1cda908237912554df3d45c6a9e85279fd3e10142792b58ccb3b"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/credit.rs",
+          "sha256": "bca766f2ff102811e73fe3ab27f4fa7c0471bee82e79bdd9d2e796f3454b70cc"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/cross_domain.rs",
+          "sha256": "d96a720c423cc88b9582c80dbddb86b6130ca35f445704ae91426e0b2ea3040d"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/dvp.rs",
+          "sha256": "bd8561f7a65a84f2a8079b79530674a0144bf275ea03f9f66aa2c887a33cd4ed"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/facility.rs",
+          "sha256": "9b13425aab170c769d512430ab66e67ab4b261b05f5f88f14b441ad2a852a66c"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/netting.rs",
+          "sha256": "bbac825a0a73f624a3d28596128efad47b917c92ed7cedd8d303f71e1cfa8c03"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/note_chain.rs",
+          "sha256": "2967bbbd2573bfea31c314125325f9be24eb2fce5cd02908fac94a91b5767d7f"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/note_settlement.rs",
+          "sha256": "d54ce8ad765dbad8d2d3721af35c520bca2a6e91084a9a54a8df68590cd571b5"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/notes.rs",
+          "sha256": "e0739b76b460f7dc9c69e94e43dc71e19bd6dcc55ea8181fc166fdcf72220559"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/pvp.rs",
+          "sha256": "0cdc693df4db31728a19f5944ba40447166651641982f8f8cf16e8fc3324102a"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/reconcile.rs",
+          "sha256": "763924625c71d0e7cfd0ba2d522913dfb721e49b29d47b706ebddea38f8997d9"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/register.rs",
+          "sha256": "00521ffa6cb6685f310b10a66fbfbd36066ce427198a012cce316ccf65909136"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/vetting.rs",
+          "sha256": "a51a19881925041aba8d4c3414d997712667b502f4e7b9c21644a74e6b3e4a46"
+        },
+        {
+          "path": "rust/qomm-defmi/tests/viewing.rs",
+          "sha256": "984911e3e3a690420d2cd590fba43ef70aba151839be209924185a597140e7ac"
+        },
+        {
+          "path": "rust/qomm-demo/Cargo.toml",
+          "sha256": "51a7627f355b71a3777ab25814610ea4b2ad32f689111d33f22711fafb51fa2c"
+        },
+        {
+          "path": "rust/qomm-demo/src/asset_ids.rs",
+          "sha256": "96ef965782a51726e3cc69d88c16c145e97cb085f23f63026ea37126d5841110"
+        },
+        {
+          "path": "rust/qomm-demo/src/bin/qomm_frontend.rs",
+          "sha256": "7496e2be46febb1e3d503c08a5f96bc62b4b5d7a9de77ff0ce30ac4c9080bf63"
+        },
+        {
+          "path": "rust/qomm-demo/src/bin/qomm_live_acceptance.rs",
+          "sha256": "a6197aca047dfd20fb1d3960245ba1c9ab8e58fbeca3cbe0be787d8b319227a4"
+        },
+        {
+          "path": "rust/qomm-demo/src/bin/qomm_live_acceptance_report.rs",
+          "sha256": "169c016d8e26bee889dacfa669a62458e1efb1d286d0d7f608c8f31d8228cf49"
+        },
+        {
+          "path": "rust/qomm-demo/src/bin/qomm_mpc_node.rs",
+          "sha256": "59773c1b074839710d93a2ced07b9066bf686f13915208f49d2626af3183bb0a"
+        },
+        {
+          "path": "rust/qomm-demo/src/bin/qomm_participant_node.rs",
+          "sha256": "08f11af7753dc4935deefd8a92172147725bb8d31e12ff5c16c846fe8ae45a2e"
+        },
+        {
+          "path": "rust/qomm-demo/src/bots.rs",
+          "sha256": "0814ad3910c480d0d12a3f95856244b79036daab97a3bd754e7c3a76374842d4"
+        },
+        {
+          "path": "rust/qomm-demo/src/defmi_bootstrap.rs",
+          "sha256": "4e8c179d29b6367d0740c858ab2612bf99eb38cce678dd3ab540eeb42c0a1cdb"
+        },
+        {
+          "path": "rust/qomm-demo/src/distributed_mpc.rs",
+          "sha256": "9bac6538fde6ed29aa6aca9fc2dd47a25ae86585e95d4187f3ad39d77e8bc5bd"
+        },
+        {
+          "path": "rust/qomm-demo/src/lib.rs",
+          "sha256": "ba10360bc4077546e8b1dbd6bb25d0c12a6c41a8b99f554f66b305c4b9cc9fb5"
+        },
+        {
+          "path": "rust/qomm-demo/src/main.rs",
+          "sha256": "c87206f253912b0b2c5962382383e7fc3a5dbdd163b8817bd607a98fc684a8cd"
+        },
+        {
+          "path": "rust/qomm-demo/src/model.rs",
+          "sha256": "e4385d9f7dcbb463ec84aeb18685b6e08aa543bb119205e8fc23f0b3381d28ee"
+        },
+        {
+          "path": "rust/qomm-demo/src/mpc.rs",
+          "sha256": "dc6358e6d66e40d2f6c95bcb26dc5966fe2e61de388a1d5d93175d7853fd62f0"
+        },
+        {
+          "path": "rust/qomm-demo/src/participant_client.rs",
+          "sha256": "ac848a4081ff75dd3ae495212b1a8ed83c2336e94a4ab12b19cf9e9a102d770f"
+        },
+        {
+          "path": "rust/qomm-demo/src/participant_node.rs",
+          "sha256": "67f2bece096291eb3d789bb087ae39d0377e01b325465246f8be6777993a25b1"
+        },
+        {
+          "path": "rust/qomm-demo/src/portfolio.rs",
+          "sha256": "343802df61989775715e65288d06d3ac8eacf39b5ad89515f0508dbc411d2e85"
+        },
+        {
+          "path": "rust/qomm-demo/src/protocol.rs",
+          "sha256": "77b96ed31f00d4ee93caf341de15ce4e431e96fe5a05c9fc41653d13dacf2386"
+        },
+        {
+          "path": "rust/qomm-demo/src/room.rs",
+          "sha256": "46e183d5325ea07eed17d1b5b56116f90b0b98e11d9fff74050cb054bd940a65"
+        },
+        {
+          "path": "rust/qomm-demo/src/web.rs",
+          "sha256": "972dc1b3d706a4eaf39f892b92f7f6b2c2a7898656be602089e3c933131c26e8"
+        },
+        {
+          "path": "rust/qomm-demo/tests/bots.rs",
+          "sha256": "f938b63dfbc277b27426f7bba3b0dd66ea89697cccb2fdabb81c9d33fabd83c5"
+        },
+        {
+          "path": "rust/qomm-demo/tests/model.rs",
+          "sha256": "1a4637b800420e47c32f2b84a20b32af14ccb3d4d3b1437878ccbef2d4f6df0a"
+        },
+        {
+          "path": "rust/qomm-demo/tests/mpc_engine.rs",
+          "sha256": "22ff17d173658aea343ff49d16cc17abf7b3aeddbbf3a92242f295668a402b6d"
+        },
+        {
+          "path": "rust/qomm-demo/tests/protocol.rs",
+          "sha256": "5350ff0a142b543a532fc3e16c7aeb8dd1fd87f57cdb1188588ab529776242db"
+        },
+        {
+          "path": "rust/qomm-demo/tests/room.rs",
+          "sha256": "b0a38e3579247213d4d95df4213cce3d4af7f02f8124e94201401489fb1dc556"
+        },
+        {
+          "path": "rust/qomm-demo/tests/web.rs",
+          "sha256": "e0fff83742d7a1ebd529aab8020d90e9ca401a2a2fffb28c6f01b93d3361c3d0"
+        },
+        {
+          "path": "rust/qomm-dsl/Cargo.toml",
+          "sha256": "24f146016304f6c4cc8487df8a7952fc4bbeab81ffbb2393e5dbca9dbd3a9095"
+        },
+        {
+          "path": "rust/qomm-dsl/src/emit.rs",
+          "sha256": "c87d7af001a8ab14534b32eaa95c49c809e86d50958560cd38982dd58e11ba71"
+        },
+        {
+          "path": "rust/qomm-dsl/src/interval.rs",
+          "sha256": "15cec7cf9b0e1b1c925837d00c2cd981578265167d9419b3ab32798d22b328f8"
+        },
+        {
+          "path": "rust/qomm-dsl/src/lib.rs",
+          "sha256": "4260f76cfc3d7ff663f23b316c89d98974fc3897be3988b92b62ebc7234aeb66"
+        },
+        {
+          "path": "rust/qomm-dsl/src/parse.rs",
+          "sha256": "a1bc3094014d5e02602c589049f32a86a200c37e64a25446ffa920d3d3039782"
+        },
+        {
+          "path": "rust/qomm-dsl/src/registry.rs",
+          "sha256": "6b2aca6a62ce9dcf0f5fdeadcd569b5139d58d15f55e53ea66b9fecb05f4b141"
+        },
+        {
+          "path": "rust/qomm-dsl/src/rule.rs",
+          "sha256": "e3dfbf3203df4b6a25d632fd0fb627f79b3f379d92361fc10e3eef41ad918378"
+        },
+        {
+          "path": "rust/qomm-dsl/tests/language.rs",
+          "sha256": "8c42b5b9d154694fbc19c5f1d3ae8c75834554abf228d3088fd681222142fd59"
+        },
+        {
+          "path": "rust/qomm-dsl/tests/registry.rs",
+          "sha256": "12db953c0d25a0a80d7a6005212a05a46e62bb1a0b740dcf039acd5cd4aab94c"
+        },
+        {
+          "path": "rust/qomm-harness/Cargo.toml",
+          "sha256": "0f9d140e684f238177765641fc4863847737de64a695337a360a9510bd0ede77"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/build_audit_doc.rs",
+          "sha256": "e26a5aaa67e916602efd6c22a09d5d528576d9c9e06ab2e41338257bb1d42beb"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/collect_origins.rs",
+          "sha256": "019e41a9af9924b2d280ff8eba9cfd49ffec099db45dfc2e407045135962c1e6"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/collect_uniswapx.rs",
+          "sha256": "cbd9d4601b9c3f57d5324b8c97d4111673aecf20fcf114f88533f4e5a515b681"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/derive_snr.rs",
+          "sha256": "e935456dbe72a2aeaad3c59a0e19f73c23d2dbdd92a50aaea1ade46f9ecd1484"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/make_figures.rs",
+          "sha256": "00c469c2d026264d9c789f1e6804b65c7afc836ee0339e267be7cd862b48bd56"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/manifest.rs",
+          "sha256": "470239039700f7f118a5dc7cb5c0a956fa2bc8ea31dffac3758b69cff818445e"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/opt_sweep.rs",
+          "sha256": "44d77d69c7fb4696b61185d61bda41110c959026840337db625adb6fca432862"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/report.rs",
+          "sha256": "defa67e4641317a631b247168697620200016af416cc1d19f5cb697a8f4293cc"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/research_run.rs",
+          "sha256": "c7c8408adcf663509fdd0a9c6e7e94b73b9f9e4ab0f5fd58cc1d9e1d3b6fe7f6"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_audit_slots.rs",
+          "sha256": "78e1f6ea9d99400c3ebbc9a537d2d374371ddf9a702b954839dd2064a97c89b3"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_binding_chain.rs",
+          "sha256": "5fa517b2eca209deb45e2005fb3aabe2d1f02aab3cdc0e9c84c0cefe1b09bec9"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_bitdec_rounds.rs",
+          "sha256": "525cff124801b4de77f6a5500221881fef6edebf189dd8495e8682c1ecbf5ced"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_block_range_query.rs",
+          "sha256": "e4b242c6bb90b85adbfa39383716072eb8739319e16f41553615020f1e6af14f"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_circuit_bound_proof.rs",
+          "sha256": "cc742445b4d95fef975b52579d991f16bf6b9ee9009cbf2b5365ea40e5b51ba1"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_disclosure_ceiling.rs",
+          "sha256": "0125d147db6b4b7287c35c2ae97447682c561a0c46ec1d486e8fad0e4a795927"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_distributed_assembly.rs",
+          "sha256": "2fa9b6b26ee328153d472bbb2f38fff7b74e8f300ccac62a009df9aa9b6d2c02"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_distributed_dp.rs",
+          "sha256": "33c1fffcaf589b36c3d269c69a3a99bf8a69a03b48a6fb83f0b8c16c75f1d5a6"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_distributed_publication.rs",
+          "sha256": "c1baa6a3727f5e91c3dd220ebbb8cc7c211f94e38b37a4eb0358ecd6510d6986"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_dp_audit.rs",
+          "sha256": "5590789e9c78548a53e3e717904a6e6b1b0691253d4a0bbc7cea67cd2c30238e"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_dp_effect.rs",
+          "sha256": "78125884d6a0b1417ae9a8b53c58aa22fea1afc3ceffd35a9774ba895ef0df13"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_entity_behavior.rs",
+          "sha256": "c30ffc64145a8360aaeba73e5737592c8f49fd08238494a8c10e4f9b73ec9acd"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_identity.rs",
+          "sha256": "d60112ebd013f5b8ec8893f6e1e42c61fd9c0ec1e723c209d0688da8c3d7593c"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_input_check.rs",
+          "sha256": "eb9080c9a4478cccfdb864b92cb953df16f0371c53f7effcc9698ce9407490a7"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_locate.rs",
+          "sha256": "6f2519382c2819b14d6600530c24e661be620a7f276b6cf92486267025a9434e"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_maker_updates.rs",
+          "sha256": "11932fc4688842e41d417ffee14af93acd98b31bd238531b6f5b3a3133c32792"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_market_thickness.rs",
+          "sha256": "2055ff1ea4437240c9c8657b293e5540a1a4260407f9500490bc214107acc753"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_multi_asset.rs",
+          "sha256": "385f0cf690ec82f92a7803b837ebe7048c52e35d8091778d7c3fd5431c803883"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_multiplication_cost.rs",
+          "sha256": "fbbb98b1bb843c3733079245e3261aa7c22ce445c5565a432e0ad05ef9809c9c"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_placement.rs",
+          "sha256": "cae1e0c6a22099d313b239b4a540b919c16ce4f3bf912c7598cd68ba1912743d"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_price_conditionals.rs",
+          "sha256": "606ebfba69dc7c994abc1ff28733bdd2cb9fc2687d85ef6f605c8680f9e3a7f4"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_probe_budget.rs",
+          "sha256": "6fa81d7306b5438737e3e1dec9551e135fd8bd72fb163d3552ae71c5db66a32e"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_qomm.rs",
+          "sha256": "88b3ee149161b5ddad2e10baec119a800420690d8851c034b41a3ec98c8031ae"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_rho_sweep.rs",
+          "sha256": "3768122cebdb304681db0657d3e2a3240ac095a202a9fc6012b6bb6baa6b2b0f"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_robust_atlas.rs",
+          "sha256": "1bb92d7061a0523a0db17e67daa18eb590bf23459ddd35de4c682dc659b308d8"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_rounds.rs",
+          "sha256": "72d745a22f429941ed8064cda4f9a50fd8af8d3dd07a9e8e4cd63cd8948b4634"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_serve_bench.rs",
+          "sha256": "fd07dde0b7fe1a5803eb44b9e88a1f480f93b924b6b88f19e0d31dbd25852f1c"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_sim_matrix.rs",
+          "sha256": "e2335e47a823dc9a3113c85ce3a8a2776ef17a4dddd759f5b7bf3cf2b260b7de"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_sites.rs",
+          "sha256": "a1240c79e39a5799b9c23d27d8d71f684da47408ec35223b30f1326473fcb89a"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_stages.rs",
+          "sha256": "325b27cd2548844681e92977bb5bca58841d99c7a43db9420ab69919164b9d7a"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_staleness.rs",
+          "sha256": "31ab3c2462e8d1c97405d8728e8ef61d80b26aca11864617047cac38d390e154"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_three_times.rs",
+          "sha256": "71639489b9e4e79505ff5cdcece6dad007a7ef1452c21de37b714cced8d37a26"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_threshold_assembly.rs",
+          "sha256": "8cef8490586810475b3db58800a85109ccfc97c0c96c8949670d383e35f522c9"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_transport.rs",
+          "sha256": "e58eca0fcec9e000b3803ce1b2a666d9a517de8166c1ecff7980ea81fa7d5819"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/rust_only_guard.rs",
+          "sha256": "c665721a76ccda5266449d8ca7c27fbdbd74f7e61fd90644798243f6584dffe8"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/scrub_artifacts.rs",
+          "sha256": "cd2b6d7bba394774800ecc0d9961b242b6c139f0cc51f082a223728c91b7204b"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/serve_demo.rs",
+          "sha256": "eee8e5e1e1c9baabd3a79f77b94cd7eee833c6dd7da04f4b46b54c28e59c4cc3"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/sweep.rs",
+          "sha256": "ac5a3238c0e53d3abfd1129c9da40086d731788d7710c31acdcdf75fc69dd853"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/tcp_rtt.rs",
+          "sha256": "bd442015b3fc6f115175d529b6f22380f0953448f22d9d7a859fa9bdd6045430"
+        },
+        {
+          "path": "rust/qomm-harness/src/lib.rs",
+          "sha256": "d5061f36320a8c6b1d02f4fa33b386b076457e8549118cce532bd93e94851ee8"
+        },
+        {
+          "path": "rust/qomm-harness/src/local_mpc.rs",
+          "sha256": "e0f6e9b5f5cb7d8da03b0ad493f8862e88155a3c651818100972d5bafd13feb1"
+        },
+        {
+          "path": "rust/qomm-harness/src/measure.rs",
+          "sha256": "04e2437f82e21ccc400688e0da2d555e149e05b0bd1d80fe3628b65925f62d19"
+        },
+        {
+          "path": "rust/qomm-harness/src/rust_only.rs",
+          "sha256": "d9b6e52e4095e7a5e7baebcacec6471a1994fdabb5e962a177da1cbe27307dc1"
+        },
+        {
+          "path": "rust/qomm-harness/src/smallsample.rs",
+          "sha256": "222ba45935a5665469d63f9029f714f60c51c49b42b8f18813f504e0463793fb"
+        },
+        {
+          "path": "rust/qomm-law/Cargo.toml",
+          "sha256": "0b81381c6a97a83cb2f11189e58e5db42b2c21c5106a0f6af46f51eb1f670af9"
+        },
+        {
+          "path": "rust/qomm-law/src/bin/law.rs",
+          "sha256": "12cceee00a6f0c2daa69fe6f460084b963de20856f6f9e09fcde65000e9c0e81"
+        },
+        {
+          "path": "rust/qomm-law/src/check.rs",
+          "sha256": "4fcc9ccc969add780e5a381a092b46e7eff9858ed64a843564119eef3c80536b"
+        },
+        {
+          "path": "rust/qomm-law/src/emit.rs",
+          "sha256": "a19ab63aabce306a859d8ca7fa4319db19930f049de7d76225de5728626de9cb"
+        },
+        {
+          "path": "rust/qomm-law/src/lib.rs",
+          "sha256": "08c628cb52eb328ce055b482abb18e2f0480f0a8b8df783c541c811fd6dba9c9"
+        },
+        {
+          "path": "rust/qomm-law/src/parse.rs",
+          "sha256": "92d1e3ea3869cc20c48400e76985c8b2558ff384525ced36d15df49d7486e37f"
+        },
+        {
+          "path": "rust/qomm-law/tests/law.rs",
+          "sha256": "e32d47dd7f5a3a65bc48450f92050bf39cd4b3a50de9017f7099f96088bbf9bc"
+        },
+        {
+          "path": "rust/qomm-measure/Cargo.toml",
+          "sha256": "421361d2aeb736d797e95ade26c3d5e538d5736ac9d77d554c5cdcdb8597e6eb"
+        },
+        {
+          "path": "rust/qomm-measure/src/beta.rs",
+          "sha256": "d4400dc5d205a744535656e6c31a63d7d91168a011ea267cafa7caca10fa8589"
+        },
+        {
+          "path": "rust/qomm-measure/src/bin/host_label.rs",
+          "sha256": "a60c9d0e44d334db87a35839036f7ad3f72a5b19457249e84ed19a9b9f1ed3c7"
+        },
+        {
+          "path": "rust/qomm-measure/src/deterministic_random.rs",
+          "sha256": "38a440aebc8817ea61a2f2679d85a9a700f0c9f61b537d7db031208ec9eb3486"
+        },
+        {
+          "path": "rust/qomm-measure/src/fsum.rs",
+          "sha256": "e8fe4283ccc945175094e5a04c5ef52377ca13a33488856d06dcad427d1cafd6"
+        },
+        {
+          "path": "rust/qomm-measure/src/hosts.rs",
+          "sha256": "0a7a86b93822ebe20297f28f53388a6b5f2c928b16614703731e93d8d753faa9"
+        },
+        {
+          "path": "rust/qomm-measure/src/lib.rs",
+          "sha256": "d881c16ce48bed1f369cf0163e2a4a453d3ed179a4af9af931c2d27f4883e326"
+        },
+        {
+          "path": "rust/qomm-measure/src/rounding.rs",
+          "sha256": "4f1090d225978f55eed214231f35b6fadaef76178309064c11757b12c297c45e"
+        },
+        {
+          "path": "rust/qomm-mpc/Cargo.toml",
+          "sha256": "7e3b451b7b2d6c027326d3161bf2481386e2798d8a5d05ca3ce08d2bd72f46ba"
+        },
+        {
+          "path": "rust/qomm-mpc/build.rs",
+          "sha256": "35425f8b535e13d87589b0a149cc5a59d9278b0312a6fb21608522a64eaf92c7"
+        },
+        {
+          "path": "rust/qomm-mpc/src/bin/gen.rs",
+          "sha256": "3123b9d2085b7fdfbd8f062db16b572a1d5eaf106b61db48d874da136f8fc07b"
+        },
+        {
+          "path": "rust/qomm-mpc/src/bin/party.rs",
+          "sha256": "4bba05b925a30907631c47237430ffebb6c0b9571d66812282e914cd28b1be4a"
+        },
+        {
+          "path": "rust/qomm-mpc/src/bin/rounds.rs",
+          "sha256": "4dec7311ade593ee6e289aab228db4ace5c6978e0184f7a817afb8d72d53c91e"
+        },
+        {
+          "path": "rust/qomm-mpc/src/compiler.rs",
+          "sha256": "e1e646cc35eefa36b14c73b70c34614e5cd8fdce44b35a30b91883af4b34eed8"
+        },
+        {
+          "path": "rust/qomm-mpc/src/inputs.rs",
+          "sha256": "2f613953d26317b509bffbddaab141db4833de1cff9ef9d70078e99908136a5f"
+        },
+        {
+          "path": "rust/qomm-mpc/src/lib.rs",
+          "sha256": "7079fc5d27474352c0c2ba0eb7e48b305318f193eec605f75b70c510b8023102"
+        },
+        {
+          "path": "rust/qomm-mpc/src/persistence.rs",
+          "sha256": "6f1f1a72405bfbd5641a75728c010117da3c5fe624db97d7033d22f7b5f516ea"
+        },
+        {
+          "path": "rust/qomm-mpc/src/program.rs",
+          "sha256": "19d9dadb1a7084af9cf80954a396a8c138d9fc50e31b8d9b4d5a35ab47e47a45"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/all_files_parity.rs",
+          "sha256": "463f212f1c64b47281010fa978594f9b5b6114c240ab5348a9da787c0489b05a"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/circuit_is_oblivious.rs",
+          "sha256": "950de69e5bfb55f5cf0ca392137e2cfd8bc4a0e4b3d8112c74db89190ee33977"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/dvp_handoff.rs",
+          "sha256": "aa5382ce33b35507fcf11c954da28d39bf8ab3686f05b584674d5b3b1a09fa06"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/fill_fold.rs",
+          "sha256": "ef3129134c5fdd27472c3825e03c4ca905b6246138038760a87cbcb8ca0e367e"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/policy_binding.rs",
+          "sha256": "94c744bedfda93058c518399ff384418c96cffe2d46900b9aa91d61ee30e7065"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/program_parity.rs",
+          "sha256": "a618b9ec69e0eff7c0b627ff7972fe09b13b7f01acb183168ea3e0b7395bb0b3"
+        },
+        {
+          "path": "rust/qomm-mpc/tests/reference_invariance.rs",
+          "sha256": "5b8b88babe6f6f6813b4842c9b4bfa8034619426ce68234db1326491bb49b66d"
+        },
+        {
+          "path": "rust/qomm-proofs/Cargo.toml",
+          "sha256": "75f2855ed4c2d853e8e258a9173be26fbcc272a02a653bd4d557dc8be7640ccf"
+        },
+        {
+          "path": "rust/qomm-proofs/src/kyb.rs",
+          "sha256": "dd42172c137de4083ede9d1e20ea271ff5760b981906f4f0332de36191285ded"
+        },
+        {
+          "path": "rust/qomm-proofs/src/lib.rs",
+          "sha256": "9c1a39fc947e211fdf1b39ac4f4ade52e438ed1f34ea7fa611fafe9012e3db13"
+        },
+        {
+          "path": "rust/qomm-proofs/src/liquidity.rs",
+          "sha256": "59ece7dfed9331adfe1d8bb8d45c0811d3ac5df89690562f14dd224241fa988e"
+        },
+        {
+          "path": "rust/qomm-proofs/src/opening_envelope.rs",
+          "sha256": "84ada868ecbb99c4d45cec77caca6ae86cbe77b6bb08e0a53425ebe6f432ac32"
+        },
+        {
+          "path": "rust/qomm-proofs/src/policy_audit.rs",
+          "sha256": "11b346c41c6bf2c8edc2574706e9def0204d1bafd78e7567d209845ef0eee6b5"
+        },
+        {
+          "path": "rust/qomm-proofs/src/price_limit.rs",
+          "sha256": "72554d2713f6db8da725498ff170959e5e09b459ab3f3373ceb2b31b61b9d41a"
+        },
+        {
+          "path": "rust/qomm-proofs/src/quote_proof.rs",
+          "sha256": "53604fffb8c2872e243df9a718843246c1e93e004cb1f2e537377ef1e8696f70"
+        },
+        {
+          "path": "rust/qomm-proofs/src/rule_audit.rs",
+          "sha256": "e28a2491321501f846b12d7d97424edf9f4f8cd4f6bc5c7747b6476b377d46a3"
+        },
+        {
+          "path": "rust/qomm-proofs/src/state_audit.rs",
+          "sha256": "c63324a7564a4a7079a7ae20f57b407630ec78a5a8aa5cb90f6d0ab8b6a4a12d"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_gadgets.rs",
+          "sha256": "0373548a026d64ac3bd99c9e413a9638c0a8f09f034b3720aefe62f64380b99e"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_quote.rs",
+          "sha256": "c55b67290fbbe8c819c1b36c5e9b030bb5b416c95c38f23faf5666272f36893b"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_range.rs",
+          "sha256": "3de1f1a03226a12f81b676819ee404916bc10d87686a47d363aa92532b746c16"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_sigma.rs",
+          "sha256": "1eaff3117124f46e0c09c3886407a360d17656ddf4757749259b4a853209d183"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/distributed_product_rounds.rs",
+          "sha256": "829323a0eb59eacf8e757ea009f1709f5e960dd2c8213889bb0af1f71de37b0b"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/joint_nonce.rs",
+          "sha256": "1243e1b8430697001c51787e26c86a8cde8cf329e687b2812b4dd2270a0ff990"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/kyb.rs",
+          "sha256": "ef3dc730e5e08b3e7ef065a5d7fae18d3bfd9894f76118f0a96f9aafa5176f24"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/liquidity.rs",
+          "sha256": "06eda6d7beb016c58ac416c56f115c5922384e86183cb928ddb39b297377bee8"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/paper_artifact_node_boundary.rs",
+          "sha256": "d0b6c5ddd06ef9e0e801bb8e0090152604e1a00021076ff097fd0535408269e1"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/policy_audit.rs",
+          "sha256": "390e97954e294005cf95d4be2e724849c5b9d99e0f7c3d5d652322c8360d3597"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/policy_kyb_contract.rs",
+          "sha256": "809152a8954475113bd19e953af529d282105c1a58079b3d6860f53a81bc324f"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/price_limit.rs",
+          "sha256": "70d5c91c229f805128a0c573ecab9343baa633656ae951cb5597658030dda418"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/product_attribution.rs",
+          "sha256": "15bc30b3a1c149c097c98645a7a2a5a69dae1b8b8b6ae0088facc00aff6026e6"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/quote_proof.rs",
+          "sha256": "14b01d9b6ca6b9ad3d0229f2106fb8de9b3feb889cb34e40b1662badfe2a5675"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/rule_audit.rs",
+          "sha256": "d6391e61105dc9d909e8db35795235947a5687fc698218f415333ea61b1bb8d6"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/slot_collision.rs",
+          "sha256": "a056604126cc41aa6c6e2fd75e5ae633244215cc71e16947004695a25128f7fe"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/state_audit.rs",
+          "sha256": "411b131cc0ad82a4c5c4735d839633613490380a39bba02e894a6dca3d4d011a"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/threshold_quote.rs",
+          "sha256": "6a18ddb9ca89e2e73874bb0af18e787189dda95ee13d702e10ce30e9bdb64fcf"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/threshold_range.rs",
+          "sha256": "d36c3d3f8a8fd1571637c822c23ea2ace006a4ab24f593f6035b82ebd20c4fd8"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/threshold_sigma.rs",
+          "sha256": "81bb00cc8b1825f1820811f99cf9954eead75c15d0615a47884981ee98e4c753"
+        },
+        {
+          "path": "rust/qomm-sim/Cargo.toml",
+          "sha256": "4224bdf956895dbf10ca2f3f699a50393531392ff9fb49e73f98ea6777715203"
+        },
+        {
+          "path": "rust/qomm-sim/src/attackers.rs",
+          "sha256": "95e6f5b329bb6c7f25319c3dad4272a2147ece9904a5902cf627e3057a7d0d79"
+        },
+        {
+          "path": "rust/qomm-sim/src/audit.rs",
+          "sha256": "72cdd5b4dc11c116a3f7d2e3826290cdd5327b610f060a1b18d578b8a1d68c47"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/attackdump.rs",
+          "sha256": "282137829a30e7abfc8604a8b63381de1a2ab2b28117ddd35bd69e31ea4be0d8"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/auditdump.rs",
+          "sha256": "c4888b961fc461df1c14a6a17a09d37d8609fbe99f7d3e01ff7d6262d7aa60ae"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/enginedump.rs",
+          "sha256": "f9ce635a37a931c1ecb4be75c64955308e76b733a67018608c54475454d1dba3"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/experiment.rs",
+          "sha256": "86a6a7cdeba68baf467f9fab251c84e80b14ff2e7ba87c5da8cde726f4c44776"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/marketdump.rs",
+          "sha256": "516f7c7bd09319c570d49e60b118bddf33c1e4900b4c7ab9506b78c861c2d484"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/middump.rs",
+          "sha256": "6b4ee1c3bf7f551c4baa6d90995258bb2309ff95aa1ced81b767811b92ff2563"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/rngdump.rs",
+          "sha256": "40efb2d88e679af5ca2b8ee39b976622c9d42bfa0b4a6aeb44c2190ef224b297"
+        },
+        {
+          "path": "rust/qomm-sim/src/bin/tapedump.rs",
+          "sha256": "3bf1df14fdc4d0a04f6145780911f841dd5b0e0a86b2dd834c794935f26aed95"
+        },
+        {
+          "path": "rust/qomm-sim/src/disclosure.rs",
+          "sha256": "08f673ed17fee5d8bf457a97d26848cadf2d41d8d6c906d40bde18ea6a2be423"
+        },
+        {
+          "path": "rust/qomm-sim/src/engine.rs",
+          "sha256": "03978808d18230887d7ee9affdc5fdcaba5f411a4ff29430e9194f26f9277027"
+        },
+        {
+          "path": "rust/qomm-sim/src/experiment.rs",
+          "sha256": "191b9bc6d5f1fd758bd02c21aaf290fa844590f745033fb58c70c645cdbb429e"
+        },
+        {
+          "path": "rust/qomm-sim/src/lab.rs",
+          "sha256": "be217f5b676a06c58a18a65ce831e29e6b59ca64151ddb00ea494728899f5c47"
+        },
+        {
+          "path": "rust/qomm-sim/src/lib.rs",
+          "sha256": "8bdd7739f8564ab08859ad390a2592563a6003e222667b9065b2ab384951c982"
+        },
+        {
+          "path": "rust/qomm-sim/src/market.rs",
+          "sha256": "c0975c4633f66d1af788e2cc320fe5c09816bce2c5f23dc8274987d40f569c7d"
+        },
+        {
+          "path": "rust/qomm-sim/src/queries.rs",
+          "sha256": "3ada518fa1082ddae7499a70a5297cedc4600543659d0bf78aab141fb0df8fd1"
+        },
+        {
+          "path": "rust/qomm-sim/src/tapes.rs",
+          "sha256": "097a8df8d0b952fd3fd4b65a44383f688d3927ced149b8b969ed5b1dfab909da"
+        },
+        {
+          "path": "rust/qomm-sim/tests/attack_contract.rs",
+          "sha256": "c0419f2c215e41d9f0b279643479c4c4f66f61ea757f5506adce56b43cc730ac"
+        },
+        {
+          "path": "rust/qomm-sim/tests/attackers_sampling.rs",
+          "sha256": "b1f9d486252f5fe0208c6464053bcaf4da7f0d80836e4a7dd0b522650df83874"
+        },
+        {
+          "path": "rust/qomm-sim/tests/audit.rs",
+          "sha256": "1854d3a7c52db0da93293601d52269a8f113b19c51890663d316f2239e81ec40"
+        },
+        {
+          "path": "rust/qomm-sim/tests/block_range_queries.rs",
+          "sha256": "7e35d045435b1a029dbfc414542dbb6ba9b879ea64a0adaddb0eeab401517359"
+        },
+        {
+          "path": "rust/qomm-sim/tests/deterministic_contract.rs",
+          "sha256": "d32b39352d96be80dcf053338c53e47457b66ed44de157600511e703afd9ff40"
+        },
+        {
+          "path": "rust/qomm-sim/tests/disclosure_contract.rs",
+          "sha256": "f0b3401c3f5544dedb9ce519a29814cd618881cc043fde0c09744b5b7991f4ea"
+        },
+        {
+          "path": "rust/qomm-sim/tests/dp_adjacency_is_the_released_one.rs",
+          "sha256": "0921754f63056964c93a56a134040bb0a5d8f2a6e4f2da5e5d93f27f47327661"
+        },
+        {
+          "path": "rust/qomm-sim/tests/lab.rs",
+          "sha256": "28b175d7d81748468b72a896ccdf4a00eda827adbfbd1cb6b4ac173c3c94fd56"
+        },
+        {
+          "path": "rust/qomm-sim/tests/range_queries.rs",
+          "sha256": "e9a4f45cfaa331d4e0dc516f53aa612ac27b611f66ba590d43994d450054051e"
+        },
+        {
+          "path": "rust/qomm-sim/tests/selective_disclosure.rs",
+          "sha256": "04e2e31a5cb6b669d3136d7bb67b6dce8d7a5c7deb97f699819d1de7a5924940"
+        },
+        {
+          "path": "rust/qomm-sim/tests/tapes.rs",
+          "sha256": "3c1b1e90ec5c14ce6c2ede8f482a4c46045df0c73998aa7c5d114e7eaf451d6f"
+        },
+        {
+          "path": "rust/qomm-transport/Cargo.toml",
+          "sha256": "5ef7867d4560e2bbcf2ace4de16f4bb58b162cf2958121bd4873629e467cbe30"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/discover_wan_inventory.rs",
+          "sha256": "57929e0f39a6915dd70938d309daf79deb60eb52a01a49fdbe4674e3648ff90a"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/prepare_wan_deployment.rs",
+          "sha256": "129f5be55e447ee20db6a701e2bb7707d1663c952515109538825b527c96ff7a"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/provision_frost_cluster.rs",
+          "sha256": "82575aa75abd8fc59c3d4b8123d504663654ae3e49739b0ca3e6bef073382c84"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/qomm_node_party.rs",
+          "sha256": "710dee00a65767e22270d291095bea50d3677ca0c39a4f370e161be70eba8012"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/serve_node.rs",
+          "sha256": "af249456cd8c43b3ef371a16602c67e902e08968ff37197442fd7fb10028becc"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/serve_proof_party.rs",
+          "sha256": "48d5fccf4094d5b077c1e3858d1310c6778f2b93eca448e10830ca62cea58690"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/serve_qomm.rs",
+          "sha256": "97f70e8de73d62a8cd9094bb9e0053312e6c7127f4e70ad63c50ec633c123900"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/seven_node_cluster.rs",
+          "sha256": "bdff91fd85db8a497ab2a63159b6f931c945e500bc59f8ad232680ff4acbefe7"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/wan_acceptance.rs",
+          "sha256": "841942ad5a3085b374e0b3240cc52df83f46c2185cdbc75a40d69010014ca8f2"
+        },
+        {
+          "path": "rust/qomm-transport/src/bin/wan_proxy.rs",
+          "sha256": "60fffa769094492765540b2f6fa8f713d703e319258ceff69f7a9304da3e2756"
+        },
+        {
+          "path": "rust/qomm-transport/src/binding.rs",
+          "sha256": "f4a8956159fe78bc906c15dbe482a7cd1cfc12e3ca9906330d3b24d84e8b1503"
+        },
+        {
+          "path": "rust/qomm-transport/src/client.rs",
+          "sha256": "7ba1a97efdb86dc321144738368b6e0f7e52d9b9fc6da9ea32ca9f93beb80583"
+        },
+        {
+          "path": "rust/qomm-transport/src/corporate_outbox.rs",
+          "sha256": "f4e45487f56acc1fc79a0369c05a5a4749ad15353559223b973ab2477cd1fa4a"
+        },
+        {
+          "path": "rust/qomm-transport/src/dvp_issuer.rs",
+          "sha256": "a5faf7b18692c955b160d58281049d12efe818aa3facc2a31447b2dfa52d7642"
+        },
+        {
+          "path": "rust/qomm-transport/src/dvp_wire.rs",
+          "sha256": "9eb77ff803547147911d302881a9d16386519e4c07c4dd05efe98261ba34c324"
+        },
+        {
+          "path": "rust/qomm-transport/src/ethereum_rpc.rs",
+          "sha256": "017f3d0599ea159db10b7cefcf3c08ea9fee3056fa907e1a424f1818de152891"
+        },
+        {
+          "path": "rust/qomm-transport/src/executor.rs",
+          "sha256": "d02cdfbc71dfcc4190f25985da87507a4f9ceb1f7e3576d56ff39dade18614fc"
+        },
+        {
+          "path": "rust/qomm-transport/src/external_kyb.rs",
+          "sha256": "e7499af5f4fc36d9a22ba22341e7af542c25f9fdabd81f087747b646d15fb53d"
+        },
+        {
+          "path": "rust/qomm-transport/src/external_signer.rs",
+          "sha256": "9b95d7de0736ad34dde25ee69107d066737db33575f57fa79d8933a24e654df0"
+        },
+        {
+          "path": "rust/qomm-transport/src/frost_cluster.rs",
+          "sha256": "9cc5ef22250deb1962843deed19e6ea76112c18888609c4d5b892c1f9f385682"
+        },
+        {
+          "path": "rust/qomm-transport/src/frost_coordinator.rs",
+          "sha256": "87bde035b7fe29a1d8a6bd4369be8c1aa074f2e43bbf0eeb485da5c980cfd464"
+        },
+        {
+          "path": "rust/qomm-transport/src/key_management.rs",
+          "sha256": "507735dd44c7796a4e265456b20465f8ae2f82554d99c9f07d614f6764528a04"
+        },
+        {
+          "path": "rust/qomm-transport/src/kyb_lifecycle.rs",
+          "sha256": "6c1f4ba392ae2d0bbe74c2d9d711079c363f03548260bdbb24943a2e69477380"
+        },
+        {
+          "path": "rust/qomm-transport/src/kyb_wire.rs",
+          "sha256": "ee71a2f91b8c3c461ebeb645668379164db7a71fec3663d29021d00f8afd41e6"
+        },
+        {
+          "path": "rust/qomm-transport/src/lib.rs",
+          "sha256": "42907cb41e43c262199f67f95b47f71dc9f9936ea6d062903f075fc913630a7f"
+        },
+        {
+          "path": "rust/qomm-transport/src/limit_issuer.rs",
+          "sha256": "469491c3a0ff583073117acd25bbaedd33479d241b3693474c3e276027e95fb7"
+        },
+        {
+          "path": "rust/qomm-transport/src/limit_wire.rs",
+          "sha256": "38d02c33da78045cb0329a79b7aa3e0d2801bc4cf9c913ed8603fdc6ca84dc64"
+        },
+        {
+          "path": "rust/qomm-transport/src/mandate.rs",
+          "sha256": "b9f5d0c72536b5079ab2f5b89b40cceb47137e041dcf7da9cef42a2a07184859"
+        },
+        {
+          "path": "rust/qomm-transport/src/mpc_result.rs",
+          "sha256": "e5472187805cf056beca93f094cea9c26ce581ceddc630f194cdbb63df2b936c"
+        },
+        {
+          "path": "rust/qomm-transport/src/node_service.rs",
+          "sha256": "af20f7dd90d191daaf62d200a9cfe50de9d93931942d43d3cd652d6ca1338df4"
+        },
+        {
+          "path": "rust/qomm-transport/src/order.rs",
+          "sha256": "4018ff6b49a136bf11d5ecf032de6661c3e2bd171c7c0126a0f01ad77816849a"
+        },
+        {
+          "path": "rust/qomm-transport/src/pretrade_authority.rs",
+          "sha256": "52c374af7e8e3d1281ef81c9ab04be9c5412d1ded483cd4374a7a94d5a71e343"
+        },
+        {
+          "path": "rust/qomm-transport/src/product_proof_coordinator.rs",
+          "sha256": "51d6d1a738b253584db84b5362b9db6d33565919ac6582390175541aceeb410a"
+        },
+        {
+          "path": "rust/qomm-transport/src/proof_client.rs",
+          "sha256": "3e02e3184f8b52e429758782713036355ee67da5c41e04c7411987cd124f0527"
+        },
+        {
+          "path": "rust/qomm-transport/src/proof_codec.rs",
+          "sha256": "9681e88c7ee52eceb36078c577e1b45a874b49cfbacc052587a25dbbd3575a95"
+        },
+        {
+          "path": "rust/qomm-transport/src/proof_party.rs",
+          "sha256": "8f4cdc62171bee7ffc22bb06fe9944e4033e1cae334005bc8d19f31639ea0f98"
+        },
+        {
+          "path": "rust/qomm-transport/src/quote_issuer.rs",
+          "sha256": "1ad330ef67539ef07d4af03b950711e0d302e2b59a7a145be411f31885141228"
+        },
+        {
+          "path": "rust/qomm-transport/src/quote_wire.rs",
+          "sha256": "9438ded27c1ae478f5f40844f41f3ffe8ee1115ab27899321fa9ef6e92c897c1"
+        },
+        {
+          "path": "rust/qomm-transport/src/relay.rs",
+          "sha256": "ed6af041cca9ba2a965dfdd6d61180ef7f9d6723ad7b50799b235f59cc741fb8"
+        },
+        {
+          "path": "rust/qomm-transport/src/resident_mpc.rs",
+          "sha256": "07fc7e3384931f84fba8e9790e1caade11bcacf499b4ed057b19d4287a380a5f"
+        },
+        {
+          "path": "rust/qomm-transport/src/resident_quote.rs",
+          "sha256": "ab44ad6534b6d8a1ea253a3ee0fdd76d7110734573c3ff924b7e06eee6794705"
+        },
+        {
+          "path": "rust/qomm-transport/src/rfq_frame.rs",
+          "sha256": "4515c12ed5dfb1d901530de5efe4fa86ddd6a30f0b273f194bf57aae44988f00"
+        },
+        {
+          "path": "rust/qomm-transport/src/roles.rs",
+          "sha256": "f5aaa61b640f8a7d0a91ad4b478b01e838cf5adf4a25b7ea31bde4c029bbf4f5"
+        },
+        {
+          "path": "rust/qomm-transport/src/rtt.rs",
+          "sha256": "e87fb1245bf3ab33984f374dc525ef90c0bb73f89dfbbfdb7a39f7578bb5ed17"
+        },
+        {
+          "path": "rust/qomm-transport/src/selective_disclosure.rs",
+          "sha256": "669b7f13562fa3a2a8b2f886be3202ef4d2a5f5d9443fea3dfdf531ed33235a4"
+        },
+        {
+          "path": "rust/qomm-transport/src/settlement_finalization.rs",
+          "sha256": "517f792edfce0c031e36ee6c134486ec9597872f58755c39b41b4c50999e8a91"
+        },
+        {
+          "path": "rust/qomm-transport/src/settlement_handoff.rs",
+          "sha256": "d9d65c0b9ae5e266a29f073a23c54976c5d2e1bc6c84d49a56ba6619bb30fc70"
+        },
+        {
+          "path": "rust/qomm-transport/src/standing_pool.rs",
+          "sha256": "8a8dfe2805e2cc164d8aedf457e48204af3b8efd7a92b747058b2f66e3c8362a"
+        },
+        {
+          "path": "rust/qomm-transport/src/wan_deployment.rs",
+          "sha256": "34f6d7b56b50617b167c5d3de3173d065ac6359c1af376a50ce0cb0ec99325d9"
+        },
+        {
+          "path": "rust/qomm-transport/src/wire.rs",
+          "sha256": "ebc0ffa531edec04e89fabf978e19a286082512dce22e7a76bd5a9ee2d037b43"
+        },
+        {
+          "path": "rust/qomm-transport/src/zkpi_issuer.rs",
+          "sha256": "d518137f5eefc8c26e585caa901abc9d4fc1dc3c1b6ae2cef4ffb143288ecdc5"
+        },
+        {
+          "path": "rust/qomm-transport/src/zkpi_wire.rs",
+          "sha256": "ab69e0961b701caf85bde2fc28e7d19e1fad33c27b1ce1f7b297104813feae5b"
+        },
+        {
+          "path": "rust/qomm-transport/tests/dvp_issuer.rs",
+          "sha256": "af24881a4a0fae1331716d593baa0c3ae17e6623eb280c75f70b414ee923b5dd"
+        },
+        {
+          "path": "rust/qomm-transport/tests/executor.rs",
+          "sha256": "aa010dead76b1f10b3ad46deccb6711b2116587b3038c888b8dca599590e9db8"
+        },
+        {
+          "path": "rust/qomm-transport/tests/external_kyb.rs",
+          "sha256": "d3058608e5289d2f5fe43c99e41c9515a0120131721048eff7f8fe4c125f62e6"
+        },
+        {
+          "path": "rust/qomm-transport/tests/external_signer.rs",
+          "sha256": "df91fcc7718ba42884aa35a45314d109318765c4896ed01fae274a9c2e57cf9e"
+        },
+        {
+          "path": "rust/qomm-transport/tests/fixed_order.rs",
+          "sha256": "bb2ee67ea16bcada25d71ee534e01784da7e76a1c69aa571c900cd790ececbca"
+        },
+        {
+          "path": "rust/qomm-transport/tests/frost_dkg_recovery.rs",
+          "sha256": "769072cf76b37be855c6d035ac07d48fbd2e3e70caa11672d70c737bf77e7e5d"
+        },
+        {
+          "path": "rust/qomm-transport/tests/key_management.rs",
+          "sha256": "5f48019f8deb0b9fdca020bf1a58d1715d835440819634cc30739c808aa51ebd"
+        },
+        {
+          "path": "rust/qomm-transport/tests/kyb_lifecycle.rs",
+          "sha256": "306ece5df9f9f1178264431143740680c9680eb7211bf0a001ac9428b94ae19c"
+        },
+        {
+          "path": "rust/qomm-transport/tests/kyb_wire.rs",
+          "sha256": "4bf940561f0d27edf241d275acd2d7e41cca1dabd980162a96d7282c9e506d3d"
+        },
+        {
+          "path": "rust/qomm-transport/tests/mandate.rs",
+          "sha256": "f33e711aeaaf66ad80c19f044949f6dd3cafdf4048def53c2f9d9ab2fc28732e"
+        },
+        {
+          "path": "rust/qomm-transport/tests/node_service.rs",
+          "sha256": "f3d2ba92a47c67ba254aec3b948ae8e5433f8873955730924facb9687b8132ff"
+        },
+        {
+          "path": "rust/qomm-transport/tests/pretrade_authority.rs",
+          "sha256": "3bdadbccae129dfeafba1346d6c9342931c459d3303e83433287c232b3737855"
+        },
+        {
+          "path": "rust/qomm-transport/tests/quote_proof_codec.rs",
+          "sha256": "8aef541fd8ac1e458c219b694004faa90b6b25adb1194d4202d06b7e3f36b214"
+        },
+        {
+          "path": "rust/qomm-transport/tests/rfq_frame.rs",
+          "sha256": "4dc392331c9f468f6d5396f846ba8941bb2b87942a8c4e99f4f8943c5587a512"
+        },
+        {
+          "path": "rust/qomm-transport/tests/roles_binding.rs",
+          "sha256": "59e6c8fbb9bd581337581f87cf4179a73bc73769691f8bd859ba47f9a5cc31e3"
+        },
+        {
+          "path": "rust/qomm-transport/tests/selective_disclosure.rs",
+          "sha256": "52eb8c8ce2746776e9ee2073d9dd822ec906c92539755d851406fec0c17e2a7f"
+        },
+        {
+          "path": "rust/qomm-transport/tests/wan_deployment.rs",
+          "sha256": "426555bed6bc35b6340ab090478bfb96925254a261035028c8273776721a1600"
+        },
+        {
+          "path": "rust/qomm-transport/tests/wire.rs",
+          "sha256": "3f533c8d9742eda3fc548e41ecb65e1b4d1466b41d585a5d9b27a57ffc23f090"
+        },
+        {
+          "path": "rust/qomm-transport/tests/zkpi_issuer.rs",
+          "sha256": "14a5322e5a82e341be4086902cc1c19edcb5689a48f313d0ba947307e5c459b2"
+        },
+        {
+          "path": "rust/qomm-zk/Cargo.toml",
+          "sha256": "6e560fe685ac39f9b3af5bae2bc3e4c519135d7d5abbb7a9c4471b9cd89c7535"
+        },
+        {
+          "path": "rust/qomm-zk/examples/range_compare.rs",
+          "sha256": "2f3829a40e2436a17ef0834f9cd794cf881cc948e883b47fe6f6305fd56fbdc6"
+        },
+        {
+          "path": "rust/qomm-zk/src/adaptor.rs",
+          "sha256": "e32d36371c30740568765d06598d29beae58f7e942290aa6af047f5c86d7ee2d"
+        },
+        {
+          "path": "rust/qomm-zk/src/bitrange.rs",
+          "sha256": "1280829e3e403c6a782637fe9824020f22ae2bddf88730686f44ac8c251f307c"
+        },
+        {
+          "path": "rust/qomm-zk/src/lib.rs",
+          "sha256": "33134a1e37c8ae35f28d3e47d7021b6e56be0ff8deb38b0ec02ef1386efa8a06"
+        },
+        {
+          "path": "rust/qomm-zk/src/oneofmany.rs",
+          "sha256": "ba221bef1b084ffcedf91462feab75d595c6ed60328646665716724bd1425f18"
+        },
+        {
+          "path": "rust/qomm-zk/src/or_dleq.rs",
+          "sha256": "c905ca2650a9367eda4f1681d53ad588a8bd0d29e0817719ea54fa495ce5e6f5"
+        },
+        {
+          "path": "rust/qomm-zk/src/pedersen.rs",
+          "sha256": "e35204cc73e143d32754081d15303ab3b1d04c2b7cdef278cc4b4d9e531fb129"
+        },
+        {
+          "path": "rust/qomm-zk/src/range.rs",
+          "sha256": "95dde6e206e25e1d3fd3f1a481f2c8eec789c12d68a668b9127f82f86042db4a"
+        },
+        {
+          "path": "rust/qomm-zk/src/shamir.rs",
+          "sha256": "076458120ee4c45f13d8e264aeafded937bd1d35f8de8c12d531d74c3b75d1ca"
+        },
+        {
+          "path": "rust/qomm-zk/src/sigma.rs",
+          "sha256": "46aad8ae659afa2ec4eb22c19add511e03e793788c69b3e3e6b6c4a2a8d183f1"
+        },
+        {
+          "path": "rust/qomm-zk/tests/bitrange.rs",
+          "sha256": "fa8c506203ba5da3ad64ae86e760aa9dfb01cbd4546d9f5644efe7a2ad7ddd70"
+        },
+        {
+          "path": "rust/qomm-zk/tests/oneofmany.rs",
+          "sha256": "650eb266c37b77a4aa0ea26f8e468575657fd20bcac20ce514a6a57f856ca102"
+        },
+        {
+          "path": "rust/qomm-zk/tests/shamir.rs",
+          "sha256": "63bc8ccbe346ae8ce136e29e0ee2e295433e9da7486c92fadd788964f9690a57"
+        },
+        {
+          "path": "rust/qomm-zk/tests/sigma.rs",
+          "sha256": "5152324199f91721502f8f73a793a40e0fd01f3776b79b6f5ba5996f982fc9c7"
+        },
+        {
+          "path": "rust/qomm-zkpi/Cargo.toml",
+          "sha256": "74bc3b62a74bb4b9322df4b1cb1f2547c994592ff02ed7c71e6c11b526798c7e"
+        },
+        {
+          "path": "rust/qomm-zkpi/benches/wire.rs",
+          "sha256": "696bd5bfb890aba383120051210e12426f9e65550db91fc22a67c549faa5417f"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/bin/verify.rs",
+          "sha256": "57f4b1018ed5ba4c0156512c7b6d5d7289eb862c1425f7341a04787cc93e5e88"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/cross_domain_dvp.rs",
+          "sha256": "af71c1be0c62b19895ae421ef43aa587c1a5942f827c893e1c64f96fb77f04db"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/handles.rs",
+          "sha256": "14faf89feb33088fa5998d1b03b7b9902cd93886a436eca66b68669c8f3e692e"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/lib.rs",
+          "sha256": "2cd1f6877d4c192ebd4cafcb17396b205a4eceedd9d5cc99418bbf23c83e1fb1"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/typed.rs",
+          "sha256": "58a4e828fb4ed94baab88ba14ec5025a7c6a5c73e98da8fb71ca0fb86ad46d96"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/typed_wire.rs",
+          "sha256": "5468dd3a1e81dac8643a500a386c17b144a95a26128ca44bcf89224dd9f2f918"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/wire.rs",
+          "sha256": "801bab73d1bbc9d2b7abce8b296d1f4ceca192109672e115fa26ff3c5a165fa2"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/wire_vectors.rs",
+          "sha256": "6cd9254ffa44284e694dd594b9851a8dd284683abd75fe85db48d35ad44d6cfa"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/instruction.rs",
+          "sha256": "e00e3031cd7c92c3a9281310f09f35415ebc729d8f751c26df713c6441881d6d"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/threshold_instruction.rs",
+          "sha256": "7159bd98adfd0171c915d99381244f88218ce0f8c67ebfdb7d7d2bb4f230c999"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/typed.rs",
+          "sha256": "54cbe65e3a5499fbac3cd8ab5a276b260ba936c1a4e668a98833a12d8a7e2285"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/wire.rs",
+          "sha256": "3b779b6ddf088eee6e6658154021d91ef851c89a3881005f4462a074282ce1d1"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/Cargo.toml",
+          "sha256": "48d7848981c21191dff486280400a95ab025b13a5d29d2266f097f9fb9aae362"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/src/application.rs",
+          "sha256": "67189613b96812fb547d21f7c5dde34ce37848c16c144ca2154d980a283ccdd4"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/src/execution.rs",
+          "sha256": "8170e34e2d7bae689a9358583d8431923c0c64104e7286eb658055ea041f9bd5"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/src/finality.rs",
+          "sha256": "9577481d61cb9d11b883092a314a7363f531b4903006b1d73abb902c0926c1c4"
+        },
+        {
+          "path": "rust/zkpi-defmi-sdk/src/lib.rs",
+          "sha256": "4fc3172406d2e6cf5de7847d2e33483b9902c606859daef082f2496a7d44154a"
+        }
+      ]
+    },
+    {
+      "repository": "zkpi",
+      "head": "62a4c4250ea7a2f5900fd8a5621b0e4201462029",
+      "files": [
+        {
+          "path": "ZKPI_WIRE.md",
+          "sha256": "9829affeafd8b41a646526ba3bd669d63a6ad4a30c76489fcb197ec57beff7c3"
+        },
+        {
+          "path": "rust/Cargo.lock",
+          "sha256": "c314728bda29b476d12e96c6ef1599f2ea703fa22d6d2a931141ad60bef704fa"
+        },
+        {
+          "path": "rust/Cargo.toml",
+          "sha256": "c716a01f0720d7304064c5ebb46bcd1f2b7ebd8cc4990c1597ef087d8f85b9f9"
+        },
+        {
+          "path": "rust/qomm-harness/Cargo.toml",
+          "sha256": "8c8dd859f2d17b88290c03e94daef2467e42d4860f6564012e0f20631749f219"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_quote_proof.rs",
+          "sha256": "01de44d5294d642e5e9b24bd9a7831735838b6fb1d24fe62dc03fc0092d6d4ad"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_state_audit.rs",
+          "sha256": "9deb47984b590ea7f6ee134ba66f3533b337dfc0b2b665a073027149916852ad"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/run_voleith.rs",
+          "sha256": "34372b197e975deda58babe96810dcd6f93e1a14e26d2d833189a145b5d81527"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/zk_bench.rs",
+          "sha256": "9ad67b1bd0343a4800441f0680caa671a530f9ca09c30deb864904bc01edeef9"
+        },
+        {
+          "path": "rust/qomm-harness/src/bin/zk_compare.rs",
+          "sha256": "57cded60249096bc1c343d36696852b11f85fec0649d5af15496594e7f3d7275"
+        },
+        {
+          "path": "rust/qomm-harness/src/lib.rs",
+          "sha256": "12934e21fe40f2b05a280a250da8789b81d32e63f46e9f654fc0c80e7eaf5b91"
+        },
+        {
+          "path": "rust/qomm-harness/src/voleith.rs",
+          "sha256": "df4bff6c476899a928a14215fe172d4b6b82bcb56d8e8fa7693f28c8a900857a"
+        },
+        {
+          "path": "rust/qomm-harness/src/zk_bench_support.rs",
+          "sha256": "9e9ac27f5feba11b2551e91552c23b5a37f9279f8215223c95ff00e844016756"
+        },
+        {
+          "path": "rust/qomm-measure/Cargo.toml",
+          "sha256": "421361d2aeb736d797e95ade26c3d5e538d5736ac9d77d554c5cdcdb8597e6eb"
+        },
+        {
+          "path": "rust/qomm-measure/src/beta.rs",
+          "sha256": "d4400dc5d205a744535656e6c31a63d7d91168a011ea267cafa7caca10fa8589"
+        },
+        {
+          "path": "rust/qomm-measure/src/bin/host_label.rs",
+          "sha256": "a60c9d0e44d334db87a35839036f7ad3f72a5b19457249e84ed19a9b9f1ed3c7"
+        },
+        {
+          "path": "rust/qomm-measure/src/deterministic_random.rs",
+          "sha256": "38a440aebc8817ea61a2f2679d85a9a700f0c9f61b537d7db031208ec9eb3486"
+        },
+        {
+          "path": "rust/qomm-measure/src/fsum.rs",
+          "sha256": "e8fe4283ccc945175094e5a04c5ef52377ca13a33488856d06dcad427d1cafd6"
+        },
+        {
+          "path": "rust/qomm-measure/src/hosts.rs",
+          "sha256": "0a7a86b93822ebe20297f28f53388a6b5f2c928b16614703731e93d8d753faa9"
+        },
+        {
+          "path": "rust/qomm-measure/src/lib.rs",
+          "sha256": "d881c16ce48bed1f369cf0163e2a4a453d3ed179a4af9af931c2d27f4883e326"
+        },
+        {
+          "path": "rust/qomm-measure/src/rounding.rs",
+          "sha256": "4f1090d225978f55eed214231f35b6fadaef76178309064c11757b12c297c45e"
+        },
+        {
+          "path": "rust/qomm-proofs/Cargo.toml",
+          "sha256": "f665d80d0566f5fb8439a24ff73fdb0f45b9313d130c054711cd6ee2541169da"
+        },
+        {
+          "path": "rust/qomm-proofs/src/kyb.rs",
+          "sha256": "dd42172c137de4083ede9d1e20ea271ff5760b981906f4f0332de36191285ded"
+        },
+        {
+          "path": "rust/qomm-proofs/src/lib.rs",
+          "sha256": "9c1a39fc947e211fdf1b39ac4f4ade52e438ed1f34ea7fa611fafe9012e3db13"
+        },
+        {
+          "path": "rust/qomm-proofs/src/liquidity.rs",
+          "sha256": "59ece7dfed9331adfe1d8bb8d45c0811d3ac5df89690562f14dd224241fa988e"
+        },
+        {
+          "path": "rust/qomm-proofs/src/opening_envelope.rs",
+          "sha256": "84ada868ecbb99c4d45cec77caca6ae86cbe77b6bb08e0a53425ebe6f432ac32"
+        },
+        {
+          "path": "rust/qomm-proofs/src/policy_audit.rs",
+          "sha256": "11b346c41c6bf2c8edc2574706e9def0204d1bafd78e7567d209845ef0eee6b5"
+        },
+        {
+          "path": "rust/qomm-proofs/src/price_limit.rs",
+          "sha256": "72554d2713f6db8da725498ff170959e5e09b459ab3f3373ceb2b31b61b9d41a"
+        },
+        {
+          "path": "rust/qomm-proofs/src/quote_proof.rs",
+          "sha256": "53604fffb8c2872e243df9a718843246c1e93e004cb1f2e537377ef1e8696f70"
+        },
+        {
+          "path": "rust/qomm-proofs/src/rule_audit.rs",
+          "sha256": "e28a2491321501f846b12d7d97424edf9f4f8cd4f6bc5c7747b6476b377d46a3"
+        },
+        {
+          "path": "rust/qomm-proofs/src/state_audit.rs",
+          "sha256": "c63324a7564a4a7079a7ae20f57b407630ec78a5a8aa5cb90f6d0ab8b6a4a12d"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_gadgets.rs",
+          "sha256": "0373548a026d64ac3bd99c9e413a9638c0a8f09f034b3720aefe62f64380b99e"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_quote.rs",
+          "sha256": "c55b67290fbbe8c819c1b36c5e9b030bb5b416c95c38f23faf5666272f36893b"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_range.rs",
+          "sha256": "3de1f1a03226a12f81b676819ee404916bc10d87686a47d363aa92532b746c16"
+        },
+        {
+          "path": "rust/qomm-proofs/src/threshold_sigma.rs",
+          "sha256": "1eaff3117124f46e0c09c3886407a360d17656ddf4757749259b4a853209d183"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/distributed_product_rounds.rs",
+          "sha256": "829323a0eb59eacf8e757ea009f1709f5e960dd2c8213889bb0af1f71de37b0b"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/joint_nonce.rs",
+          "sha256": "1243e1b8430697001c51787e26c86a8cde8cf329e687b2812b4dd2270a0ff990"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/kyb.rs",
+          "sha256": "ef3dc730e5e08b3e7ef065a5d7fae18d3bfd9894f76118f0a96f9aafa5176f24"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/liquidity.rs",
+          "sha256": "06eda6d7beb016c58ac416c56f115c5922384e86183cb928ddb39b297377bee8"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/paper_artifact_node_boundary.rs",
+          "sha256": "d0b6c5ddd06ef9e0e801bb8e0090152604e1a00021076ff097fd0535408269e1"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/policy_audit.rs",
+          "sha256": "390e97954e294005cf95d4be2e724849c5b9d99e0f7c3d5d652322c8360d3597"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/policy_kyb_contract.rs",
+          "sha256": "809152a8954475113bd19e953af529d282105c1a58079b3d6860f53a81bc324f"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/price_limit.rs",
+          "sha256": "70d5c91c229f805128a0c573ecab9343baa633656ae951cb5597658030dda418"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/product_attribution.rs",
+          "sha256": "15bc30b3a1c149c097c98645a7a2a5a69dae1b8b8b6ae0088facc00aff6026e6"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/quote_proof.rs",
+          "sha256": "14b01d9b6ca6b9ad3d0229f2106fb8de9b3feb889cb34e40b1662badfe2a5675"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/rule_audit.rs",
+          "sha256": "d6391e61105dc9d909e8db35795235947a5687fc698218f415333ea61b1bb8d6"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/slot_collision.rs",
+          "sha256": "a056604126cc41aa6c6e2fd75e5ae633244215cc71e16947004695a25128f7fe"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/state_audit.rs",
+          "sha256": "411b131cc0ad82a4c5c4735d839633613490380a39bba02e894a6dca3d4d011a"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/threshold_quote.rs",
+          "sha256": "6a18ddb9ca89e2e73874bb0af18e787189dda95ee13d702e10ce30e9bdb64fcf"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/threshold_range.rs",
+          "sha256": "d36c3d3f8a8fd1571637c822c23ea2ace006a4ab24f593f6035b82ebd20c4fd8"
+        },
+        {
+          "path": "rust/qomm-proofs/tests/threshold_sigma.rs",
+          "sha256": "81bb00cc8b1825f1820811f99cf9954eead75c15d0615a47884981ee98e4c753"
+        },
+        {
+          "path": "rust/qomm-zk/Cargo.toml",
+          "sha256": "6e560fe685ac39f9b3af5bae2bc3e4c519135d7d5abbb7a9c4471b9cd89c7535"
+        },
+        {
+          "path": "rust/qomm-zk/examples/range_compare.rs",
+          "sha256": "2f3829a40e2436a17ef0834f9cd794cf881cc948e883b47fe6f6305fd56fbdc6"
+        },
+        {
+          "path": "rust/qomm-zk/src/adaptor.rs",
+          "sha256": "e32d36371c30740568765d06598d29beae58f7e942290aa6af047f5c86d7ee2d"
+        },
+        {
+          "path": "rust/qomm-zk/src/bitrange.rs",
+          "sha256": "1280829e3e403c6a782637fe9824020f22ae2bddf88730686f44ac8c251f307c"
+        },
+        {
+          "path": "rust/qomm-zk/src/lib.rs",
+          "sha256": "33134a1e37c8ae35f28d3e47d7021b6e56be0ff8deb38b0ec02ef1386efa8a06"
+        },
+        {
+          "path": "rust/qomm-zk/src/oneofmany.rs",
+          "sha256": "ba221bef1b084ffcedf91462feab75d595c6ed60328646665716724bd1425f18"
+        },
+        {
+          "path": "rust/qomm-zk/src/or_dleq.rs",
+          "sha256": "c905ca2650a9367eda4f1681d53ad588a8bd0d29e0817719ea54fa495ce5e6f5"
+        },
+        {
+          "path": "rust/qomm-zk/src/pedersen.rs",
+          "sha256": "e35204cc73e143d32754081d15303ab3b1d04c2b7cdef278cc4b4d9e531fb129"
+        },
+        {
+          "path": "rust/qomm-zk/src/range.rs",
+          "sha256": "4ab04c9683aef373658700584eaea6a7ae62589f9b4c76a9517ebb3699b32807"
+        },
+        {
+          "path": "rust/qomm-zk/src/shamir.rs",
+          "sha256": "076458120ee4c45f13d8e264aeafded937bd1d35f8de8c12d531d74c3b75d1ca"
+        },
+        {
+          "path": "rust/qomm-zk/src/sigma.rs",
+          "sha256": "46aad8ae659afa2ec4eb22c19add511e03e793788c69b3e3e6b6c4a2a8d183f1"
+        },
+        {
+          "path": "rust/qomm-zk/tests/bitrange.rs",
+          "sha256": "fa8c506203ba5da3ad64ae86e760aa9dfb01cbd4546d9f5644efe7a2ad7ddd70"
+        },
+        {
+          "path": "rust/qomm-zk/tests/oneofmany.rs",
+          "sha256": "650eb266c37b77a4aa0ea26f8e468575657fd20bcac20ce514a6a57f856ca102"
+        },
+        {
+          "path": "rust/qomm-zk/tests/shamir.rs",
+          "sha256": "63bc8ccbe346ae8ce136e29e0ee2e295433e9da7486c92fadd788964f9690a57"
+        },
+        {
+          "path": "rust/qomm-zk/tests/sigma.rs",
+          "sha256": "5152324199f91721502f8f73a793a40e0fd01f3776b79b6f5ba5996f982fc9c7"
+        },
+        {
+          "path": "rust/qomm-zkpi/Cargo.toml",
+          "sha256": "74bc3b62a74bb4b9322df4b1cb1f2547c994592ff02ed7c71e6c11b526798c7e"
+        },
+        {
+          "path": "rust/qomm-zkpi/benches/wire.rs",
+          "sha256": "696bd5bfb890aba383120051210e12426f9e65550db91fc22a67c549faa5417f"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/bin/verify.rs",
+          "sha256": "57f4b1018ed5ba4c0156512c7b6d5d7289eb862c1425f7341a04787cc93e5e88"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/cross_domain_dvp.rs",
+          "sha256": "af71c1be0c62b19895ae421ef43aa587c1a5942f827c893e1c64f96fb77f04db"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/handles.rs",
+          "sha256": "14faf89feb33088fa5998d1b03b7b9902cd93886a436eca66b68669c8f3e692e"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/lib.rs",
+          "sha256": "91e4744a834877c7c8ef3665967f7bfdbcc29ac168ff8a5a628cc7f18e3d8288"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/typed.rs",
+          "sha256": "58a4e828fb4ed94baab88ba14ec5025a7c6a5c73e98da8fb71ca0fb86ad46d96"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/typed_wire.rs",
+          "sha256": "5468dd3a1e81dac8643a500a386c17b144a95a26128ca44bcf89224dd9f2f918"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/wire.rs",
+          "sha256": "801bab73d1bbc9d2b7abce8b296d1f4ceca192109672e115fa26ff3c5a165fa2"
+        },
+        {
+          "path": "rust/qomm-zkpi/src/wire_vectors.rs",
+          "sha256": "6cd9254ffa44284e694dd594b9851a8dd284683abd75fe85db48d35ad44d6cfa"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/instruction.rs",
+          "sha256": "e00e3031cd7c92c3a9281310f09f35415ebc729d8f751c26df713c6441881d6d"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/threshold_instruction.rs",
+          "sha256": "7159bd98adfd0171c915d99381244f88218ce0f8c67ebfdb7d7d2bb4f230c999"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/typed.rs",
+          "sha256": "54cbe65e3a5499fbac3cd8ab5a276b260ba936c1a4e668a98833a12d8a7e2285"
+        },
+        {
+          "path": "rust/qomm-zkpi/tests/wire.rs",
+          "sha256": "3b779b6ddf088eee6e6658154021d91ef851c89a3881005f4462a074282ce1d1"
+        }
+      ]
+    }
+  ]
+}

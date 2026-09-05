@@ -1,0 +1,181 @@
+started_at=2026-09-05T13:02:44Z
+sha256:0e2bcaef56d041a486784e54104a81aebe0da44bd03019bd70bc0401e42e4a97
+aethel_directory_absent=true
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+cargo 1.97.1 (c980f4866 2026-06-30)
+metadata_workspace=deccp
+ Downloading crates ...
+  Downloaded fiat-crypto v0.2.9
+  Downloaded wasi v0.11.1+wasi-snapshot-preview1
+true
+metadata_workspace=dekyx
+true
+metadata_workspace=defmi/rust
+ Downloading crates ...
+  Downloaded find-msvc-tools v0.1.11
+  Downloaded atomic-polyfill v1.0.3
+  Downloaded critical-section v1.2.0
+  Downloaded r-efi v6.0.0
+  Downloaded windows-targets v0.52.6
+  Downloaded windows-link v0.2.1
+  Downloaded cc v1.4.4
+  Downloaded indexmap v2.14.1
+  Downloaded tinyvec v1.12.0
+  Downloaded zerocopy-derive v0.8.56
+  Downloaded windows_x86_64_gnullvm v0.52.6
+  Downloaded windows_aarch64_gnullvm v0.52.6
+  Downloaded windows_i686_gnu v0.52.6
+  Downloaded windows_aarch64_msvc v0.52.6
+  Downloaded windows_i686_msvc v0.52.6
+  Downloaded windows_x86_64_msvc v0.52.6
+  Downloaded windows_i686_gnullvm v0.52.6
+  Downloaded windows_x86_64_gnu v0.52.6
+  Downloaded windows-sys v0.61.2
+  Downloaded windows-sys v0.52.0
+true
+metadata_workspace=qomm/rust
+true
+metadata_workspace=zkpi/rust
+    Updating git repository `https://github.com/shukob/qomm`
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded num-traits v0.2.19
+  Downloaded num-integer v0.1.47
+  Downloaded num-bigint v0.4.8
+true
+gate_workspace=deccp
+   Compiling syn v3.0.4
+   Compiling libc v0.2.189
+   Compiling curve25519-dalek v4.1.3
+   Compiling syn v2.0.119
+   Compiling serde_json v1.0.151
+    Checking zeroize v1.9.0
+    Checking subtle v2.6.1
+    Checking memchr v2.8.3
+    Checking getrandom v0.2.17
+    Checking rand_core v0.6.4
+   Compiling serde_derive v1.0.229
+   Compiling thiserror-impl v2.0.20
+    Checking thiserror v2.0.20
+   Compiling curve25519-dalek-derive v0.1.1
+    Checking serde v1.0.229
+    Checking ed25519 v2.2.3
+    Checking ed25519-dalek v2.2.0
+    Checking deccp-core v0.1.0 (/work/deccp/crates/deccp-core)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.58s
+   Compiling syn v3.0.4
+   Compiling libc v0.2.189
+   Compiling curve25519-dalek v4.1.3
+   Compiling syn v2.0.119
+   Compiling serde_json v1.0.151
+   Compiling zeroize v1.9.0
+   Compiling subtle v2.6.1
+   Compiling memchr v2.8.3
+   Compiling getrandom v0.2.17
+   Compiling rand_core v0.6.4
+   Compiling serde_derive v1.0.229
+   Compiling thiserror-impl v2.0.20
+   Compiling thiserror v2.0.20
+   Compiling curve25519-dalek-derive v0.1.1
+   Compiling serde v1.0.229
+   Compiling ed25519 v2.2.3
+   Compiling ed25519-dalek v2.2.0
+   Compiling deccp-core v0.1.0 (/work/deccp/crates/deccp-core)
+    Finished `release` profile [optimized] target(s) in 6.12s
+     Running unittests src/lib.rs (/work/.cache/target/release/deps/deccp_core-d2c9cd6141bf711e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/clearing.rs (/work/.cache/target/release/deps/clearing-022b034329236d72)
+
+running 7 tests
+test concurrent_guarantee_reservations_use_one_sequence_and_never_exceed_capacity ... ok
+test confidential_guarantees_use_commitment_cas_without_opening_amounts ... ok
+test defaulted_guarantor_cannot_reserve_and_expired_hold_cannot_be_claimed ... ok
+test gross_gross_mode_preserves_each_leg_and_requires_gross_margin ... ok
+test default_waterfall_draws_margin_then_member_funds_then_ccp_capital ... ok
+test netting_is_conserving_quorum_approved_and_margin_bounded ... ok
+test snapshot_restores_only_with_quorum_approval_and_intact_invariants ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests deccp_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+gate_workspace=dekyx
+   Compiling curve25519-dalek v4.1.3
+    Checking ed25519-dalek v2.2.0
+    Checking dekyx-core v0.1.0 (/work/dekyx/crates/dekyx-core)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.23s
+   Compiling curve25519-dalek v4.1.3
+   Compiling ed25519-dalek v2.2.0
+   Compiling dekyx-core v0.1.0 (/work/dekyx/crates/dekyx-core)
+    Finished `release` profile [optimized] target(s) in 2.79s
+     Running unittests src/lib.rs (/work/.cache/target/release/deps/dekyx_core-0f593ff5654f8ac5)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/protocol.rs (/work/.cache/target/release/deps/protocol-c58ffc90db37905b)
+
+running 6 tests
+test duplicate_issuer_epoch_does_not_replace_the_existing_trust_anchor ... ok
+test directory_rejects_stale_status_lists_and_reloads_only_validated_state ... ok
+test issuance_rejects_a_commitment_not_opened_by_the_holder_proof ... ok
+test different_scopes_are_not_publicly_linkable ... ok
+test selective_qualification_proof_hides_other_attributes_and_consumes_context_once ... ok
+test key_rotation_bounds_the_old_epoch_and_keeps_the_subject_line ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests dekyx_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+gate_workspace=defmi/rust
+   Compiling find-msvc-tools v0.1.11
+    Checking qomm-dsl v0.1.0 (/work/defmi/rust/qomm-dsl)
+    Checking qomm-measure v0.1.0 (/work/defmi/rust/qomm-measure)
+   Compiling rustix v1.1.4
+   Compiling getrandom v0.4.3
+    Checking bitflags v2.13.1
+   Compiling cc v1.4.4
+   Compiling qomm-mpc v0.1.0 (/work/defmi/rust/qomm-mpc)
+    Checking linux-raw-sys v0.12.1
+    Checking fastrand v2.5.0
+    Checking indexmap v2.14.1
+warning: qomm-mpc@0.1.0: MP_SPDZ_ROOT is unset; building without the engine
+   Compiling clear_on_drop v0.2.5
+   Compiling openssl-sys v0.9.117
+   Compiling blake3 v1.8.7
+    Checking bulletproofs v5.0.0
+   Compiling openssl v0.10.81
+    Checking qomm-zk v0.1.0 (/work/defmi/rust/qomm-zk)
+    Checking triptych v0.1.1 (https://github.com/tari-project/triptych.git?rev=bf0cb42fff55636a8bb037020411fb3a050af23f#bf0cb42f)
+    Checking qomm-proofs v0.1.0 (/work/defmi/rust/qomm-proofs)
+    Checking tempfile v3.27.0
+    Checking h2 v0.4.19
+   Compiling petgraph v0.7.1
+    Checking qomm-zkpi v0.1.0 (/work/defmi/rust/qomm-zkpi)
+    Checking qomm-audit v0.1.0 (/work/defmi/rust/qomm-audit)
+    Checking hyper v1.11.1
+   Compiling prost-build v0.13.5
+    Checking qomm-transport v0.1.0 (/work/defmi/rust/qomm-transport)
+   Compiling tonic-build v0.12.3
+    Checking hyper-util v0.1.20
+error: couldn't read `qomm-zkpi/tests/../../../ZKPI_WIRE.md`: No such file or directory (os error 2)
+  --> qomm-zkpi/tests/wire.rs:42:20
+   |
+42 |     let document = include_str!("../../../ZKPI_WIRE.md");
+   |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: could not compile `qomm-zkpi` (test "wire") due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

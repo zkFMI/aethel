@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/aethel-types", "crates/aethel-provider-sdk", "crates/aethel-core", "crates/aethel-tokenization", "crates/aethel-distribution", "crates/aethel-obligation-wallet", "crates/aethel-servicing", "crates/aethel"]
+members = ["crates/aethel-types", "crates/aethel-provider-sdk", "crates/aethel-core", "crates/aethel-tokenization", "crates/aethel-distribution", "crates/aethel-obligation-wallet", "crates/aethel-servicing", "crates/aethel-deccp", "crates/aethel-dekyx", "crates/aethel-zkpi", "crates/aethel-defmi-host", "crates/aethel"]
 
 [workspace.package]
 version = "0.1.0"

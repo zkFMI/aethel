@@ -1,0 +1,17 @@
+[package]
+name = "aethel-zkpi"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "Aethel-owned receivable proof context and wire format over generic zkPI"
+
+[dependencies]
+qomm-zkpi = { path = "../../../defmi/rust/qomm-zkpi" }
+qomm-proofs = { path = "../../../defmi/rust/qomm-proofs" }
+curve25519-dalek.workspace = true
+sha2.workspace = true
+
+[dev-dependencies]
+qomm-zk = { path = "../../../defmi/rust/qomm-zk" }
+rand.workspace = true

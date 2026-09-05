@@ -127,20 +127,20 @@ Dependencies are deliberately separate from Aethel's product definition.
 
 ```mermaid
 flowchart TB
-    DK["DeKYX\nidentity and qualification"] --> AC["aethel-core"]
-    AC --> APP["Host application / VM"]
-    CCP["DeCCP\nguarantee capacity"] --> APP
-    Z["zkPI\ntyped execution instruction"] --> APP
-    APP --> DF["DeFMI\nauthoritative settlement"]
+    APP["aethel-defmi-host"] --> AC["aethel-core"]
+    AC --> ADK["aethel-dekyx"] --> DK["dekyx-core"]
+    APP --> ACCP["aethel-deccp"] --> CCP["deccp-core"]
+    APP --> AZ["aethel-zkpi"] --> Z["qomm-zkpi"]
+    APP --> DF["DeFMI generic VM / ledger"]
 ```
 
 | Module | Relationship |
 |---|---|
 | `dekyx-core` | Direct Rust dependency used for issuer directories and verified presentations |
-| `dekyx-aethel` | Direct Rust dependency that binds a DeKYX presentation to an Aethel artifact |
-| DeCCP | Runtime integration for guarantee capacity; not imported by `aethel-core` |
-| zkPI | Runtime integration for executable issuance and claim instructions |
-| DeFMI | Runtime integration for authoritative cash, asset, and facility state |
+| `aethel-dekyx` | Application-owned adapter for DeKYX presentation and artifact binding |
+| `aethel-deccp` | Application-owned guarantee adapter over `deccp-core`; not imported by `aethel-core` |
+| `aethel-zkpi` | Receivable context, verification extension and wire format over generic zkPI |
+| `aethel-defmi-host` | Application runtime and dedicated binary over DeFMI's generic consensus host |
 
 The core crate can be embedded in any deterministic host that supplies durable
 state, authorization, and the external verification ports required by its
@@ -149,7 +149,9 @@ the Aethel domain model.
 
 ## Complete product layout
 
-This repository ships the complete eight-crate distribution shown below. A
+This workspace contains eight business crates and four application-owned integration
+crates. The integration crates use the sibling `../defmi` checkout; use matching
+revisions of both repositories when building this source tree. A
 deliberately reduced, core-only downstream package would contain only
 `crates/aethel-core`; such a package would not provide the tokenization,
 distribution, obligation-wallet, servicing, or composition paths.
@@ -163,7 +165,11 @@ crates/
 ├── aethel-distribution/       Circulation admission, venue fills and settlement binding
 ├── aethel-obligation-wallet/  Bounded pre-authorization and payment retry queue
 ├── aethel-servicing/          Payment evidence, delinquency, cure and default evidence
-└── aethel/                    Composition boundary and end-to-end tests
+├── aethel/                    Business composition boundary and end-to-end tests
+├── aethel-dekyx/              Qualification adapter owned by Aethel
+├── aethel-deccp/              Guarantee adapter owned by Aethel
+├── aethel-zkpi/               Receivable proof context and wire format
+└── aethel-defmi-host/         Application runtime and dedicated VM binary
 ```
 
 Use `cargo metadata --locked --no-deps --format-version 1` as the authoritative
@@ -174,6 +180,9 @@ package inventory. A layout diagram is not evidence that a crate was shipped.
 [Enterprise PoC guide (Japanese)](docs/ENTERPRISE_POC_JA.md) covers signed
 payment streams, external credit providers, guarantees, funding, tokenization,
 servicing, zkPI/DeFMI settlement, rejection tests and acceptance criteria.
+
+[Foundation independence and migration](docs/FOUNDATION_INDEPENDENCE_JA.md)
+describes ownership, the generic RPC envelope and snapshot compatibility.
 
 ## Build and verification
 
