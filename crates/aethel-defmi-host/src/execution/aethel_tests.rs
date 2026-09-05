@@ -699,6 +699,14 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         issuer_id: id(212),
         key_epoch: 1,
         public_key: dekyx_key.verifying_key().to_bytes(),
+        pq_public_key: zkfmi_crypto::traits::Signer::public_key(
+            &zkfmi_crypto::test_support::public_fixture_pq_key(
+                &(dekyx_key.verifying_key().to_bytes()),
+            ),
+        ),
+        signature_suite: zkfmi_crypto::suite::Suite::new(
+            zkfmi_crypto::suite::SuiteId::Ed25519MlDsa65,
+        ),
         supported_subjects: [SubjectKind::LegalEntity].into_iter().collect(),
         namespace_digest: id(215),
         valid_from: 1,
@@ -726,7 +734,12 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         23,
     )
     .unwrap();
-    let dekyx_issuer = CredentialIssuer::new(dekyx_definition.clone(), dekyx_key).unwrap();
+    let dekyx_issuer = CredentialIssuer::new(
+        dekyx_definition.clone(),
+        (dekyx_key).clone(),
+        zkfmi_crypto::test_support::public_fixture_pq_key(&(dekyx_key).verifying_key().to_bytes()),
+    )
+    .unwrap();
     let status_publication = PublishCredentialStatus {
         operation_id: id(217),
         status_list: dekyx_issuer.issue_status_list(1, 1, 900, vec![]).unwrap(),
@@ -779,9 +792,24 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
     let assessor_definition = IssuerDefinition {
         issuer_id: id(83),
         public_key: assessor_dekyx_key.verifying_key().to_bytes(),
+        pq_public_key: zkfmi_crypto::traits::Signer::public_key(
+            &zkfmi_crypto::test_support::public_fixture_pq_key(
+                &(assessor_dekyx_key.verifying_key().to_bytes()),
+            ),
+        ),
+        signature_suite: zkfmi_crypto::suite::Suite::new(
+            zkfmi_crypto::suite::SuiteId::Ed25519MlDsa65,
+        ),
         ..dekyx_definition.clone()
     };
-    let assessor_issuer = CredentialIssuer::new(assessor_definition, assessor_dekyx_key).unwrap();
+    let assessor_issuer = CredentialIssuer::new(
+        assessor_definition,
+        (assessor_dekyx_key).clone(),
+        zkfmi_crypto::test_support::public_fixture_pq_key(
+            &(assessor_dekyx_key).verifying_key().to_bytes(),
+        ),
+    )
+    .unwrap();
     let assessor_request = CredentialRequest {
         credential_id: id(221),
         issuer_id: id(83),

@@ -32,6 +32,7 @@ dependencies = [
  "serde_json",
  "sha2",
  "thiserror 1.0.69",
+ "zkfmi-crypto",
 ]
 
 [[package]]
@@ -77,6 +78,7 @@ dependencies = [
  "ed25519-dalek",
  "rand_core 0.6.4",
  "serde",
+ "zkfmi-crypto",
 ]
 
 [[package]]
@@ -588,6 +590,7 @@ dependencies = [
  "serde",
  "sha2",
  "thiserror 2.0.20",
+ "zkfmi-crypto",
 ]
 
 [[package]]

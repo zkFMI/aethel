@@ -410,6 +410,12 @@ fn dekyx_definition(provider: u8, key: &SigningKey, epoch: u64) -> IssuerDefinit
         issuer_id: id(provider),
         key_epoch: epoch,
         public_key: key.verifying_key().to_bytes(),
+        pq_public_key: zkfmi_crypto::traits::Signer::public_key(
+            &zkfmi_crypto::test_support::public_fixture_pq_key(&(key.verifying_key().to_bytes())),
+        ),
+        signature_suite: zkfmi_crypto::suite::Suite::new(
+            zkfmi_crypto::suite::SuiteId::Ed25519MlDsa65,
+        ),
         supported_subjects: BTreeSet::from([SubjectKind::LegalEntity]),
         namespace_digest: id(131),
         valid_from: 1,
@@ -606,7 +612,12 @@ fn confidential_fixture() -> (AethelBook, IssuerDefinition, CredentialIssuer) {
     register_series(&mut book, confidential_policy());
     let dekyx_key = signer(140);
     let definition = dekyx_definition(4, &dekyx_key, 1);
-    let issuer = CredentialIssuer::new(definition.clone(), dekyx_key).unwrap();
+    let issuer = CredentialIssuer::new(
+        definition.clone(),
+        (dekyx_key).clone(),
+        zkfmi_crypto::test_support::public_fixture_pq_key(&(dekyx_key).verifying_key().to_bytes()),
+    )
+    .unwrap();
     book.register_credential_issuer(
         issuer_registration(140, 4, &issuer_provider, definition.clone(), None),
         41,
@@ -647,8 +658,14 @@ fn confidential_series_links_credit_and_guarantee_to_one_dekyx_line() {
     // credential-issuer capability and is refused before any DeKYX check.
     let assessor_dekyx = signer(141);
     let assessor_definition = dekyx_definition(2, &assessor_dekyx, 1);
-    let assessor_issuer =
-        CredentialIssuer::new(assessor_definition.clone(), assessor_dekyx).unwrap();
+    let assessor_issuer = CredentialIssuer::new(
+        assessor_definition.clone(),
+        (assessor_dekyx).clone(),
+        zkfmi_crypto::test_support::public_fixture_pq_key(
+            &(assessor_dekyx).verifying_key().to_bytes(),
+        ),
+    )
+    .unwrap();
     let self_issued = credential_for(&assessor_issuer, &assessor_definition, &witness, 151, 50);
     let self_presentation = present(
         &book,
@@ -759,8 +776,14 @@ fn revocation_and_key_rotation_govern_new_artifacts_on_a_line() {
         book.publish_credential_status(status_publication(143, &issuer, 2, vec![]), 46),
         Err(AethelError::Credential(DeKyxError::StaleStatusList))
     );
-    let impostor =
-        CredentialIssuer::new(dekyx_definition(4, &signer(143), 1), signer(143)).unwrap();
+    let impostor = CredentialIssuer::new(
+        dekyx_definition(4, &signer(143), 1),
+        (signer(143)).clone(),
+        zkfmi_crypto::test_support::public_fixture_pq_key(
+            &(signer(143)).verifying_key().to_bytes(),
+        ),
+    )
+    .unwrap();
     assert_eq!(
         book.publish_credential_status(status_publication(144, &impostor, 3, vec![]), 46),
         Err(AethelError::Credential(
@@ -795,7 +818,14 @@ fn revocation_and_key_rotation_govern_new_artifacts_on_a_line() {
         book.credential_issuers.issuer(&id(4), 1).unwrap().status,
         IssuerStatus::Revoked
     );
-    let rotated_issuer = CredentialIssuer::new(rotated.clone(), rotated_key).unwrap();
+    let rotated_issuer = CredentialIssuer::new(
+        rotated.clone(),
+        (rotated_key).clone(),
+        zkfmi_crypto::test_support::public_fixture_pq_key(
+            &(rotated_key).verifying_key().to_bytes(),
+        ),
+    )
+    .unwrap();
     book.publish_credential_status(status_publication(147, &rotated_issuer, 1, vec![]), 47)
         .unwrap();
 

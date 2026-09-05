@@ -10,5 +10,6 @@ dekyx-core.workspace = true
 serde.workspace = true
 
 [dev-dependencies]
+zkfmi-crypto = { workspace = true, features = ["test-support"] }
 ed25519-dalek.workspace = true
 rand_core.workspace = true

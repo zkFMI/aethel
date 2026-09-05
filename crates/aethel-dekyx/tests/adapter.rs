@@ -17,6 +17,12 @@ fn definition(key: &SigningKey, issuer: u8, epoch: u64, namespace: u8) -> Issuer
         issuer_id: id(issuer),
         key_epoch: epoch,
         public_key: key.verifying_key().to_bytes(),
+        pq_public_key: zkfmi_crypto::traits::Signer::public_key(
+            &zkfmi_crypto::test_support::public_fixture_pq_key(&(key.verifying_key().to_bytes())),
+        ),
+        signature_suite: zkfmi_crypto::suite::Suite::new(
+            zkfmi_crypto::suite::SuiteId::Ed25519MlDsa65,
+        ),
         supported_subjects: BTreeSet::from([SubjectKind::LegalEntity]),
         namespace_digest: id(namespace),
         valid_from: 1,
@@ -100,7 +106,12 @@ fn present(
 fn fresh_credit_and_guarantee_proofs_keep_one_aethel_subject_line_across_key_rotation() {
     let first_key = SigningKey::generate(&mut OsRng);
     let first = definition(&first_key, 1, 7, 2);
-    let first_issuer = CredentialIssuer::new(first.clone(), first_key).unwrap();
+    let first_issuer = CredentialIssuer::new(
+        first.clone(),
+        (first_key).clone(),
+        zkfmi_crypto::test_support::public_fixture_pq_key(&(first_key).verifying_key().to_bytes()),
+    )
+    .unwrap();
     let witness = CredentialWitness::random(vec![kyb()], &mut OsRng).unwrap();
     let credential = issue(&first_issuer, &first, &witness, 4, 5, 6);
     let mut directory = IssuerDirectory::default();
@@ -128,7 +139,12 @@ fn fresh_credit_and_guarantee_proofs_keep_one_aethel_subject_line_across_key_rot
     // The issuer rotates its key; the guarantee uses a re-issued credential.
     let second_key = SigningKey::generate(&mut OsRng);
     let second = definition(&second_key, 1, 8, 2);
-    let second_issuer = CredentialIssuer::new(second.clone(), second_key).unwrap();
+    let second_issuer = CredentialIssuer::new(
+        second.clone(),
+        (second_key).clone(),
+        zkfmi_crypto::test_support::public_fixture_pq_key(&(second_key).verifying_key().to_bytes()),
+    )
+    .unwrap();
     directory.rotate_key(second.clone(), 300).unwrap();
     directory
         .publish_status_list(second_issuer.issue_status_list(1, 1, 950, vec![]).unwrap())
@@ -160,7 +176,12 @@ fn fresh_credit_and_guarantee_proofs_keep_one_aethel_subject_line_across_key_rot
 fn revoked_wrong_context_or_foreign_issuer_evidence_is_rejected() {
     let key = SigningKey::generate(&mut OsRng);
     let trusted = definition(&key, 20, 1, 21);
-    let issuer = CredentialIssuer::new(trusted.clone(), key).unwrap();
+    let issuer = CredentialIssuer::new(
+        trusted.clone(),
+        (key).clone(),
+        zkfmi_crypto::test_support::public_fixture_pq_key(&(key).verifying_key().to_bytes()),
+    )
+    .unwrap();
     let witness = CredentialWitness::random(vec![kyb()], &mut OsRng).unwrap();
     let credential = issue(&issuer, &trusted, &witness, 23, 24, 25);
     let request = request(&trusted, 24, 25, 27, 28, 29);
@@ -223,7 +244,14 @@ fn revoked_wrong_context_or_foreign_issuer_evidence_is_rejected() {
     // request names cannot satisfy the request.
     let foreign_key = SigningKey::generate(&mut OsRng);
     let foreign = definition(&foreign_key, 40, 1, 21);
-    let foreign_issuer = CredentialIssuer::new(foreign.clone(), foreign_key).unwrap();
+    let foreign_issuer = CredentialIssuer::new(
+        foreign.clone(),
+        (foreign_key).clone(),
+        zkfmi_crypto::test_support::public_fixture_pq_key(
+            &(foreign_key).verifying_key().to_bytes(),
+        ),
+    )
+    .unwrap();
     live.register_issuer(foreign.clone()).unwrap();
     live.publish_status_list(foreign_issuer.issue_status_list(1, 1, 950, vec![]).unwrap())
         .unwrap();
