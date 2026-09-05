@@ -173,6 +173,7 @@ fn make_instruction() -> (ReceivableInstruction, Quorum) {
     let authorization = sign(&q, &authorization_digest, &mut rng);
     (
         ReceivableInstruction {
+            pq_authorization: None,
             instruction: payment,
             context,
             eligibility_remaining: Some(eligibility_remaining),
@@ -201,6 +202,56 @@ fn streaming_receivable_wire_round_trips_and_verifies() {
     let decoded = receivable_wire::decode(&bytes).expect("decode streaming receivable zkPI");
     assert_eq!(receivable_wire::encode(&decoded), bytes);
     assert_eq!(venue(&q).verify_receivable(&decoded, 1_000), Ok(()));
+}
+
+#[test]
+fn hybrid_receivable_requires_both_components_and_the_enrolled_epoch() {
+    use sha2::{Digest, Sha256};
+    let (mut instruction, q) = make_instruction();
+    let policy =
+        zkfmi_crypto::test_support::committee(Sha256::digest(q.public.serialize().unwrap()).into());
+    let enrolled = venue(&q).require_pq_committee(policy.clone()).unwrap();
+    assert!(enrolled.verify_receivable(&instruction, 1_000).is_err());
+    instruction.instruction.pq_approval = Some(zkfmi_crypto::test_support::approve(
+        &policy,
+        &instruction.instruction.digest_for(DEFAULT_DOMAIN),
+        1_000,
+    ));
+    instruction.pq_authorization = Some(zkfmi_crypto::test_support::approve(
+        &policy,
+        &instruction.digest_for(DEFAULT_DOMAIN).unwrap(),
+        1_000,
+    ));
+    let bytes = receivable_wire::encode(&instruction);
+    assert_eq!(
+        &bytes[8..10],
+        &receivable_wire::HYBRID_VERSION.to_be_bytes()
+    );
+    let decoded = receivable_wire::decode(&bytes).unwrap();
+    assert_eq!(bytes, receivable_wire::encode(&decoded));
+    enrolled.verify_receivable(&decoded, 1_000).unwrap();
+    assert!(venue(&q).verify_receivable(&decoded, 1_000).is_err());
+    for mutation in 0..4 {
+        let mut bad = decoded.clone();
+        match mutation {
+            0 => bad.instruction.pq_approval.as_mut().unwrap().signatures[0].signature[0] ^= 1,
+            1 => bad.pq_authorization.as_mut().unwrap().signatures[0].signature[0] ^= 1,
+            2 => bad.authorization = sign(&q, b"another application action", &mut OsRng),
+            _ => bad.context.before_aethel_root[0] ^= 1,
+        }
+        assert!(enrolled.verify_receivable(&bad, 1_000).is_err());
+    }
+    let mut other = policy;
+    other.epoch += 1;
+    assert!(venue(&q)
+        .require_pq_committee(other)
+        .unwrap()
+        .verify_receivable(&decoded, 1_000)
+        .is_err());
+    let mut trailing = bytes.clone();
+    trailing.push(0);
+    assert!(receivable_wire::decode(&trailing).is_err());
+    assert!(receivable_wire::decode(&bytes[..bytes.len() - 1]).is_err());
 }
 
 #[test]

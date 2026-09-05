@@ -887,7 +887,12 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         &frost_public,
         &partial.digest_for(DEFAULT_DOMAIN),
     );
-    let base_instruction = partial.sealed(base_signature);
+    let pq_base = zkfmi_crypto::test_support::approve(
+        &verifier.pq_committee,
+        &partial.digest_for(DEFAULT_DOMAIN),
+        100,
+    );
+    let base_instruction = partial.sealed_hybrid(base_signature, pq_base);
 
     let mut note = NoteOutput {
         note_id: [0; 32],
@@ -1478,6 +1483,11 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         &receivable_digest(&base_instruction, &context, DEFAULT_DOMAIN).unwrap(),
     );
     let zkpi = receivable_wire::encode(&ReceivableInstruction {
+        pq_authorization: Some(zkfmi_crypto::test_support::approve(
+            &verifier.pq_committee,
+            &receivable_digest(&base_instruction, &context, DEFAULT_DOMAIN).unwrap(),
+            100,
+        )),
         instruction: base_instruction,
         context,
         eligibility_remaining: Some(eligibility_remaining),
@@ -1678,7 +1688,12 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         &frost_public,
         &claim_partial.digest_for(DEFAULT_DOMAIN),
     );
-    let claim_base = claim_partial.sealed(claim_base_signature);
+    let pq_claim = zkfmi_crypto::test_support::approve(
+        &verifier.pq_committee,
+        &claim_partial.digest_for(DEFAULT_DOMAIN),
+        100,
+    );
+    let claim_base = claim_partial.sealed_hybrid(claim_base_signature, pq_claim);
     let claim_context = ReceivableExecutionContext {
         operation: ReceivableOperation::ClaimGuarantee,
         venue_id: verifier.venue_id,
@@ -1719,6 +1734,11 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         &receivable_digest(&claim_base, &claim_context, DEFAULT_DOMAIN).unwrap(),
     );
     let claim_zkpi = receivable_wire::encode(&ReceivableInstruction {
+        pq_authorization: Some(zkfmi_crypto::test_support::approve(
+            &verifier.pq_committee,
+            &receivable_digest(&claim_base, &claim_context, DEFAULT_DOMAIN).unwrap(),
+            100,
+        )),
         instruction: claim_base,
         context: claim_context,
         eligibility_remaining: None,

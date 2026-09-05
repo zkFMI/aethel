@@ -159,6 +159,7 @@ pub struct ReceivableInstruction {
     /// fits the venue's published amount width. It is present only on issue.
     pub eligibility_remaining: Option<ThresholdRangeProof>,
     pub authorization: frost::Signature,
+    pub pq_authorization: Option<qomm_zkpi::QuorumApproval>,
 }
 
 /// Canonically names the actual eligibility proof rather than an off-chain
@@ -277,9 +278,12 @@ impl VerifyReceivable for Venue {
             }
         }
         let digest = instruction.digest_for(&self.domain)?;
-        self.group_public
-            .verifying_key()
-            .verify(&digest, &instruction.authorization)
-            .map_err(|_| "streaming-receivable zkPI authorization does not verify")
+        self.verify_authorization(
+            &digest,
+            &instruction.authorization,
+            &instruction.pq_authorization,
+            now,
+        )
+        .map_err(|_| "streaming-receivable zkPI authorization does not verify")
     }
 }

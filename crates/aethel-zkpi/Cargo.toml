@@ -13,5 +13,6 @@ curve25519-dalek.workspace = true
 sha2.workspace = true
 
 [dev-dependencies]
+zkfmi-crypto = { workspace = true, features = ["test-support"] }
 qomm-zk.workspace = true
 rand.workspace = true

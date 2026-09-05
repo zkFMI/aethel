@@ -7,6 +7,7 @@ use crate::{frost, wire};
 
 pub const MAGIC: &[u8; 8] = b"AETHZKPI";
 pub const VERSION: u16 = 1;
+pub const HYBRID_VERSION: u16 = 2;
 const MAX_BASE_BYTES: usize = 1_048_576;
 const MAX_ELIGIBILITY_PROOF_BYTES: usize = 1_048_576;
 
@@ -138,7 +139,12 @@ pub fn encode(instruction: &ReceivableInstruction) -> Vec<u8> {
     let base = wire::encode(&instruction.instruction);
     let mut output = Vec::with_capacity(base.len() + 800);
     output.extend_from_slice(MAGIC);
-    output.extend_from_slice(&VERSION.to_be_bytes());
+    let version = if instruction.pq_authorization.is_some() {
+        HYBRID_VERSION
+    } else {
+        VERSION
+    };
+    output.extend_from_slice(&version.to_be_bytes());
     output.extend_from_slice(&(base.len() as u32).to_be_bytes());
     output.extend_from_slice(&base);
     append_context(&mut output, &instruction.context);
@@ -155,6 +161,11 @@ pub fn encode(instruction: &ReceivableInstruction) -> Vec<u8> {
             .serialize()
             .expect("a FROST signature serializes"),
     );
+    if let Some(approval) = &instruction.pq_authorization {
+        let encoded = approval.encode().expect("a valid PQ approval encodes");
+        output.extend_from_slice(&(encoded.len() as u32).to_be_bytes());
+        output.extend_from_slice(&encoded);
+    }
     output
 }
 
@@ -169,7 +180,7 @@ pub fn decode(bytes: &[u8]) -> Result<ReceivableInstruction, Error> {
             .try_into()
             .map_err(|_| Error::Truncated("version"))?,
     );
-    if version != VERSION {
+    if version != VERSION && version != HYBRID_VERSION {
         return Err(Error::UnknownVersion(version));
     }
     let base_length = u32::from_be_bytes(
@@ -183,6 +194,9 @@ pub fn decode(bytes: &[u8]) -> Result<ReceivableInstruction, Error> {
     }
     let instruction = wire::decode(reader.take(base_length, "base instruction")?)
         .map_err(|_| Error::InvalidBase)?;
+    if instruction.pq_approval.is_some() != (version == HYBRID_VERSION) {
+        return Err(Error::InvalidBase);
+    }
     let context = read_context(&mut reader)?;
     let eligibility_length = reader.u32("eligibility proof length")? as usize;
     if eligibility_length > MAX_ELIGIBILITY_PROOF_BYTES {
@@ -198,6 +212,18 @@ pub fn decode(bytes: &[u8]) -> Result<ReceivableInstruction, Error> {
     };
     let authorization = frost::Signature::deserialize(reader.take(64, "authorization")?)
         .map_err(|_| Error::InvalidSignature)?;
+    let pq_authorization = if version == HYBRID_VERSION {
+        let length = reader.u32("PQ authorization length")? as usize;
+        if length > MAX_BASE_BYTES {
+            return Err(Error::InvalidSignature);
+        }
+        Some(
+            qomm_zkpi::QuorumApproval::decode(reader.take(length, "PQ authorization")?)
+                .map_err(|_| Error::InvalidSignature)?,
+        )
+    } else {
+        None
+    };
     if reader.at != bytes.len() {
         return Err(Error::Trailing(bytes.len() - reader.at));
     }
@@ -215,5 +241,6 @@ pub fn decode(bytes: &[u8]) -> Result<ReceivableInstruction, Error> {
         context,
         eligibility_remaining,
         authorization,
+        pq_authorization,
     })
 }

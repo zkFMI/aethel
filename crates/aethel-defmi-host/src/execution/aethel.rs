@@ -1157,6 +1157,8 @@ fn verify_receivable_zkpi(
     };
     Venue::new(Pedersen::new(b"qomm:defmi:v1"), &bounds, public)
         .require_threshold_ranges()
+        .require_pq_committee(verifier.pq_committee.clone())
+        .map_err(str::to_string)?
         .verify_receivable(&instruction, timestamp)
         .map_err(|error| format!("streaming-receivable zkPI verification failed: {error}"))?;
     Ok(instruction)
