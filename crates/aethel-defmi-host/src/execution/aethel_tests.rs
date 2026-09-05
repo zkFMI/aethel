@@ -809,6 +809,9 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         price_bits: 8,
         max_horizon: 1_000,
         frost_public_package: frost_public.serialize().unwrap(),
+        pq_committee: zkfmi_crypto::test_support::committee(
+            Sha256::digest(frost_public.serialize().unwrap()).into(),
+        ),
         valid_from: 1,
         valid_until: 900,
     };
@@ -826,6 +829,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
             price_bits: verifier.price_bits,
             max_horizon: verifier.max_horizon,
             frost_public_package: verifier.frost_public_package.clone(),
+            pq_committee: verifier.pq_committee.clone(),
             valid_from: verifier.valid_from,
             valid_until: verifier.valid_until,
             statement: verifier_statement,

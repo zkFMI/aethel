@@ -22,6 +22,7 @@ sha2.workspace = true
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 
 [dev-dependencies]
+zkfmi-crypto = { workspace = true, features = ["test-support"] }
 curve25519-dalek.workspace = true
 ed25519-dalek.workspace = true
 qomm-proofs.workspace = true
