@@ -7,11 +7,11 @@ publish = false
 description = "Aethel-owned receivable proof context and wire format over generic zkPI"
 
 [dependencies]
-qomm-zkpi = { path = "../../../defmi/rust/qomm-zkpi" }
-qomm-proofs = { path = "../../../defmi/rust/qomm-proofs" }
+qomm-zkpi.workspace = true
+qomm-proofs.workspace = true
 curve25519-dalek.workspace = true
 sha2.workspace = true
 
 [dev-dependencies]
-qomm-zk = { path = "../../../defmi/rust/qomm-zk" }
+qomm-zk.workspace = true
 rand.workspace = true
