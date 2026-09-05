@@ -66,12 +66,20 @@ pub(super) fn id(byte: u8) -> [u8; 32] {
     [byte; 32]
 }
 
-pub(super) fn committee() -> (QuorumAuthorizer, BTreeMap<String, SigningKey>) {
+pub(super) fn committee() -> (
+    QuorumAuthorizer,
+    BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
+) {
     let signers = (0u8..3)
         .map(|index| {
             (
                 format!("node-{index}"),
-                SigningKey::from_bytes(&[index + 1; 32]),
+                qomm_defmi::governance::GovernanceSigner::generate(
+                    &format!("node-{index}"),
+                    0,
+                    i64::MAX as u64,
+                )
+                .unwrap(),
             )
         })
         .collect::<BTreeMap<_, _>>();
@@ -89,11 +97,13 @@ pub(super) fn approval_json(approval: &QuorumApproval) -> Value {
     json!({
         "statement": hex::encode(approval.statement),
         "signerEpoch": approval.signer_epoch,
+        "suite": approval.suite,
+        "committeeDigest": hex::encode(approval.committee_digest),
         "domain": approval.domain,
         "beforeRoot": hex::encode(approval.before_root),
         "approvals": approval.approvals.iter().map(|signed: &NodeApproval| json!({
             "nodeID": signed.node_id,
-            "signature": hex::encode(signed.signature.to_bytes()),
+            "signature": hex::encode(&signed.signature),
         })).collect::<Vec<_>>(),
     })
 }
@@ -124,7 +134,7 @@ pub(super) fn rpc_value<T: Serialize>(request: &T) -> Value {
 pub(super) fn apply_request<T: Serialize>(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, SigningKey>,
+    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
     method: &str,
     request: &T,
     statement: [u8; 32],
@@ -146,7 +156,7 @@ pub(super) fn apply_request<T: Serialize>(
 pub(super) fn apply_fields(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, SigningKey>,
+    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
     method: &str,
     fields: Vec<(&str, Value)>,
     statement: [u8; 32],
@@ -212,7 +222,7 @@ pub(super) fn locked_cash_note(
 fn apply_confidential_request<T: Serialize, P: Serialize>(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, SigningKey>,
+    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
     method: &str,
     request: &T,
     subject_proof: &P,
@@ -264,7 +274,7 @@ fn credit_backing(decision: &CreditDecision) -> [u8; 32] {
 fn apply_receivable_request(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, SigningKey>,
+    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
     request: &ReceivableIssuance,
     zkpi: &[u8],
     timestamp: u64,
@@ -289,7 +299,7 @@ fn apply_receivable_request(
 fn apply_claim_request(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, SigningKey>,
+    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
     request: &GuaranteeClaim,
     zkpi: &[u8],
     timestamp: u64,

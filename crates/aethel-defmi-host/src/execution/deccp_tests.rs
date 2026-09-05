@@ -68,7 +68,7 @@ fn signed_transition(
 fn apply_transition(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, SigningKey>,
+    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
     transition: &StreamTransition,
     timestamp: u64,
 ) -> Result<(), String> {
