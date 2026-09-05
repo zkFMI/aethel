@@ -1328,7 +1328,23 @@ pub(super) fn domain_field<T: DeserializeOwned>(
 fn normalize_hex(value: &mut Value, field_name: Option<&str>) -> Result<(), String> {
     match value {
         Value::Object(map) => {
+            // Crypto registry identifiers are opaque strings, even when their
+            // spelling happens to be 64 hexadecimal characters.
+            let key_record = map.contains_key("suite")
+                && map.contains_key("key_version")
+                && map.contains_key("public_key")
+                && map.contains_key("purpose");
+            let authority_signature = map.contains_key("memberId")
+                && map.contains_key("keyId")
+                && map.contains_key("keyVersion")
+                && map.contains_key("signature");
             for (name, child) in map.iter_mut() {
+                if (key_record
+                    && matches!(name.as_str(), "key_id" | "participant_id" | "dekyx_binding"))
+                    || (authority_signature && name == "keyId")
+                {
+                    continue;
+                }
                 normalize_hex(child, Some(name))?;
             }
         }
@@ -1339,8 +1355,10 @@ fn normalize_hex(value: &mut Value, field_name: Option<&str>) -> Result<(), Stri
         }
         Value::String(encoded)
             if (encoded.len() == 64
-                || field_name
-                    .is_some_and(|name| name.to_ascii_lowercase().contains("signature"))) =>
+                || field_name.is_some_and(|name| {
+                    name.to_ascii_lowercase().contains("signature")
+                        || matches!(name, "classical" | "pq")
+                })) =>
         {
             let bytes = hex::decode(&*encoded)
                 .map_err(|_| format!("{} is not hexadecimal", field_name.unwrap_or("field")))?;

@@ -11,8 +11,7 @@ use deccp_core::{
     GuaranteeFacilityStatus, GuaranteeHoldStatus, GuaranteeReservation, ParticipantAdmission,
     QuorumApproval, VerifiedAdmission,
 };
-use ed25519_dalek::SigningKey;
-use rand_core::OsRng;
+use zkfmi_crypto::hybrid::signature::HybridSigner;
 
 fn id(byte: u8) -> [u8; 32] {
     [byte; 32]
@@ -148,28 +147,26 @@ impl DeFmiPort for Defmi {
 #[test]
 fn aethel_uses_deccp_hold_without_owning_guarantee_state() {
     let keys: Vec<_> = (1..=2)
-        .map(|index| (id(index), SigningKey::generate(&mut OsRng)))
+        .map(|index| (id(index), HybridSigner::generate().unwrap()))
         .collect();
     let authorities = AuthoritySet {
         epoch: 1,
         threshold: 2,
         members: keys
             .iter()
-            .map(|(member_id, key)| AuthorityMember {
-                member_id: *member_id,
-                public_key: key.verifying_key().to_bytes(),
-            })
+            .map(|(member_id, key)| authority_member(*member_id, key))
             .collect(),
     };
     let approve = |digest| {
         QuorumApproval::sign(
-            1,
+            &authorities,
             digest,
             &[(keys[0].0, &keys[0].1), (keys[1].0, &keys[1].1)],
         )
+        .expect("hybrid quorum")
     };
     let mut book = ClearingBook::new(
-        authorities,
+        authorities.clone(),
         CcpCapitalization {
             amount: 100,
             defmi_lock_id: id(8),
@@ -281,30 +278,28 @@ fn aethel_uses_deccp_hold_without_owning_guarantee_state() {
     assert_eq!(facility.sequence, 2);
 }
 
-fn confidential_book() -> (ClearingBook, Vec<([u8; 32], SigningKey)>) {
+fn confidential_book() -> (ClearingBook, Vec<([u8; 32], HybridSigner)>) {
     let keys: Vec<_> = (1..=2)
-        .map(|index| (id(index), SigningKey::generate(&mut OsRng)))
+        .map(|index| (id(index), HybridSigner::generate().unwrap()))
         .collect();
     let authorities = AuthoritySet {
         epoch: 1,
         threshold: 2,
         members: keys
             .iter()
-            .map(|(member_id, key)| AuthorityMember {
-                member_id: *member_id,
-                public_key: key.verifying_key().to_bytes(),
-            })
+            .map(|(member_id, key)| authority_member(*member_id, key))
             .collect(),
     };
     let approve = |digest| {
         QuorumApproval::sign(
-            1,
+            &authorities,
             digest,
             &[(keys[0].0, &keys[0].1), (keys[1].0, &keys[1].1)],
         )
+        .expect("hybrid quorum")
     };
     let mut book = ClearingBook::new(
-        authorities,
+        authorities.clone(),
         CcpCapitalization {
             amount: 100,
             defmi_lock_id: id(8),
@@ -468,4 +463,30 @@ fn aethel_release_returns_capacity_only_through_a_verified_transition() {
         AethelDeCcpAdapter::bind_issuance(&mut book, id(65), &binding, id(66), 120),
         Err(DeCcpError::GuaranteeHoldUnavailable)
     );
+}
+
+fn authority_member(
+    member_id: [u8; 32],
+    signer: &zkfmi_crypto::hybrid::signature::HybridSigner,
+) -> AuthorityMember {
+    use zkfmi_crypto::{
+        key::{KeyId, KeyPurpose, KeyRecord, ParticipantId},
+        traits::Signer as _,
+    };
+    AuthorityMember {
+        member_id,
+        key: KeyRecord {
+            participant_id: ParticipantId::new(format!("fixture-ccp-{}", member_id[0])).unwrap(),
+            key_id: KeyId::new(format!("fixture-ccp-{}-generation-1", member_id[0])).unwrap(),
+            suite: signer.suite(),
+            key_version: 1,
+            purpose: KeyPurpose::Governance,
+            public_key: signer.public_key(),
+            not_before: 1,
+            not_after: 10_000,
+            revoked_at: None,
+            rotation_proof: None,
+            dekyx_binding: None,
+        },
+    }
 }

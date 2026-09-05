@@ -989,33 +989,37 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
     // DeCCP: the clearing book that holds the guarantor's hidden capacity.
     // The DeCCP authorities are a threshold set of their own, separate from
     // the VM committee; the CCP's capital is a cash note locked for it.
-    let deccp_keys: Vec<([u8; 32], SigningKey)> = (1..=2u8)
-        .map(|index| (id(230 + index), SigningKey::from_bytes(&id(240 + index))))
+    let deccp_keys: Vec<([u8; 32], zkfmi_crypto::hybrid::signature::HybridSigner)> = (1..=2u8)
+        .map(|index| {
+            (
+                id(230 + index),
+                zkfmi_crypto::hybrid::signature::HybridSigner::generate().unwrap(),
+            )
+        })
         .collect();
+    let deccp_authorities = AuthoritySet {
+        epoch: 1,
+        threshold: 2,
+        members: deccp_keys
+            .iter()
+            .map(|(id, key)| authority_member(*id, key))
+            .collect(),
+    };
     let deccp_approve = |digest: [u8; 32]| {
         DeccpQuorumApproval::sign(
-            1,
+            &deccp_authorities,
             digest,
             &[
                 (deccp_keys[0].0, &deccp_keys[0].1),
                 (deccp_keys[1].0, &deccp_keys[1].1),
             ],
         )
+        .expect("hybrid quorum")
     };
     let (capital_note, capital_commitment) = locked_cash_note(&mut state, 300, capital_lock_tag());
     let clearing_book = ClearingBookRegistration {
         operation_id: id(232),
-        authorities: AuthoritySet {
-            epoch: 1,
-            threshold: 2,
-            members: deccp_keys
-                .iter()
-                .map(|(member_id, key)| AuthorityMember {
-                    member_id: *member_id,
-                    public_key: key.verifying_key().to_bytes(),
-                })
-                .collect(),
-        },
+        authorities: deccp_authorities.clone(),
         capitalization: CcpCapitalization {
             amount: 1_000,
             defmi_lock_id: capital_note,
@@ -1864,4 +1868,30 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
     // rebuilt only through DeCCP's own invariants.
     let encoded = state.encode().unwrap();
     assert_eq!(State::decode(&encoded).unwrap(), state);
+}
+
+fn authority_member(
+    member_id: [u8; 32],
+    signer: &zkfmi_crypto::hybrid::signature::HybridSigner,
+) -> AuthorityMember {
+    use zkfmi_crypto::{
+        key::{KeyId, KeyPurpose, KeyRecord, ParticipantId},
+        traits::Signer as _,
+    };
+    AuthorityMember {
+        member_id,
+        key: KeyRecord {
+            participant_id: ParticipantId::new(hex::encode(member_id)).unwrap(),
+            key_id: KeyId::new(hex::encode(member_id)).unwrap(),
+            suite: signer.suite(),
+            key_version: 1,
+            purpose: KeyPurpose::Governance,
+            public_key: signer.public_key(),
+            not_before: 1,
+            not_after: 10_000,
+            revoked_at: None,
+            rotation_proof: None,
+            dekyx_binding: None,
+        },
+    }
 }
