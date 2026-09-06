@@ -12,7 +12,7 @@ aethel-provider-sdk.workspace = true
 # DeKYX is the independent identity and qualification layer. These are sibling
 # workspaces under mvp/; a remote test run must transfer mvp/dekyx next to
 # mvp/qomm (see the Makefile remote-test target).
-dekyx-core = { git = "https://github.com/shukob/dekyx.git", rev = "67eb59a1548740d15585a42d9cff8bc06ae95c5e" }
+dekyx-core = { git = "https://github.com/zkFMI/dekyx.git", rev = "67eb59a1548740d15585a42d9cff8bc06ae95c5e" }
 dekyx-aethel = { package = "aethel-dekyx", path = "../aethel-dekyx" }
 serde.workspace = true
 serde_json.workspace = true

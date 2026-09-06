@@ -11,7 +11,7 @@ aethel-types.workspace = true
 # DeKYX is the only credential layer. A credential-issuer provider vouches for
 # a DeKYX issuer key, so the SDK carries that request type and nothing else
 # about identity.
-dekyx-core = { git = "https://github.com/shukob/dekyx.git", rev = "67eb59a1548740d15585a42d9cff8bc06ae95c5e" }
+dekyx-core = { git = "https://github.com/zkFMI/dekyx.git", rev = "67eb59a1548740d15585a42d9cff8bc06ae95c5e" }
 ed25519-dalek.workspace = true
 serde.workspace = true
 thiserror.workspace = true

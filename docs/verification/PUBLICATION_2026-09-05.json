@@ -5,49 +5,49 @@
   "published_implementation_commits": [
     {
       "repository": "aethel",
-      "url": "https://github.com/shukob/aethel",
+      "url": "https://github.com/zkFMI/aethel",
       "branch": "main",
       "commit": "845ea7765c708f2d544b14007d34c750948921ef",
       "verified_remote_head": "845ea7765c708f2d544b14007d34c750948921ef"
     },
     {
       "repository": "deccp",
-      "url": "https://github.com/shukob/deccp",
+      "url": "https://github.com/zkFMI/deccp",
       "branch": "main",
       "commit": "b2dc95bb01d3fc50c96249962f5ea8344a857d6d",
       "verified_remote_head": "b2dc95bb01d3fc50c96249962f5ea8344a857d6d"
     },
     {
       "repository": "dekyx",
-      "url": "https://github.com/shukob/dekyx",
+      "url": "https://github.com/zkFMI/dekyx",
       "branch": "main",
       "commit": "af06561a2075f7e449a24c3bfe8e2e0a1a5df5e5",
       "verified_remote_head": "af06561a2075f7e449a24c3bfe8e2e0a1a5df5e5"
     },
     {
       "repository": "defmi",
-      "url": "https://github.com/shukob/defmi",
+      "url": "https://github.com/zkFMI/defmi",
       "branch": "main",
       "commit": "d8a54fa89676d7ca993c8683658e5dcdb37788c2",
       "verified_remote_head": "d8a54fa89676d7ca993c8683658e5dcdb37788c2"
     },
     {
       "repository": "qomm",
-      "url": "https://github.com/shukob/qomm",
+      "url": "https://github.com/zkFMI/qomm",
       "branch": "main",
       "commit": "26026b5807ce6bd093e363ddc8e71b53b084cb19",
       "verified_remote_head": "26026b5807ce6bd093e363ddc8e71b53b084cb19"
     },
     {
       "repository": "zkpi",
-      "url": "https://github.com/shukob/zkpi",
+      "url": "https://github.com/zkFMI/zkpi",
       "branch": "main",
       "commit": "b50704ab27dac55f3ccef70a5c97ab7eb3893f39",
       "verified_remote_head": "b50704ab27dac55f3ccef70a5c97ab7eb3893f39"
     },
     {
       "repository": "zkfmi-crypto",
-      "url": "https://github.com/shukob/zkfmi-crypto",
+      "url": "https://github.com/zkFMI/zkfmi-crypto",
       "branch": "main",
       "commit": "25e69708b978b7d1a79258c3318b720f0ead952e",
       "verified_remote_head": "25e69708b978b7d1a79258c3318b720f0ead952e"

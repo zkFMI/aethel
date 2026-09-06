@@ -528,7 +528,7 @@ dependencies = [
 [[package]]
 name = "deccp-core"
 version = "0.1.0"
-source = "git+https://github.com/shukob/deccp?rev=3660ebab170723d055be3cf26ea8e2f039d6514b#3660ebab170723d055be3cf26ea8e2f039d6514b"
+source = "git+https://github.com/zkFMI/deccp?rev=3660ebab170723d055be3cf26ea8e2f039d6514b#3660ebab170723d055be3cf26ea8e2f039d6514b"
 dependencies = [
  "ed25519-dalek",
  "serde",
@@ -540,7 +540,7 @@ dependencies = [
 [[package]]
 name = "dekyx-core"
 version = "0.1.0"
-source = "git+https://github.com/shukob/dekyx.git?rev=67eb59a1548740d15585a42d9cff8bc06ae95c5e#67eb59a1548740d15585a42d9cff8bc06ae95c5e"
+source = "git+https://github.com/zkFMI/dekyx.git?rev=67eb59a1548740d15585a42d9cff8bc06ae95c5e#67eb59a1548740d15585a42d9cff8bc06ae95c5e"
 dependencies = [
  "curve25519-dalek",
  "ed25519-dalek",

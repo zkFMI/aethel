@@ -64,7 +64,7 @@ warning: qomm-mpc@0.1.0: MP_SPDZ_ROOT is unset; building without the engine
    Compiling ed25519 v2.2.3
    Compiling bytes v1.12.1
    Compiling ed25519-dalek v2.2.0
-   Compiling dekyx-core v0.1.0 (https://github.com/shukob/dekyx.git?rev=67eb59a1548740d15585a42d9cff8bc06ae95c5e#67eb59a1)
+   Compiling dekyx-core v0.1.0 (https://github.com/zkFMI/dekyx.git?rev=67eb59a1548740d15585a42d9cff8bc06ae95c5e#67eb59a1)
    Compiling aethel-types v0.1.0 (/work/aethel/crates/aethel-types)
    Compiling pin-project-lite v0.2.17
    Compiling futures-core v0.3.34
@@ -198,7 +198,7 @@ warning: qomm-mpc@0.1.0: MP_SPDZ_ROOT is unset; building without the engine
    Compiling snafu-derive v0.8.9
    Compiling tokio-stream v0.1.19
    Compiling aethel-tokenization v0.1.0 (/work/aethel/crates/aethel-tokenization)
-   Compiling deccp-core v0.1.0 (https://github.com/shukob/deccp?rev=3660ebab170723d055be3cf26ea8e2f039d6514b#3660ebab)
+   Compiling deccp-core v0.1.0 (https://github.com/zkFMI/deccp?rev=3660ebab170723d055be3cf26ea8e2f039d6514b#3660ebab)
    Compiling openssl-macros v0.1.1
    Compiling socket2 v0.5.10
    Compiling cpufeatures v0.3.1

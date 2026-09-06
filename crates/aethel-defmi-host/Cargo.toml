@@ -10,7 +10,7 @@ description = "Aethel-owned application runtime for the generic DeFMI consensus 
 aethel-core.workspace = true
 aethel-deccp = { path = "../aethel-deccp" }
 aethel-zkpi = { path = "../aethel-zkpi" }
-deccp-core = { git = "https://github.com/shukob/deccp", rev = "3660ebab170723d055be3cf26ea8e2f039d6514b" }
+deccp-core = { git = "https://github.com/zkFMI/deccp", rev = "3660ebab170723d055be3cf26ea8e2f039d6514b" }
 qomm-avalanche-vm = { path = "../../../defmi/rust/qomm-avalanche-vm" }
 qomm-defmi = { path = "../../../defmi/rust/qomm-defmi" }
 qomm-zk = { path = "../../../defmi/rust/qomm-zk" }

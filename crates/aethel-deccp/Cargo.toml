@@ -6,7 +6,7 @@ license.workspace = true
 rust-version = "1.85"
 
 [dependencies]
-deccp-core = { git = "https://github.com/shukob/deccp", rev = "3660ebab170723d055be3cf26ea8e2f039d6514b" }
+deccp-core = { git = "https://github.com/zkFMI/deccp", rev = "3660ebab170723d055be3cf26ea8e2f039d6514b" }
 sha2.workspace = true
 
 [dev-dependencies]
