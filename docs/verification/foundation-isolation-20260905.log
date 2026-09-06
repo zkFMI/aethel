@@ -36,7 +36,7 @@ true
 metadata_workspace=qomm/rust
 true
 metadata_workspace=zkpi/rust
-    Updating git repository `https://github.com/shukob/qomm`
+    Updating git repository `https://github.com/zkFMI/qomm`
     Updating crates.io index
  Downloading crates ...
   Downloaded num-traits v0.2.19
