@@ -282,7 +282,7 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 [[package]]
 name = "avalanche-rpcchainvm-qomm"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/defmi.git?rev=99b5eb271e1e0e405f70679697722e978cd706a3#99b5eb271e1e0e405f70679697722e978cd706a3"
+source = "git+https://github.com/zkFMI/defmi.git?rev=bc543696c7504b332735c14ed2e5c33267848e78#bc543696c7504b332735c14ed2e5c33267848e78"
 dependencies = [
  "bytes",
  "prost",
@@ -646,7 +646,7 @@ dependencies = [
 [[package]]
 name = "defmi"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/defmi.git?rev=99b5eb271e1e0e405f70679697722e978cd706a3#99b5eb271e1e0e405f70679697722e978cd706a3"
+source = "git+https://github.com/zkFMI/defmi.git?rev=bc543696c7504b332735c14ed2e5c33267848e78#bc543696c7504b332735c14ed2e5c33267848e78"
 dependencies = [
  "base64",
  "bulletproofs",
@@ -674,7 +674,7 @@ dependencies = [
 [[package]]
 name = "defmi-avalanche-vm"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/defmi.git?rev=99b5eb271e1e0e405f70679697722e978cd706a3#99b5eb271e1e0e405f70679697722e978cd706a3"
+source = "git+https://github.com/zkFMI/defmi.git?rev=bc543696c7504b332735c14ed2e5c33267848e78#bc543696c7504b332735c14ed2e5c33267848e78"
 dependencies = [
  "avalanche-rpcchainvm-qomm",
  "base64",
@@ -1740,7 +1740,7 @@ checksum = "95067976aca6421a523e491fce939a3e65249bac4b977adee0ee9771568e8aa3"
 [[package]]
 name = "qomm-audit"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/zkpi.git?rev=1366f4c0c20924c5c2665a13fe0901de3a4f76f8#1366f4c0c20924c5c2665a13fe0901de3a4f76f8"
+source = "git+https://github.com/zkFMI/zkpi.git?rev=cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c#cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c"
 dependencies = [
  "ed25519-dalek",
  "hex",
@@ -1759,7 +1759,7 @@ dependencies = [
 [[package]]
 name = "qomm-dsl"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/zkpi.git?rev=1366f4c0c20924c5c2665a13fe0901de3a4f76f8#1366f4c0c20924c5c2665a13fe0901de3a4f76f8"
+source = "git+https://github.com/zkFMI/zkpi.git?rev=cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c#cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c"
 dependencies = [
  "sha2",
 ]
@@ -1767,7 +1767,7 @@ dependencies = [
 [[package]]
 name = "qomm-mpc"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/zkpi.git?rev=1366f4c0c20924c5c2665a13fe0901de3a4f76f8#1366f4c0c20924c5c2665a13fe0901de3a4f76f8"
+source = "git+https://github.com/zkFMI/zkpi.git?rev=cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c#cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c"
 dependencies = [
  "qomm-dsl",
  "rand_core 0.6.4",
@@ -1780,7 +1780,7 @@ dependencies = [
 [[package]]
 name = "qomm-proofs"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/zkpi.git?rev=1366f4c0c20924c5c2665a13fe0901de3a4f76f8#1366f4c0c20924c5c2665a13fe0901de3a4f76f8"
+source = "git+https://github.com/zkFMI/zkpi.git?rev=cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c#cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c"
 dependencies = [
  "bulletproofs",
  "curve25519-dalek",
@@ -1798,7 +1798,7 @@ dependencies = [
 [[package]]
 name = "qomm-transport"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/zkpi.git?rev=1366f4c0c20924c5c2665a13fe0901de3a4f76f8#1366f4c0c20924c5c2665a13fe0901de3a4f76f8"
+source = "git+https://github.com/zkFMI/zkpi.git?rev=cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c#cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c"
 dependencies = [
  "base64",
  "curve25519-dalek",
@@ -2766,12 +2766,12 @@ dependencies = [
 [[package]]
 name = "zkfmi-measure"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/zkpi.git?rev=1366f4c0c20924c5c2665a13fe0901de3a4f76f8#1366f4c0c20924c5c2665a13fe0901de3a4f76f8"
+source = "git+https://github.com/zkFMI/zkpi.git?rev=cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c#cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c"
 
 [[package]]
 name = "zkfmi-zk"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/zkpi.git?rev=1366f4c0c20924c5c2665a13fe0901de3a4f76f8#1366f4c0c20924c5c2665a13fe0901de3a4f76f8"
+source = "git+https://github.com/zkFMI/zkpi.git?rev=cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c#cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c"
 dependencies = [
  "bulletproofs",
  "curve25519-dalek",
@@ -2784,7 +2784,7 @@ dependencies = [
 [[package]]
 name = "zkpi"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/zkpi.git?rev=1366f4c0c20924c5c2665a13fe0901de3a4f76f8#1366f4c0c20924c5c2665a13fe0901de3a4f76f8"
+source = "git+https://github.com/zkFMI/zkpi.git?rev=cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c#cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c"
 dependencies = [
  "bulletproofs",
  "curve25519-dalek",
