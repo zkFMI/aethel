@@ -11,19 +11,19 @@ license = "MIT"
 zkfmi-crypto = { git = "https://github.com/zkFMI/zkfmi-crypto.git", rev = "9a183c90b6ee6af17fce26ca4b235bdb543dc0a0" }
 deccp-core = { git = "https://github.com/zkFMI/deccp.git", rev = "934343fd59db866b83772253a082d7da371ac230" }
 dekyx-core = { git = "https://github.com/zkFMI/dekyx.git", rev = "4ea50f5c25482c680716622d39b008dd6e0645c8" }
-defmi-avalanche-vm = { git = "https://github.com/zkFMI/defmi.git", rev = "99b5eb271e1e0e405f70679697722e978cd706a3" }
-zkpi-defmi-sdk = { git = "https://github.com/zkFMI/defmi.git", rev = "99b5eb271e1e0e405f70679697722e978cd706a3" }
-defmi = { git = "https://github.com/zkFMI/defmi.git", rev = "99b5eb271e1e0e405f70679697722e978cd706a3" }
-zkpi = { git = "https://github.com/zkFMI/zkpi.git", rev = "1366f4c0c20924c5c2665a13fe0901de3a4f76f8" }
-zkfmi-zk = { git = "https://github.com/zkFMI/zkpi.git", rev = "1366f4c0c20924c5c2665a13fe0901de3a4f76f8" }
-qomm-proofs = { git = "https://github.com/zkFMI/zkpi.git", rev = "1366f4c0c20924c5c2665a13fe0901de3a4f76f8" }
-zkfmi-measure = { git = "https://github.com/zkFMI/zkpi.git", rev = "1366f4c0c20924c5c2665a13fe0901de3a4f76f8" }
-qomm-audit = { git = "https://github.com/zkFMI/zkpi.git", rev = "1366f4c0c20924c5c2665a13fe0901de3a4f76f8" }
-qomm-transport = { git = "https://github.com/zkFMI/zkpi.git", rev = "1366f4c0c20924c5c2665a13fe0901de3a4f76f8" }
-qomm-mpc = { git = "https://github.com/zkFMI/zkpi.git", rev = "1366f4c0c20924c5c2665a13fe0901de3a4f76f8" }
-qomm-sim = { git = "https://github.com/zkFMI/zkpi.git", rev = "1366f4c0c20924c5c2665a13fe0901de3a4f76f8" }
-qomm-law = { git = "https://github.com/zkFMI/qomm.git", rev = "b9b5b5215c756a91ca5d04d5c859bb655a19cb23" }
-qomm-dsl = { git = "https://github.com/zkFMI/zkpi.git", rev = "1366f4c0c20924c5c2665a13fe0901de3a4f76f8" }
+defmi-avalanche-vm = { git = "https://github.com/zkFMI/defmi.git", rev = "bc543696c7504b332735c14ed2e5c33267848e78" }
+zkpi-defmi-sdk = { git = "https://github.com/zkFMI/defmi.git", rev = "bc543696c7504b332735c14ed2e5c33267848e78" }
+defmi = { git = "https://github.com/zkFMI/defmi.git", rev = "bc543696c7504b332735c14ed2e5c33267848e78" }
+zkpi = { git = "https://github.com/zkFMI/zkpi.git", rev = "cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c" }
+zkfmi-zk = { git = "https://github.com/zkFMI/zkpi.git", rev = "cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c" }
+qomm-proofs = { git = "https://github.com/zkFMI/zkpi.git", rev = "cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c" }
+zkfmi-measure = { git = "https://github.com/zkFMI/zkpi.git", rev = "cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c" }
+qomm-audit = { git = "https://github.com/zkFMI/zkpi.git", rev = "cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c" }
+qomm-transport = { git = "https://github.com/zkFMI/zkpi.git", rev = "cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c" }
+qomm-mpc = { git = "https://github.com/zkFMI/zkpi.git", rev = "cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c" }
+qomm-sim = { git = "https://github.com/zkFMI/zkpi.git", rev = "cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c" }
+qomm-law = { git = "https://github.com/zkFMI/qomm.git", rev = "4d634d26140a7bfa4755857c9b4b8b39e9b2f885" }
+qomm-dsl = { git = "https://github.com/zkFMI/zkpi.git", rev = "cc9cfa9c65ff3e065b926abdb08d0b7bfebb666c" }
 # Audited by Quarkslab (2019, commissioned by Tari Labs, 30 man-days) together
 # with subtle and bulletproofs. 4.1.3 is the first release carrying the fix for
 # RUSTSEC-2024-0344, a timing leak LLVM introduced into Scalar::sub, so the
