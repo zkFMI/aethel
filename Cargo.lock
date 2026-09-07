@@ -282,7 +282,7 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 [[package]]
 name = "avalanche-rpcchainvm-qomm"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/defmi.git?rev=4a6081f653516d1b17ba650b9d8f5c4e5bcb2bc7#4a6081f653516d1b17ba650b9d8f5c4e5bcb2bc7"
+source = "git+https://github.com/zkFMI/defmi.git?rev=99b5eb271e1e0e405f70679697722e978cd706a3#99b5eb271e1e0e405f70679697722e978cd706a3"
 dependencies = [
  "bytes",
  "prost",
@@ -646,7 +646,7 @@ dependencies = [
 [[package]]
 name = "defmi"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/defmi.git?rev=4a6081f653516d1b17ba650b9d8f5c4e5bcb2bc7#4a6081f653516d1b17ba650b9d8f5c4e5bcb2bc7"
+source = "git+https://github.com/zkFMI/defmi.git?rev=99b5eb271e1e0e405f70679697722e978cd706a3#99b5eb271e1e0e405f70679697722e978cd706a3"
 dependencies = [
  "base64",
  "bulletproofs",
@@ -674,7 +674,7 @@ dependencies = [
 [[package]]
 name = "defmi-avalanche-vm"
 version = "0.1.0"
-source = "git+https://github.com/zkFMI/defmi.git?rev=4a6081f653516d1b17ba650b9d8f5c4e5bcb2bc7#4a6081f653516d1b17ba650b9d8f5c4e5bcb2bc7"
+source = "git+https://github.com/zkFMI/defmi.git?rev=99b5eb271e1e0e405f70679697722e978cd706a3#99b5eb271e1e0e405f70679697722e978cd706a3"
 dependencies = [
  "avalanche-rpcchainvm-qomm",
  "base64",
