@@ -115,6 +115,11 @@ impl AethelBook {
         if now < request.provider.valid_from || now > request.provider.valid_until {
             return Err(AethelError::OutsideValidityWindow);
         }
+        request
+            .provider
+            .artifact_key
+            .valid_at(now)
+            .map_err(|_| AethelError::InvalidProviderKey)?;
         let key = id_key(&request.provider.provider_id);
         if self.providers.contains_key(&key) {
             return Err(AethelError::DuplicateProvider);
@@ -137,6 +142,7 @@ impl AethelBook {
         let statement = request.verify_possession()?;
         self.ensure_operation_unused(&request.operation_id)?;
         let provider = self.provider(&request.provider_id)?;
+        provider.validate()?;
         if provider.status == ProviderStatus::Revoked {
             return Err(AethelError::ProviderRevoked);
         }
@@ -149,23 +155,41 @@ impl AethelBook {
         if provider
             .signing_keys()
             .any(|key| key == request.next_public_key)
+            || request.next_artifact_key.key_version
+                != provider
+                    .artifact_key
+                    .key_version
+                    .checked_add(1)
+                    .ok_or(AethelError::ArithmeticOverflow)?
+            || request.next_artifact_key.participant_id != provider.artifact_key.participant_id
+            || provider
+                .retired_keys
+                .iter()
+                .map(|key| &key.artifact_key)
+                .chain(std::iter::once(&provider.artifact_key))
+                .any(|key| {
+                    key.key_id == request.next_artifact_key.key_id
+                        || key.public_key[32..] == request.next_artifact_key.public_key[32..]
+                })
         {
             return Err(AethelError::InvalidProviderKey);
         }
-        let provider = self
-            .providers
-            .get_mut(&id_key(&request.provider_id))
-            .expect("checked provider");
-        provider.retired_keys.push(RetiredProviderKey {
-            public_key: provider.public_key,
+        // Validate the complete successor before changing persisted state.
+        let mut successor = provider.clone();
+        successor.retired_keys.push(RetiredProviderKey {
+            public_key: successor.public_key,
+            artifact_key: successor.artifact_key.clone(),
             retired_at: now,
         });
-        provider.public_key = request.next_public_key;
-        provider.sequence = provider
+        successor.public_key = request.next_public_key;
+        successor.artifact_key = request.next_artifact_key;
+        successor.sequence = successor
             .sequence
             .checked_add(1)
             .ok_or(AethelError::ArithmeticOverflow)?;
-        provider.validate()?;
+        successor.validate()?;
+        self.providers
+            .insert(id_key(&request.provider_id), successor);
         self.consume_operation(&request.operation_id)?;
         Ok(statement)
     }
@@ -217,7 +241,7 @@ impl AethelBook {
             ProviderCapability::StreamAttestor,
             now,
         )?;
-        provider.verify_new_signature(&statement, &request.signature)?;
+        provider.verify_new_signature(&statement, &request.signature, now)?;
         let key = id_key(&request.state.stream_id);
         if self.streams.contains_key(&key) {
             return Err(AethelError::DuplicateStream);
@@ -245,7 +269,7 @@ impl AethelBook {
             ProviderCapability::StreamAttestor,
             now,
         )?;
-        provider.verify_new_signature(&statement, &request.signature)?;
+        provider.verify_new_signature(&statement, &request.signature, now)?;
         self.ensure_operation_unused(&request.operation_id)?;
         let key = id_key(&request.after_state.stream_id);
         let current = self.streams.get(&key).ok_or(AethelError::UnknownStream)?;
@@ -298,7 +322,7 @@ impl AethelBook {
             ProviderCapability::CreditAssessor,
             now,
         )?;
-        provider.verify_new_signature(&statement, &decision.signature)?;
+        provider.verify_new_signature(&statement, &decision.signature, now)?;
         self.ensure_series_state(
             &decision.series_id,
             decision.stream_state_version,
@@ -342,7 +366,7 @@ impl AethelBook {
             ProviderCapability::CredentialIssuer,
             now,
         )?;
-        provider.verify_new_signature(&statement, &request.signature)?;
+        provider.verify_new_signature(&statement, &request.signature, now)?;
         if request.issuer.valid_from < provider.valid_from
             || request.issuer.valid_until > provider.valid_until
         {
@@ -425,7 +449,7 @@ impl AethelBook {
         let statement = guarantee.statement()?;
         let provider =
             self.active_provider(&guarantee.provider_id, ProviderCapability::Guarantor, now)?;
-        provider.verify_new_signature(&statement, &guarantee.signature)?;
+        provider.verify_new_signature(&statement, &guarantee.signature, now)?;
         self.ensure_series_state(
             &guarantee.series_id,
             guarantee.stream_state_version,
@@ -506,7 +530,7 @@ impl AethelBook {
         let statement = release.statement()?;
         let provider =
             self.active_provider(&release.provider_id, ProviderCapability::Guarantor, now)?;
-        provider.verify_new_signature(&statement, &release.signature)?;
+        provider.verify_new_signature(&statement, &release.signature, now)?;
         if release.released_at != now {
             return Err(AethelError::InvalidGuaranteeRelease);
         }
@@ -542,7 +566,7 @@ impl AethelBook {
             ProviderCapability::LiquidityProvider,
             now,
         )?;
-        provider.verify_new_signature(&statement, &quote.signature)?;
+        provider.verify_new_signature(&statement, &quote.signature, now)?;
         let stream = self.ensure_series_state(
             &quote.series_id,
             quote.stream_state_version,
@@ -680,7 +704,7 @@ impl AethelBook {
         let statement = attestation.statement()?;
         let provider =
             self.active_provider(&attestation.provider_id, ProviderCapability::Servicer, now)?;
-        provider.verify_new_signature(&statement, &attestation.signature)?;
+        provider.verify_new_signature(&statement, &attestation.signature, now)?;
         let stream = self.stream(&attestation.stream_id)?;
         if stream.state.version != attestation.stream_state_version
             || stream.state.root()? != attestation.stream_state_root

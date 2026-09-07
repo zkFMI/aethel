@@ -18,6 +18,25 @@ use aethel::servicing::DueInstallment;
 use aethel::tokenization::{LedgerRejection, RedemptionCondition, SupplyChange, TokenSeriesStatus};
 use aethel::types::id_key;
 use ed25519_dalek::SigningKey;
+use zkfmi_crypto::{
+    backend::{Ed25519Signer, MlDsa65Signer},
+    hybrid::signature::HybridSigner,
+    key::{KeyId, KeyPurpose, KeyRecord, ParticipantId},
+    suite::{Suite, SuiteId},
+    traits::Signer as _,
+};
+
+fn sign_artifact<A: aethel_provider_sdk::SignedArtifact>(
+    artifact: &mut A,
+    key: &SigningKey,
+) -> Result<[u8; 32], aethel_provider_sdk::ProviderError> {
+    let participant = [artifact.provider_id()[0] + 40; 32];
+    aethel_provider_sdk::sign_artifact(
+        artifact,
+        &aethel_provider_sdk::test_support::signer(key),
+        &aethel_provider_sdk::test_support::key_record(key, participant, 1),
+    )
+}
 
 fn id(byte: u8) -> [u8; 32] {
     [byte; 32]
@@ -25,6 +44,29 @@ fn id(byte: u8) -> [u8; 32] {
 
 fn key(seed: u8) -> SigningKey {
     SigningKey::from_bytes(&id(seed))
+}
+
+fn obligation_signer() -> HybridSigner {
+    HybridSigner::new(
+        Ed25519Signer::from_seed(&id(21)),
+        MlDsa65Signer::from_seed(&id(121)),
+    )
+}
+
+fn obligation_key(signer: &HybridSigner) -> KeyRecord {
+    KeyRecord {
+        participant_id: ParticipantId::new(id_key(&id(21))).unwrap(),
+        key_id: KeyId::new("aethel-obligor-payment-e2e-v1").unwrap(),
+        suite: Suite::new(SuiteId::Ed25519MlDsa65),
+        key_version: 1,
+        purpose: KeyPurpose::SettlementInstruction,
+        public_key: signer.public_key(),
+        not_before: 1,
+        not_after: 50_001,
+        revoked_at: None,
+        rotation_proof: None,
+        dekyx_binding: None,
+    }
 }
 
 const ATTESTOR: u8 = 1;
@@ -40,6 +82,11 @@ fn provider(byte: u8, capabilities: &[ProviderCapability]) -> RegisterProvider {
             participant_id: id(byte + 40),
             capabilities: capabilities.iter().copied().collect::<BTreeSet<_>>(),
             public_key: key(100 + byte).verifying_key().to_bytes(),
+            artifact_key: aethel_provider_sdk::test_support::key_record(
+                &key(100 + byte),
+                id(byte + 40),
+                1,
+            ),
             policy_registry_digest: id(byte + 80),
             defmi_guarantor_id: None,
             valid_from: 1,
@@ -427,24 +474,30 @@ fn a_receivable_flows_from_signed_stream_to_default_across_every_module() {
         },
     )
     .unwrap();
+    let obligor_key = obligation_signer();
     wallet
-        .add_authorization(PreAuthorization {
-            authorization_id: id(130),
-            stream_id: id(20),
-            payee_commitment: id(22),
-            settlement_asset_id: id(23),
-            per_payment_ceiling: 40,
-            period_ceiling: 120,
-            period_seconds: 10_000,
-            valid_from: 1,
-            valid_until: 50_000,
-        })
+        .add_authorization(
+            PreAuthorization {
+                authorization_id: id(130),
+                stream_id: id(20),
+                obligor_commitment: id(21),
+                payee_commitment: id(22),
+                settlement_asset_id: id(23),
+                payment_key: obligation_key(&obligor_key),
+                per_payment_ceiling: 40,
+                period_ceiling: 120,
+                period_seconds: 10_000,
+                valid_from: 1,
+                valid_until: 50_000,
+            },
+            900,
+        )
         .unwrap();
-    let obligor_key = key(21);
     let signed = wallet
         .prepare(1, &id(130), id(131), 900)
         .unwrap()
-        .sign(&obligor_key);
+        .sign(&obligor_key)
+        .unwrap();
     assert_eq!(
         wallet.enqueue(signed.clone(), 900),
         Ok(EnqueueOutcome::Accepted)
@@ -459,7 +512,7 @@ fn a_receivable_flows_from_signed_stream_to_default_across_every_module() {
     assert_eq!(wallet.settled_units().unwrap(), 0);
     let receipt = SettlementReceipt {
         payment_id: id(131),
-        receipt_digest: signed.verify().unwrap(),
+        receipt_digest: signed.payment.statement().unwrap(),
         settled_units: 40,
         finalized_at: 950,
     };

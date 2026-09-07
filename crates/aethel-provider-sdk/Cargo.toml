@@ -6,7 +6,11 @@ license.workspace = true
 publish = false
 description = "Open provider plug-in contract for Aethel: capabilities, signed artifacts, key rotation, status, and validation"
 
+[features]
+test-support = []
+
 [dependencies]
+zkfmi-crypto.workspace = true
 aethel-types.workspace = true
 # DeKYX is the only credential layer. A credential-issuer provider vouches for
 # a DeKYX issuer key, so the SDK carries that request type and nothing else

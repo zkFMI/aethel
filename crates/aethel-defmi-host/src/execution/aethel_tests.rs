@@ -11,6 +11,7 @@ use aethel_core::{
     ReceivableStatus, RegisterCredentialIssuer, RegisterProvider, RegisterSeries, RegisterStream,
     SeriesPolicy, StreamState, StreamStatus, StreamTransition,
 };
+use aethel_provider_sdk::{test_support as provider_fixture, SignedArtifact};
 use aethel_zkpi::{
     deal_quorum, frost,
     receivable::{
@@ -29,10 +30,10 @@ use deccp_core::{
     GuaranteeFacilityStatus, GuaranteeHoldStatus, ParticipantAdmission,
     QuorumApproval as DeccpQuorumApproval,
 };
-use ed25519_dalek::{Signer, SigningKey};
+use ed25519_dalek::SigningKey;
 use qomm_defmi::{
     facility::{NodeApproval, QuorumApproval, QuorumAuthorizer},
-    note_chain::{NoteClaim, NoteClaimKind, NoteOutput},
+    note_chain::{ClaimAuthorizationCommitment, NoteClaim, NoteClaimKind, NoteOutput},
     participant::{
         ParticipantKeys, ParticipantRecord, ParticipantRole, ParticipantStatus, PurposeKey,
         RegisterParticipant, RegistryConfiguration,
@@ -112,7 +113,7 @@ pub(super) fn rpc_value<T: Serialize>(request: &T) -> Value {
     fn convert(value: &mut Value) {
         match value {
             Value::Array(values)
-                if (values.len() == 32 || values.len() == 64)
+                if matches!(values.len(), 32 | 64 | 1984 | 3373)
                     && values.iter().all(Value::is_u64) =>
             {
                 let bytes = values
@@ -197,8 +198,9 @@ pub(super) fn locked_cash_note(
         ephemeral: RistrettoPoint::mul_base(&Scalar::from(seed + 2))
             .compress()
             .to_bytes(),
-        masked_value: Scalar::from(seed + 3).to_bytes(),
-        masked_blinding: Scalar::from(seed + 4).to_bytes(),
+        encrypted_opening: qomm_defmi::notes::NoteOpening::Recipient(
+            zkfmi_crypto::test_support::note_envelope(),
+        ),
         lock_id,
     };
     note.note_id = note.derived_id().unwrap();
@@ -210,8 +212,7 @@ pub(super) fn locked_cash_note(
             one_time: note.one_time,
             value_commitment: note.value_commitment,
             ephemeral: note.ephemeral,
-            masked_value: note.masked_value,
-            masked_blinding: note.masked_blinding,
+            encrypted_opening: note.encrypted_opening.clone(),
             lock_id: note.lock_id,
         },
     );
@@ -388,6 +389,9 @@ pub(super) fn purpose_key(seed: u8) -> (PurposeKey, SigningKey) {
     (
         PurposeKey {
             public_key: key.verifying_key().to_bytes(),
+            pq_public_key: zkfmi_crypto::traits::Signer::public_key(
+                &zkfmi_crypto::test_support::entity_pq_signer(&key.to_bytes()),
+            ),
             epoch: 1,
         },
         key,
@@ -526,6 +530,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
             participant_id: id(6),
             capabilities: [ProviderCapability::StreamAttestor].into_iter().collect(),
             public_key: quote_signer.verifying_key().to_bytes(),
+            artifact_key: provider_fixture::key_record(&quote_signer, id(6), 1),
             policy_registry_digest: id(32),
             defmi_guarantor_id: None,
             valid_from: 1,
@@ -569,10 +574,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         relation_proof_digest: id(43),
         signature: Vec::new(),
     };
-    stream.signature = quote_signer
-        .sign(&stream.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_provider_artifact(&state, &mut stream, &quote_signer);
     apply_request(
         &mut state,
         &authorizer,
@@ -630,6 +632,9 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
             kind: "credit_provider".into(),
             name: "Aethel test guarantor".into(),
             public_key: quote_signer.verifying_key().to_bytes(),
+            pq_public_key: zkfmi_crypto::traits::Signer::public_key(
+                &zkfmi_crypto::test_support::entity_pq_signer(&quote_signer.to_bytes()),
+            ),
             risk_policy_digest: id(81),
             active: true,
         },
@@ -647,6 +652,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
             .into_iter()
             .collect(),
             public_key: quote_signer.verifying_key().to_bytes(),
+            artifact_key: provider_fixture::key_record(&quote_signer, id(6), 1),
             policy_registry_digest: id(81),
             defmi_guarantor_id: Some(id(80)),
             valid_from: 1,
@@ -679,6 +685,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
             participant_id: id(201),
             capabilities: [ProviderCapability::CredentialIssuer].into_iter().collect(),
             public_key: credential_issuer_signer.verifying_key().to_bytes(),
+            artifact_key: provider_fixture::key_record(&credential_issuer_signer, id(201), 1),
             policy_registry_digest: id(213),
             defmi_guarantor_id: None,
             valid_from: 1,
@@ -730,10 +737,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         previous_epochs_valid_until: None,
         signature: Vec::new(),
     };
-    issuer_registration.signature = credential_issuer_signer
-        .sign(&issuer_registration.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_provider_artifact(&state, &mut issuer_registration, &credential_issuer_signer);
     apply_request(
         &mut state,
         &authorizer,
@@ -944,8 +948,9 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         ephemeral: RistrettoPoint::mul_base(&Scalar::from(77u64))
             .compress()
             .to_bytes(),
-        masked_value: Scalar::from(78u64).to_bytes(),
-        masked_blinding: Scalar::from(79u64).to_bytes(),
+        encrypted_opening: qomm_defmi::notes::NoteOpening::Recipient(
+            zkfmi_crypto::test_support::note_envelope(),
+        ),
         lock_id: [0; 32],
     };
     note.note_id = note.derived_id().unwrap();
@@ -957,8 +962,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
             one_time: note.one_time,
             value_commitment: note.value_commitment,
             ephemeral: note.ephemeral,
-            masked_value: note.masked_value,
-            masked_blinding: note.masked_blinding,
+            encrypted_opening: note.encrypted_opening.clone(),
             lock_id: note.lock_id,
         },
     );
@@ -1228,10 +1232,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         nonce: id(184),
         signature: Vec::new(),
     };
-    credit_decision.signature = quote_signer
-        .sign(&credit_decision.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_provider_artifact(&state, &mut credit_decision, &quote_signer);
     let assessor_subject_proof = dekyx_presentation(
         &state,
         &assessor_credential,
@@ -1300,10 +1301,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         status: GuaranteeStatus::Available,
         bound_issuance_id: None,
     };
-    guarantee.signature = quote_signer
-        .sign(&guarantee.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_provider_artifact(&state, &mut guarantee, &quote_signer);
     let guarantee_subject_proof = dekyx_presentation(
         &state,
         &subject_credential,
@@ -1399,10 +1397,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         signature: Vec::new(),
         ..guarantee.clone()
     };
-    second_guarantee.signature = quote_signer
-        .sign(&second_guarantee.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_provider_artifact(&state, &mut second_guarantee, &quote_signer);
     let second_guarantee_proof = dekyx_presentation(
         &state,
         &subject_credential,
@@ -1433,10 +1428,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         released_at: 25,
         signature: Vec::new(),
     };
-    release.signature = quote_signer
-        .sign(&release.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_provider_artifact(&state, &mut release, &quote_signer);
     let before_premature_release = state.root();
     assert!(apply_request(
         &mut state,
@@ -1567,6 +1559,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
             participant_id: id(6),
             capabilities: [ProviderCapability::Servicer].into_iter().collect(),
             public_key: quote_signer.verifying_key().to_bytes(),
+            artifact_key: provider_fixture::key_record(&quote_signer, id(6), 1),
             policy_registry_digest: id(97),
             defmi_guarantor_id: None,
             valid_from: 1,
@@ -1602,10 +1595,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         relation_proof_digest: id(100),
         signature: Vec::new(),
     };
-    stream_transition.signature = quote_signer
-        .sign(&stream_transition.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_provider_artifact(&state, &mut stream_transition, &quote_signer);
     apply_request(
         &mut state,
         &authorizer,
@@ -1630,10 +1620,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         observed_at: 27,
         signature: Vec::new(),
     };
-    default.signature = quote_signer
-        .sign(&default.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_provider_artifact(&state, &mut default, &quote_signer);
     apply_request(
         &mut state,
         &authorizer,
@@ -1656,9 +1643,9 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         RistrettoPoint::mul_base(&Scalar::from(108u64)),
         vec![EncryptedOpeningShare {
             party: 1,
-            ephemeral: RistrettoPoint::mul_base(&Scalar::from(109u64)),
-            masked_value: Scalar::from(110u64),
-            masked_blinding: Scalar::from(111u64),
+            recipient_public: zkfmi_crypto::test_support::opening_recipient_public(),
+            sealed: zkfmi_crypto::test_support::threshold_opening_envelope(),
+            blinding_adjustment: Scalar::from(111u64),
         }],
     )
     .unwrap();
@@ -1667,6 +1654,10 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         asset_id: id(20),
         value_commitment: face_commitment.compress().to_bytes(),
         recipient_commitment: owner_handle.compress().to_bytes(),
+        authorization: ClaimAuthorizationCommitment {
+            key_record_commitment: id(115),
+            key_fingerprint: id(116),
+        },
         source_hold_id: id(85),
         kind: NoteClaimKind::Delivery,
         opening_envelope: opening_envelope.clone(),
@@ -1679,6 +1670,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
             asset_id: delivery.asset_id,
             value_commitment: delivery.value_commitment,
             recipient_commitment: delivery.recipient_commitment,
+            authorization: delivery.authorization,
             source_hold_id: delivery.source_hold_id,
             kind: delivery.kind.as_str().into(),
             opening_envelope: OpeningEnvelopeRecord::from_domain(&opening_envelope).unwrap(),
@@ -1904,4 +1896,27 @@ fn authority_member(
             dekyx_binding: None,
         },
     }
+}
+
+pub(super) fn sign_provider_artifact<A: SignedArtifact>(
+    state: &State,
+    artifact: &mut A,
+    signer: &SigningKey,
+) {
+    let provider = state.aethel.provider(&artifact.provider_id()).unwrap();
+    let key = provider
+        .retired_keys
+        .iter()
+        .map(|key| &key.artifact_key)
+        .chain(std::iter::once(&provider.artifact_key))
+        .find(|key| key.public_key[..32] == signer.verifying_key().to_bytes())
+        .unwrap_or(&provider.artifact_key);
+    let signing_record =
+        provider_fixture::key_record(signer, provider.participant_id, key.key_version);
+    aethel_provider_sdk::sign_artifact(
+        artifact,
+        &provider_fixture::signer(signer),
+        &signing_record,
+    )
+    .unwrap();
 }

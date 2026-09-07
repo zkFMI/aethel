@@ -314,6 +314,8 @@ pub(super) fn rotate_provider_key(
     if timestamp < participant.valid_from
         || timestamp > participant.valid_until
         || participant.keys.quote.public_key != request.next_public_key
+        || request.next_artifact_key.public_key.get(32..)
+            != Some(participant.keys.quote.pq_public_key.as_slice())
     {
         return Err(
             "Aethel provider key rotation must install the participant's current quote key".into(),
@@ -685,6 +687,8 @@ fn validate_provider_identity(state: &State, request: &RegisterProvider) -> Resu
     if provider.valid_from < participant.valid_from
         || provider.valid_until > participant.valid_until
         || participant.keys.quote.public_key != provider.public_key
+        || provider.artifact_key.public_key.get(32..)
+            != Some(participant.keys.quote.pq_public_key.as_slice())
     {
         return Err(
             "Aethel provider is outside its participant identity or quote-key epoch".into(),
@@ -710,7 +714,11 @@ fn validate_provider_identity(state: &State, request: &RegisterProvider) -> Resu
             .guarantors
             .get(&id_key(&guarantor_id))
             .ok_or_else(|| "Aethel guarantee provider has no DeFMI guarantor".to_string())?;
-        if !guarantor.active || guarantor.public_key != provider.public_key {
+        if !guarantor.active
+            || guarantor.public_key != provider.public_key
+            || provider.artifact_key.public_key.get(32..)
+                != Some(guarantor.pq_public_key.as_slice())
+        {
             return Err("Aethel guarantee provider and DeFMI guarantor identity differ".into());
         }
     }
@@ -734,6 +742,8 @@ fn validate_provider_runtime(
     if timestamp < participant.valid_from
         || timestamp > participant.valid_until
         || participant.keys.quote.public_key != provider.public_key
+        || provider.artifact_key.public_key.get(32..)
+            != Some(participant.keys.quote.pq_public_key.as_slice())
     {
         return Err("Aethel provider no longer matches its active participant key epoch".into());
     }
@@ -747,7 +757,15 @@ fn validate_provider_runtime(
             .ok_or_else(|| "Aethel guarantee provider has no DeFMI guarantor".to_string())?;
         // The DeFMI guarantor record is bound to the key the provider was
         // registered with; Aethel key rotation does not re-bind it.
-        if !guarantor.active || guarantor.public_key != provider.registration_key() {
+        let registration_artifact_key = provider
+            .retired_keys
+            .first()
+            .map_or(&provider.artifact_key, |retired| &retired.artifact_key);
+        if !guarantor.active
+            || guarantor.public_key != provider.registration_key()
+            || registration_artifact_key.public_key.get(32..)
+                != Some(guarantor.pq_public_key.as_slice())
+        {
             return Err("Aethel guarantee provider's DeFMI authority is inactive".into());
         }
     }
@@ -1357,7 +1375,7 @@ fn normalize_hex(value: &mut Value, field_name: Option<&str>) -> Result<(), Stri
             if (encoded.len() == 64
                 || field_name.is_some_and(|name| {
                     name.to_ascii_lowercase().contains("signature")
-                        || matches!(name, "classical" | "pq")
+                        || matches!(name, "classical" | "pq" | "public_key" | "pq_public_key")
                 })) =>
         {
             let bytes = hex::decode(&*encoded)

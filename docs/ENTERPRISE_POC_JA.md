@@ -63,7 +63,7 @@ settlement digestです。DeCCP receipt全体をAethelの正本として複製�
 ### 4.2 取得と固定依存関係の確認
 
 ```bash
-git clone https://github.com/shukob/aethel.git
+git clone https://github.com/zkFMI/aethel.git
 cd aethel
 cargo test --workspace --locked
 ```
@@ -573,7 +573,7 @@ worker停止中はoutboxが残り、Aethel状態は「決済済み」になり�
 ### 16.1 取得した版を固定する
 
 ```sh
-git clone https://github.com/shukob/aethel.git
+git clone https://github.com/zkFMI/aethel.git
 cd aethel
 git fetch --tags --prune
 git checkout <組織内で承認したcommit>

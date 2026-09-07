@@ -28,6 +28,9 @@ mod error;
 mod provider;
 mod stream;
 
+#[cfg(any(test, feature = "test-support"))]
+pub mod test_support;
+
 pub use artifacts::{
     CreditDecision, DefaultAttestation, FundingQuote, GuaranteeCommitment, GuaranteeRelease,
     GuaranteeStatus, LossLayer,
@@ -36,8 +39,9 @@ pub use contract::{sign_artifact, ProviderRegistry, SignedArtifact};
 pub use credential::{PublishCredentialStatus, RegisterCredentialIssuer};
 pub use error::ProviderError;
 pub use provider::{
-    ProviderCapability, ProviderDefinition, ProviderStatus, RegisterProvider, RetiredProviderKey,
-    RotateProviderKey, SetProviderStatus,
+    sign_provider_statement, ProviderCapability, ProviderDefinition, ProviderStatus,
+    RegisterProvider, RetiredProviderKey, RotateProviderKey, SetProviderStatus,
+    PROVIDER_SIGNATURE_SUITE,
 };
 pub use stream::{RegisterStream, StreamState, StreamStatus, StreamTransition};
 
@@ -57,12 +61,24 @@ mod tests {
         [byte; 32]
     }
 
+    fn sign_artifact<A: SignedArtifact>(
+        artifact: &mut A,
+        key: &SigningKey,
+    ) -> Result<aethel_types::Commitment, ProviderError> {
+        super::sign_artifact(
+            artifact,
+            &test_support::signer(key),
+            &test_support::key_record(key, id(2), 1),
+        )
+    }
+
     fn definition(key: &SigningKey, capabilities: &[ProviderCapability]) -> ProviderDefinition {
         ProviderDefinition {
             provider_id: id(1),
             participant_id: id(2),
             capabilities: capabilities.iter().copied().collect::<BTreeSet<_>>(),
             public_key: key.verifying_key().to_bytes(),
+            artifact_key: test_support::key_record(key, id(2), 1),
             policy_registry_digest: id(3),
             defmi_guarantor_id: None,
             valid_from: 1,
@@ -162,33 +178,52 @@ mod tests {
             operation_id: id(20),
             provider_id: id(1),
             next_public_key: next.verifying_key().to_bytes(),
+            next_artifact_key: test_support::key_record(&next, id(2), 2),
             expected_sequence: 0,
             rotated_at: 50,
             signature: Vec::new(),
         };
         // Signed by the wrong key: possession of the next key is not shown.
-        rotation.signature = ed25519_dalek::Signer::sign(&old, &rotation.statement().unwrap())
-            .to_bytes()
-            .to_vec();
+        rotation.signature = sign_provider_statement(
+            &test_support::signer(&old),
+            &test_support::key_record(&old, id(2), 2),
+            &rotation.provider_id,
+            &rotation.statement().unwrap(),
+        )
+        .unwrap();
         assert_eq!(
             rotation.verify_possession(),
             Err(ProviderError::InvalidSignature)
         );
-        rotation.signature = ed25519_dalek::Signer::sign(&next, &rotation.statement().unwrap())
-            .to_bytes()
-            .to_vec();
+        // Correct key under the artifact purpose cannot authorize rotation.
+        rotation.signature = sign_provider_statement(
+            &test_support::signer(&next),
+            &rotation.next_artifact_key,
+            &rotation.provider_id,
+            &rotation.statement().unwrap(),
+        )
+        .unwrap();
+        assert_eq!(
+            rotation.verify_possession(),
+            Err(ProviderError::InvalidSignature)
+        );
+        rotation
+            .sign_possession(&test_support::signer(&next))
+            .unwrap();
         assert!(rotation.verify_possession().is_ok());
 
         let mut provider = definition(&old, &[ProviderCapability::CreditAssessor]);
         provider.retired_keys.push(RetiredProviderKey {
             public_key: provider.public_key,
+            artifact_key: provider.artifact_key.clone(),
             retired_at: 50,
         });
         provider.public_key = rotation.next_public_key;
+        provider.artifact_key = rotation.next_artifact_key;
         provider.sequence = 1;
         provider.validate().unwrap();
         assert_eq!(
-            provider.verify_new_signature(&statement, &decision.signature),
+            provider.verify_new_signature(&statement, &decision.signature, 100),
             Err(ProviderError::InvalidSignature)
         );
         assert_eq!(
@@ -228,5 +263,92 @@ mod tests {
             serde_json::from_str::<ProviderDefinition>(&encoded).unwrap(),
             provider
         );
+    }
+    #[test]
+    fn hybrid_components_metadata_and_clock_are_mandatory() {
+        use zkfmi_crypto::{
+            key::KeyId,
+            suite::{Suite, SuiteId},
+        };
+        let key = SigningKey::from_bytes(&id(101));
+        let provider = definition(&key, &[ProviderCapability::CreditAssessor]);
+        let mut artifact = decision();
+        let statement = sign_artifact(&mut artifact, &key).unwrap();
+        assert_eq!(
+            provider.verify_new_signature(&statement, &artifact.signature, 100),
+            Ok(())
+        );
+        for position in [0, 64, artifact.signature.len() - 1] {
+            let mut corrupted = artifact.clone();
+            corrupted.signature[position] ^= 1;
+            assert_eq!(
+                registry(provider.clone()).verify_artifact(&corrupted, 100),
+                Err(ProviderError::InvalidSignature)
+            );
+        }
+        for length in [0, 64, artifact.signature.len() - 1] {
+            let mut truncated = artifact.clone();
+            truncated.signature.truncate(length);
+            assert_eq!(
+                registry(provider.clone()).verify_artifact(&truncated, 100),
+                Err(ProviderError::InvalidSignature)
+            );
+        }
+        let mut extended = artifact.clone();
+        extended.signature.push(0);
+        assert_eq!(
+            registry(provider.clone()).verify_artifact(&extended, 100),
+            Err(ProviderError::InvalidSignature)
+        );
+        let mut changed = artifact.clone();
+        changed.model_digest = id(99);
+        assert_eq!(
+            registry(provider.clone()).verify_artifact(&changed, 100),
+            Err(ProviderError::InvalidSignature)
+        );
+        let mut changed_key = provider.clone();
+        changed_key.artifact_key.key_id = KeyId::new("substituted-key").unwrap();
+        assert_eq!(
+            registry(changed_key).verify_artifact(&artifact, 100),
+            Err(ProviderError::InvalidSignature)
+        );
+        let mut revoked = provider.clone();
+        revoked.artifact_key.revoked_at = Some(100);
+        assert_eq!(
+            registry(revoked.clone()).verify_artifact(&artifact, 100),
+            Err(ProviderError::InvalidProviderKey)
+        );
+        assert_eq!(
+            revoked.verify_recorded_signature(&statement, &artifact.signature),
+            Ok(())
+        );
+        let mut expired = provider.clone();
+        expired.artifact_key.not_after = 100;
+        assert_eq!(
+            registry(expired).verify_artifact(&artifact, 100),
+            Err(ProviderError::InvalidProviderKey)
+        );
+        let mut future = provider.clone();
+        future.artifact_key.not_before = 101;
+        assert_eq!(
+            registry(future).verify_artifact(&artifact, 100),
+            Err(ProviderError::InvalidProviderKey)
+        );
+        let mut classical = provider.clone();
+        classical.artifact_key.suite = Suite::new(SuiteId::Ed25519);
+        classical.artifact_key.public_key.truncate(32);
+        assert_eq!(
+            classical.validate_initial(),
+            Err(ProviderError::InvalidProviderKey)
+        );
+        let mut wrong_purpose = provider.clone();
+        wrong_purpose.artifact_key.purpose = zkfmi_crypto::key::KeyPurpose::Quote;
+        assert_eq!(
+            wrong_purpose.validate_initial(),
+            Err(ProviderError::InvalidProviderKey)
+        );
+        let mut omitted = serde_json::to_value(&provider).unwrap();
+        omitted.as_object_mut().unwrap().remove("artifactKey");
+        assert!(serde_json::from_value::<ProviderDefinition>(omitted).is_err());
     }
 }

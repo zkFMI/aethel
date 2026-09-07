@@ -4,8 +4,8 @@ aethel_directory_absent=true
 rustc 1.97.1 (8bab26f4f 2026-07-14)
 cargo 1.97.1 (c980f4866 2026-06-30)
 metadata_workspace=oclob
-    Updating git repository `https://github.com/shukob/defmi.git`
-    Updating git repository `https://github.com/shukob/qomm.git`
+    Updating git repository `https://github.com/zkFMI/defmi.git`
+    Updating git repository `https://github.com/zkFMI/qomm.git`
 true
 gate_workspace=defmi_binary
    Compiling qomm-mpc v0.1.0 (/work/defmi/rust/qomm-mpc)
@@ -184,11 +184,11 @@ running 0 tests
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
 gate_workspace=zkpi/rust
-    Checking qomm-dsl v0.1.0 (https://github.com/shukob/qomm#972396e6)
+    Checking qomm-dsl v0.1.0 (https://github.com/zkFMI/qomm#972396e6)
     Checking qomm-proofs v0.1.0 (/work/zkpi/rust/qomm-proofs)
     Checking qomm-zkpi v0.1.0 (/work/zkpi/rust/qomm-zkpi)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.59s
-   Compiling qomm-dsl v0.1.0 (https://github.com/shukob/qomm#972396e6)
+   Compiling qomm-dsl v0.1.0 (https://github.com/zkFMI/qomm#972396e6)
    Compiling qomm-proofs v0.1.0 (/work/zkpi/rust/qomm-proofs)
    Compiling qomm-zkpi v0.1.0 (/work/zkpi/rust/qomm-zkpi)
     Finished `release` profile [optimized] target(s) in 7.78s

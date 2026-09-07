@@ -8,7 +8,7 @@ description = "Obligor-side schedule projection, bounded pre-authorization, sign
 
 [dependencies]
 aethel-types.workspace = true
-ed25519-dalek.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true
+zkfmi-crypto.workspace = true

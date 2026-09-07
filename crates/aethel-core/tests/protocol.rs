@@ -11,8 +11,19 @@ use aethel_core::{
     ReceivableSeries, ReceivableStatus, RegisterCredentialIssuer, RegisterProvider, RegisterSeries,
     RegisterStream, RotateProviderKey, SeriesPolicy, SetProviderStatus, StreamState, StreamStatus,
 };
-use ed25519_dalek::{Signer, SigningKey};
+use aethel_provider_sdk::{test_support as provider_fixture, SignedArtifact};
+use ed25519_dalek::SigningKey;
 use rand_core::OsRng;
+
+fn sign_artifact<A: SignedArtifact>(artifact: &mut A, key: &SigningKey, generation: u32) {
+    let participant = [artifact.provider_id()[0] + 40; 32];
+    aethel_provider_sdk::sign_artifact(
+        artifact,
+        &provider_fixture::signer(key),
+        &provider_fixture::key_record(key, participant, generation),
+    )
+    .unwrap();
+}
 
 fn id(byte: u8) -> [u8; 32] {
     [byte; 32]
@@ -33,6 +44,7 @@ fn provider(
         participant_id: id(provider_id + 40),
         capabilities: capabilities.iter().copied().collect::<BTreeSet<_>>(),
         public_key: key.verifying_key().to_bytes(),
+        artifact_key: provider_fixture::key_record(key, id(provider_id + 40), 1),
         policy_registry_digest: id(provider_id + 80),
         defmi_guarantor_id: guarantor_id.map(id),
         valid_from: 1,
@@ -82,10 +94,7 @@ fn register_stream(book: &mut AethelBook, attestor: &SigningKey) {
         relation_proof_digest: id(32),
         signature: Vec::new(),
     };
-    request.signature = attestor
-        .sign(&request.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_artifact(&mut request, attestor, 1);
     book.register_stream(request, 40).unwrap();
 }
 
@@ -221,10 +230,7 @@ fn assessor_guarantor_and_liquidity_provider_are_independent_capabilities() {
         nonce: id(57),
         signature: Vec::new(),
     };
-    decision.signature = assessor
-        .sign(&decision.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_artifact(&mut decision, &assessor, 1);
     book.record_credit_decision(decision, 45).unwrap();
 
     let mut guarantee = GuaranteeCommitment {
@@ -249,10 +255,7 @@ fn assessor_guarantor_and_liquidity_provider_are_independent_capabilities() {
         status: GuaranteeStatus::Available,
         bound_issuance_id: None,
     };
-    guarantee.signature = guarantor
-        .sign(&guarantee.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_artifact(&mut guarantee, &guarantor, 1);
     book.record_guarantee(guarantee, 46).unwrap();
 
     let mut quote = FundingQuote {
@@ -277,7 +280,7 @@ fn assessor_guarantor_and_liquidity_provider_are_independent_capabilities() {
         signature: Vec::new(),
         bound_issuance_id: None,
     };
-    quote.signature = funder.sign(&quote.statement().unwrap()).to_bytes().to_vec();
+    sign_artifact(&mut quote, &funder, 1);
     book.record_funding_quote(quote, 47).unwrap();
 
     book.issue_receivable(
@@ -345,10 +348,7 @@ fn credit_decision_cannot_substitute_for_required_guarantee() {
         nonce: id(57),
         signature: Vec::new(),
     };
-    decision.signature = assessor
-        .sign(&decision.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_artifact(&mut decision, &assessor, 1);
     book.record_credit_decision(decision, 45).unwrap();
 
     assert_eq!(
@@ -438,10 +438,7 @@ fn issuer_registration(
         previous_epochs_valid_until,
         signature: Vec::new(),
     };
-    request.signature = provider_key
-        .sign(&request.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_artifact(&mut request, provider_key, 1);
     request
 }
 
@@ -526,10 +523,15 @@ fn signed_decision(
         nonce: id(nonce),
         signature: Vec::new(),
     };
-    decision.signature = assessor
-        .sign(&decision.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    let provider = book.provider(&decision.provider_id).unwrap();
+    let generation = provider
+        .retired_keys
+        .iter()
+        .map(|key| &key.artifact_key)
+        .chain(std::iter::once(&provider.artifact_key))
+        .find(|key| key.public_key[..32] == assessor.verifying_key().to_bytes())
+        .map_or(1, |key| key.key_version);
+    sign_artifact(&mut decision, assessor, generation);
     decision
 }
 
@@ -569,10 +571,7 @@ fn signed_guarantee(
         status: GuaranteeStatus::Available,
         bound_issuance_id: None,
     };
-    guarantee.signature = guarantor
-        .sign(&guarantee.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_artifact(&mut guarantee, guarantor, 1);
     guarantee
 }
 
@@ -925,14 +924,32 @@ fn provider_rotation(
         operation_id: id(operation),
         provider_id: id(provider),
         next_public_key: next.verifying_key().to_bytes(),
+        next_artifact_key: provider_fixture::key_record(
+            next,
+            id(provider + 40),
+            expected_sequence as u32 + 2,
+        ),
         expected_sequence,
         rotated_at,
         signature: Vec::new(),
     };
-    rotation.signature = signer_of_request
-        .sign(&rotation.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    if signer_of_request.verifying_key() == next.verifying_key() {
+        rotation
+            .sign_possession(&provider_fixture::signer(next))
+            .unwrap();
+    } else {
+        rotation.signature = aethel_provider_sdk::sign_provider_statement(
+            &provider_fixture::signer(signer_of_request),
+            &provider_fixture::key_record(
+                signer_of_request,
+                id(provider + 40),
+                expected_sequence as u32 + 2,
+            ),
+            &rotation.provider_id,
+            &rotation.statement().unwrap(),
+        )
+        .unwrap();
+    }
     rotation
 }
 
@@ -1090,10 +1107,7 @@ fn guarantor_can_release_only_its_own_unbound_guarantee() {
             released_at: at,
             signature: Vec::new(),
         };
-        release.signature = signer
-            .sign(&release.statement().unwrap())
-            .to_bytes()
-            .to_vec();
+        sign_artifact(&mut release, signer, 1);
         release
     };
     // Only a guarantor provider may release, and only its own guarantee.
@@ -1131,4 +1145,60 @@ fn guarantor_can_release_only_its_own_unbound_guarantee() {
         Err(AethelError::GuaranteeUnavailable)
     );
     book.validate().unwrap();
+}
+
+#[test]
+fn rejected_hybrid_rotation_preserves_the_entire_provider_book() {
+    let old = signer(102);
+    let next = signer(112);
+    let mut book = AethelBook::default();
+    register_provider(
+        &mut book,
+        10,
+        provider(2, &old, &[ProviderCapability::CreditAssessor], None),
+    );
+    let before = book.clone();
+    let mut request = provider_rotation(2, &next, &next, 70, 0, 46);
+    request.next_artifact_key.participant_id =
+        zkfmi_crypto::key::ParticipantId::new("wrong-participant").unwrap();
+    request
+        .sign_possession(&provider_fixture::signer(&next))
+        .unwrap();
+    assert_eq!(
+        book.rotate_provider_key(request, 46),
+        Err(AethelError::InvalidProviderKey)
+    );
+    assert_eq!(book, before);
+    let mut request = provider_rotation(2, &next, &next, 70, 0, 46);
+    request.signature[64] ^= 1;
+    assert_eq!(
+        book.rotate_provider_key(request, 46),
+        Err(AethelError::InvalidSignature)
+    );
+    assert_eq!(book, before);
+    let mut request = provider_rotation(2, &next, &next, 70, 0, 46);
+    request.signature.truncate(64);
+    assert_eq!(
+        book.rotate_provider_key(request, 46),
+        Err(AethelError::InvalidSignature)
+    );
+    assert_eq!(book, before);
+    // Both components must be fresh, even when possession is valid.
+    use zkfmi_crypto::{
+        backend::{Ed25519Signer, MlDsa65Signer},
+        hybrid::signature::HybridSigner,
+        traits::Signer,
+    };
+    let reused_pq = HybridSigner::new(
+        Ed25519Signer::from_seed(&next.to_bytes()),
+        MlDsa65Signer::from_seed(&old.to_bytes().map(|byte| byte.wrapping_add(73))),
+    );
+    let mut request = provider_rotation(2, &next, &next, 70, 0, 46);
+    request.next_artifact_key.public_key = reused_pq.public_key();
+    request.sign_possession(&reused_pq).unwrap();
+    assert_eq!(
+        book.rotate_provider_key(request, 46),
+        Err(AethelError::InvalidProviderKey)
+    );
+    assert_eq!(book, before);
 }

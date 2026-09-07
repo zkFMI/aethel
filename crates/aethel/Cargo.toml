@@ -16,5 +16,7 @@ aethel-obligation-wallet.workspace = true
 aethel-servicing.workspace = true
 
 [dev-dependencies]
+aethel-provider-sdk = { workspace = true, features = ["test-support"] }
 ed25519-dalek.workspace = true
 serde_json.workspace = true
+zkfmi-crypto.workspace = true

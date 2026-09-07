@@ -248,7 +248,7 @@ impl ServicingBook {
         {
             return Err(ServicingError::NotAnObserver);
         }
-        provider.verify_new_signature(&statement, &evidence.signature)?;
+        provider.verify_new_signature(&statement, &evidence.signature, now)?;
         if evidence.stream_id != self.terms.stream_id || evidence.observed_at > now {
             return Err(ServicingError::InvalidEvidence);
         }
@@ -515,10 +515,22 @@ impl From<ProviderError> for ServicingError {
 mod tests {
     use std::collections::BTreeSet;
 
-    use aethel_provider_sdk::{sign_artifact, ProviderDefinition, ProviderStatus};
+    use aethel_provider_sdk::{ProviderDefinition, ProviderStatus};
     use ed25519_dalek::SigningKey;
 
     use super::*;
+
+    fn sign_artifact<A: aethel_provider_sdk::SignedArtifact>(
+        artifact: &mut A,
+        key: &SigningKey,
+    ) -> Result<[u8; 32], aethel_provider_sdk::ProviderError> {
+        let participant = [artifact.provider_id()[0] + 40; 32];
+        aethel_provider_sdk::sign_artifact(
+            artifact,
+            &aethel_provider_sdk::test_support::signer(key),
+            &aethel_provider_sdk::test_support::key_record(key, participant, 1),
+        )
+    }
 
     fn id(byte: u8) -> [u8; 32] {
         [byte; 32]
@@ -534,6 +546,7 @@ mod tests {
             participant_id: id(byte + 40),
             capabilities: capabilities.iter().copied().collect::<BTreeSet<_>>(),
             public_key: key.verifying_key().to_bytes(),
+            artifact_key: aethel_provider_sdk::test_support::key_record(key, id(byte + 40), 1),
             policy_registry_digest: id(byte + 80),
             defmi_guarantor_id: None,
             valid_from: 1,

@@ -16,8 +16,10 @@ use qomm_defmi::{
     participant::{EntityApproval, KeyPurpose, PurposeKey, RotateParticipantKey},
 };
 
+use super::aethel_tests::sign_provider_artifact;
 use super::aethel_tests::{apply_request, base_state, committee, id, purpose_key};
 use crate::state::State;
+use aethel_provider_sdk::test_support as provider_fixture;
 
 fn initial_stream() -> StreamState {
     StreamState {
@@ -58,10 +60,7 @@ fn signed_transition(
         relation_proof_digest: id(43),
         signature: Vec::new(),
     };
-    transition.signature = signer
-        .sign(&transition.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_provider_artifact(state, &mut transition, signer);
     transition
 }
 
@@ -93,14 +92,14 @@ fn signed_rotation(
         operation_id: id(operation),
         provider_id: id(31),
         next_public_key: next.verifying_key().to_bytes(),
+        next_artifact_key: provider_fixture::key_record(next, id(6), expected_sequence as u32 + 2),
         expected_sequence,
         rotated_at: at,
         signature: Vec::new(),
     };
-    rotation.signature = next
-        .sign(&rotation.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    rotation
+        .sign_possession(&provider_fixture::signer(next))
+        .unwrap();
     rotation
 }
 
@@ -115,6 +114,7 @@ fn provider_key_rotation_follows_the_participant_registry_and_keeps_recorded_art
             participant_id: id(6),
             capabilities: [ProviderCapability::StreamAttestor].into_iter().collect(),
             public_key: quote_signer.verifying_key().to_bytes(),
+            artifact_key: provider_fixture::key_record(&quote_signer, id(6), 1),
             policy_registry_digest: id(32),
             defmi_guarantor_id: None,
             valid_from: 1,
@@ -142,10 +142,7 @@ fn provider_key_rotation_follows_the_participant_registry_and_keeps_recorded_art
         relation_proof_digest: id(43),
         signature: Vec::new(),
     };
-    stream.signature = quote_signer
-        .sign(&stream.statement().unwrap())
-        .to_bytes()
-        .to_vec();
+    sign_provider_artifact(&state, &mut stream, &quote_signer);
     apply_request(
         &mut state,
         &authorizer,
@@ -182,6 +179,9 @@ fn provider_key_rotation_follows_the_participant_registry_and_keeps_recorded_art
         purpose: KeyPurpose::Quote,
         new_key: PurposeKey {
             public_key: next.verifying_key().to_bytes(),
+            pq_public_key: zkfmi_crypto::traits::Signer::public_key(
+                &zkfmi_crypto::test_support::entity_pq_signer(&next.to_bytes()),
+            ),
             epoch: 2,
         },
     };
@@ -191,15 +191,20 @@ fn provider_key_rotation_follows_the_participant_registry_and_keeps_recorded_art
         key_purpose: KeyPurpose::Admin,
         key_epoch: 1,
         statement: registry_statement,
-        signature: admin
-            .sign(&EntityApproval::signing_body(
-                &id(2),
-                KeyPurpose::Admin,
-                1,
-                &registry_statement,
-            ))
-            .to_bytes()
-            .to_vec(),
+        signature: {
+            let body =
+                EntityApproval::signing_body(&id(2), KeyPurpose::Admin, 1, &registry_statement);
+            let mut signature = admin.sign(&body).to_bytes().to_vec();
+            signature.extend(
+                zkfmi_crypto::traits::Signer::sign(
+                    &zkfmi_crypto::test_support::entity_pq_signer(&admin.to_bytes()),
+                    zkfmi_crypto::key::KeyPurpose::Attestation,
+                    &body,
+                )
+                .unwrap(),
+            );
+            signature
+        },
     };
     state
         .participant_registry

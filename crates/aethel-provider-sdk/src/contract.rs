@@ -10,7 +10,7 @@
 
 use std::collections::BTreeMap;
 
-use ed25519_dalek::{Signer, SigningKey};
+use zkfmi_crypto::{key::KeyRecord, traits::Signer};
 
 use aethel_types::{id_key, Commitment, Identifier};
 
@@ -100,10 +100,16 @@ signed_artifact!(
 /// malformed artifact is never signed.
 pub fn sign_artifact<A: SignedArtifact>(
     artifact: &mut A,
-    key: &SigningKey,
+    signer: &dyn Signer,
+    key: &KeyRecord,
 ) -> Result<Commitment, ProviderError> {
     let statement = artifact.statement()?;
-    artifact.set_signature(key.sign(&statement).to_bytes().to_vec());
+    artifact.set_signature(crate::sign_provider_statement(
+        signer,
+        key,
+        &artifact.provider_id(),
+        &statement,
+    )?);
     Ok(statement)
 }
 
@@ -141,7 +147,7 @@ pub trait ProviderRegistry {
     ) -> Result<Commitment, ProviderError> {
         let statement = artifact.statement()?;
         let provider = self.active_provider(&artifact.provider_id(), artifact.capability(), now)?;
-        provider.verify_new_signature(&statement, artifact.signature())?;
+        provider.verify_new_signature(&statement, artifact.signature(), now)?;
         Ok(statement)
     }
 }
