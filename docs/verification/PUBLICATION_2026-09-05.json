@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-05T14:19:41.733Z",
+  "request": "Commit and push the foundation-wide Aethel separation and finalized Canton comparison; publish zkfmi-crypto publicly; discard any identifiable legacy Aethel state instead of migrating it.",
+  "published_implementation_commits": [
+    {
+      "repository": "aethel",
+      "url": "https://github.com/zkFMI/aethel",
+      "branch": "main",
+      "commit": "845ea7765c708f2d544b14007d34c750948921ef",
+      "verified_remote_head": "845ea7765c708f2d544b14007d34c750948921ef"
+    },
+    {
+      "repository": "deccp",
+      "url": "https://github.com/zkFMI/deccp",
+      "branch": "main",
+      "commit": "b2dc95bb01d3fc50c96249962f5ea8344a857d6d",
+      "verified_remote_head": "b2dc95bb01d3fc50c96249962f5ea8344a857d6d"
+    },
+    {
+      "repository": "dekyx",
+      "url": "https://github.com/zkFMI/dekyx",
+      "branch": "main",
+      "commit": "af06561a2075f7e449a24c3bfe8e2e0a1a5df5e5",
+      "verified_remote_head": "af06561a2075f7e449a24c3bfe8e2e0a1a5df5e5"
+    },
+    {
+      "repository": "defmi",
+      "url": "https://github.com/zkFMI/defmi",
+      "branch": "main",
+      "commit": "d8a54fa89676d7ca993c8683658e5dcdb37788c2",
+      "verified_remote_head": "d8a54fa89676d7ca993c8683658e5dcdb37788c2"
+    },
+    {
+      "repository": "qomm",
+      "url": "https://github.com/zkFMI/qomm",
+      "branch": "main",
+      "commit": "26026b5807ce6bd093e363ddc8e71b53b084cb19",
+      "verified_remote_head": "26026b5807ce6bd093e363ddc8e71b53b084cb19"
+    },
+    {
+      "repository": "zkpi",
+      "url": "https://github.com/zkFMI/zkpi",
+      "branch": "main",
+      "commit": "b50704ab27dac55f3ccef70a5c97ab7eb3893f39",
+      "verified_remote_head": "b50704ab27dac55f3ccef70a5c97ab7eb3893f39"
+    },
+    {
+      "repository": "zkfmi-crypto",
+      "url": "https://github.com/zkFMI/zkfmi-crypto",
+      "branch": "main",
+      "commit": "25e69708b978b7d1a79258c3318b720f0ead952e",
+      "verified_remote_head": "25e69708b978b7d1a79258c3318b720f0ead952e"
+    }
+  ],
+  "verification": {
+    "staging": "Only task paths staged; git diff --cached --check passed in all seven repositories before each implementation/documentation commit.",
+    "remote_heads": "git ls-remote --heads origin main matched each published implementation commit.",
+    "previous_runtime_gate": "FOUNDATION_INDEPENDENCE_2026-09-05.json",
+    "release_tests_passed": 526,
+    "failed": 0,
+    "ignored": 0,
+    "foundation_graphs_without_aethel": 6,
+    "local_runtime_builds_or_tests": false,
+    "post_test_manifest_whitespace": {
+      "path": "crates/aethel-zkpi/Cargo.toml",
+      "before_sha256": "672cdadc73ff71e008ceccd2b31db64eca8462773de29bab93336e502d12a891",
+      "after_sha256": "fff92d294780a9a6ab0c51c74ce51b3f67c4deadb664916645716b597652004c",
+      "change": "Remove the extra blank line at EOF found by staged git diff --check. TOML fields and dependencies unchanged; prior tests still apply."
+    },
+    "scope": "This receipt and current publication wording are documentation-only follow-up changes. The implementation commits above are the tested source baseline; the receipt does not claim a post-change live-chain deployment."
+  },
+  "public_repository": {
+    "full_name": "shukob/zkfmi-crypto",
+    "private": false,
+    "default_branch": "main",
+    "creation": "User-authorized public repository created through the existing authenticated GitHub browser session; pushed with the existing Git setup. No authentication configuration changed.",
+    "anonymous_readback": "https://api.github.com/repos/shukob/zkfmi-crypto",
+    "readme_readback": {
+      "commit": "25e69708b978b7d1a79258c3318b720f0ead952e",
+      "sha256": "aae313d2368dbee79c7a450a108394f197348f55fdf8a84d5d161ecf37f268af",
+      "matched_local": true
+    }
+  },
+  "legacy_aethel_state": {
+    "meaning": "Application-specific persisted receivable, guarantee and clearing ledgers formerly embedded in the generic DeFMI VM.",
+    "decision": "User authorizes disposal and empty initialization instead of migration because Aethel is not operationally used.",
+    "checked_local_roots": [
+      "/Users/shukob/Research/DeFMI/aethel",
+      "/Users/shukob/Research/DeFMI/defmi"
+    ],
+    "checked_artifact_directories": [
+      "/Users/shukob/Research/DeFMI/aethel/.artifacts",
+      "/Users/shukob/Research/DeFMI/defmi/artifacts"
+    ],
+    "findings": "No .runtime, data, state or snapshot directory was identified at either repository root. A bounded artifact-directory listing found verification inputs, reports and logs, with no identifiable operational Aethel state. The observed Softbank running-container list contained no Aethel or DeFMI container.",
+    "deleted_paths": [],
+    "scope": "Bounded checks of known task locations, not a machine-wide storage inventory. Source, test fixtures, reports and unrelated application ledgers were preserved."
+  },
+  "separate_pqc_work": {
+    "status": "in_progress",
+    "delegate": "/root/pqc_full_integration_gpt6",
+    "model": "gpt-6-astra",
+    "reasoning": "max",
+    "worktree_root": "/Users/shukob/Research/DeFMI/zkfmi-crypto/.worktrees/pqc-full",
+    "scope": "Full PQC integration is separate ongoing implementation work and is not included in the published implementation commits."
+  }
+}
