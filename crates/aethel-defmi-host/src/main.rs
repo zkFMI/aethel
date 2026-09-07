@@ -1,6 +1,6 @@
 use std::{env, fs, io::Write, path::PathBuf, process::ExitCode};
 
-use qomm_avalanche_vm::{genesis::GenesisConfig, id::Id};
+use defmi_avalanche_vm::{genesis::GenesisConfig, id::Id};
 const VERSION: &str = "aethel-defmi-host/0.1.0";
 fn vm_id() -> Id {
     Id::digest(b"AETHEL:DEFMI:HOST:v1")
@@ -25,7 +25,7 @@ async fn run() -> Result<(), String> {
         Some("genesis") => genesis_command(&arguments[1..])?,
         Some(_) => return Err("unknown command".into()),
         None => {
-            qomm_avalanche_vm::serve(aethel_defmi_host::vm())
+            defmi_avalanche_vm::serve(aethel_defmi_host::vm())
                 .await
                 .map_err(|error| error.to_string())?;
         }

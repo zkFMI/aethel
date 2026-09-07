@@ -159,7 +159,7 @@ pub struct ReceivableInstruction {
     /// fits the venue's published amount width. It is present only on issue.
     pub eligibility_remaining: Option<ThresholdRangeProof>,
     pub authorization: frost::Signature,
-    pub pq_authorization: Option<qomm_zkpi::QuorumApproval>,
+    pub pq_authorization: Option<zkpi::QuorumApproval>,
 }
 
 /// Canonically names the actual eligibility proof rather than an off-chain

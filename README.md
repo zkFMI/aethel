@@ -130,7 +130,7 @@ flowchart TB
     APP["aethel-defmi-host"] --> AC["aethel-core"]
     AC --> ADK["aethel-dekyx"] --> DK["dekyx-core"]
     APP --> ACCP["aethel-deccp"] --> CCP["deccp-core"]
-    APP --> AZ["aethel-zkpi"] --> Z["qomm-zkpi"]
+    APP --> AZ["aethel-zkpi"] --> Z["zkpi"]
     APP --> DF["DeFMI generic VM / ledger"]
 ```
 

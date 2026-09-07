@@ -11,9 +11,9 @@ aethel-core.workspace = true
 aethel-deccp = { path = "../aethel-deccp" }
 aethel-zkpi = { path = "../aethel-zkpi" }
 deccp-core.workspace = true
-qomm-avalanche-vm.workspace = true
-qomm-defmi.workspace = true
-qomm-zk.workspace = true
+defmi-avalanche-vm.workspace = true
+defmi.workspace = true
+zkfmi-zk.workspace = true
 base64.workspace = true
 hex.workspace = true
 serde.workspace = true

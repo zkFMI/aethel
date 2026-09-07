@@ -31,7 +31,7 @@ use deccp_core::{
     QuorumApproval as DeccpQuorumApproval,
 };
 use ed25519_dalek::SigningKey;
-use qomm_defmi::{
+use defmi::{
     facility::{NodeApproval, QuorumApproval, QuorumAuthorizer},
     note_chain::{ClaimAuthorizationCommitment, NoteClaim, NoteClaimKind, NoteOutput},
     participant::{
@@ -44,7 +44,7 @@ use qomm_proofs::opening_envelope::{EncryptedOpeningShare, OpeningEnvelope};
 use qomm_proofs::threshold_range::{
     deal_bits, joint_prove_range_from_contributions, ThresholdRangeProof,
 };
-use qomm_zk::pedersen::Pedersen;
+use zkfmi_zk::pedersen::Pedersen;
 use rand_core::OsRng;
 use serde::Serialize;
 use serde_json::{json, Value};
@@ -69,13 +69,13 @@ pub(super) fn id(byte: u8) -> [u8; 32] {
 
 pub(super) fn committee() -> (
     QuorumAuthorizer,
-    BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
+    BTreeMap<String, defmi::governance::GovernanceSigner>,
 ) {
     let signers = (0u8..3)
         .map(|index| {
             (
                 format!("node-{index}"),
-                qomm_defmi::governance::GovernanceSigner::generate(
+                defmi::governance::GovernanceSigner::generate(
                     &format!("node-{index}"),
                     0,
                     i64::MAX as u64,
@@ -135,7 +135,7 @@ pub(super) fn rpc_value<T: Serialize>(request: &T) -> Value {
 pub(super) fn apply_request<T: Serialize>(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
+    signers: &BTreeMap<String, defmi::governance::GovernanceSigner>,
     method: &str,
     request: &T,
     statement: [u8; 32],
@@ -157,7 +157,7 @@ pub(super) fn apply_request<T: Serialize>(
 pub(super) fn apply_fields(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
+    signers: &BTreeMap<String, defmi::governance::GovernanceSigner>,
     method: &str,
     fields: Vec<(&str, Value)>,
     statement: [u8; 32],
@@ -198,7 +198,7 @@ pub(super) fn locked_cash_note(
         ephemeral: RistrettoPoint::mul_base(&Scalar::from(seed + 2))
             .compress()
             .to_bytes(),
-        encrypted_opening: qomm_defmi::notes::NoteOpening::Recipient(
+        encrypted_opening: defmi::notes::NoteOpening::Recipient(
             zkfmi_crypto::test_support::note_envelope(),
         ),
         lock_id,
@@ -223,7 +223,7 @@ pub(super) fn locked_cash_note(
 fn apply_confidential_request<T: Serialize, P: Serialize>(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
+    signers: &BTreeMap<String, defmi::governance::GovernanceSigner>,
     method: &str,
     request: &T,
     subject_proof: &P,
@@ -275,7 +275,7 @@ fn credit_backing(decision: &CreditDecision) -> [u8; 32] {
 fn apply_receivable_request(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
+    signers: &BTreeMap<String, defmi::governance::GovernanceSigner>,
     request: &ReceivableIssuance,
     zkpi: &[u8],
     timestamp: u64,
@@ -300,7 +300,7 @@ fn apply_receivable_request(
 fn apply_claim_request(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
+    signers: &BTreeMap<String, defmi::governance::GovernanceSigner>,
     request: &GuaranteeClaim,
     zkpi: &[u8],
     timestamp: u64,
@@ -948,7 +948,7 @@ fn avalanche_state_executes_guaranteed_receivable_issue_default_and_claim() {
         ephemeral: RistrettoPoint::mul_base(&Scalar::from(77u64))
             .compress()
             .to_bytes(),
-        encrypted_opening: qomm_defmi::notes::NoteOpening::Recipient(
+        encrypted_opening: defmi::notes::NoteOpening::Recipient(
             zkfmi_crypto::test_support::note_envelope(),
         ),
         lock_id: [0; 32],

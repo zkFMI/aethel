@@ -23,7 +23,7 @@ use deccp_core::{
     EligibilityPort, GuaranteeFacility, GuaranteeReservation, ParticipantAdmission,
     QuorumApproval as DeccpQuorumApproval, VerifiedAdmission, ZERO,
 };
-use qomm_defmi::facility::QuorumAuthorizer;
+use defmi::facility::QuorumAuthorizer;
 use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value};
 use sha2::{Digest, Sha256};

@@ -1,6 +1,6 @@
 use crate::state::State;
-pub(crate) use qomm_avalanche_vm::application::{authorize, require_keys};
-use qomm_defmi::facility::QuorumAuthorizer;
+pub(crate) use defmi_avalanche_vm::application::{authorize, require_keys};
+use defmi::facility::QuorumAuthorizer;
 use serde_json::{Map, Value};
 
 mod aethel;

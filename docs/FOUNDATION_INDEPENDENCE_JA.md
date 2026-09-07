@@ -23,7 +23,7 @@ flowchart TD
 | --- | --- | --- |
 | DeCCP `deccp-aethel` | `crates/aethel-deccp` | Aethelの保証・損失層を汎用清算APIへ対応付けるadapter |
 | DeKYX `dekyx-aethel` | `crates/aethel-dekyx` | Aethelの参加資格・providerに対応するadapter |
-| DeFMI・QOMM・zkPIの `qomm-zkpi::receivable` / `receivable_wire` | `crates/aethel-zkpi` | 債権向け指図・証明・wireと既存テスト。3リポジトリにあった同一コピーを一か所へ集約 |
+| DeFMI・QOMM・zkPIの `zkpi::receivable` / `receivable_wire` | `crates/aethel-zkpi` | 債権向け指図・証明・wireと既存テスト。3リポジトリにあった同一コピーを一か所へ集約 |
 | DeFMI VMのAethel / DeCCP専用reducer、型付き状態、18個の専用メソッド | `crates/aethel-defmi-host` | アプリ用ホスト、状態検証、RPC payloadの解釈、既存reducerテスト |
 
 `deccp-core` と `dekyx-core` の業務規則は変更していない。Aethel core内の従来の `dekyx_aethel` import名は、ローカル `aethel-dekyx` のCargo aliasとして維持した。基盤側への依存ではない。

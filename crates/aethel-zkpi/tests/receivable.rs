@@ -9,8 +9,8 @@ use curve25519_dalek::{ristretto::RistrettoPoint, scalar::Scalar, traits::Identi
 use qomm_proofs::threshold_range::{
     deal_bits, joint_prove_range_from_contributions, ThresholdRangeProof,
 };
-use qomm_zk::pedersen::Pedersen;
-use qomm_zkpi::{
+use zkfmi_zk::pedersen::Pedersen;
+use zkpi::{
     deal_quorum, frost, Bounds, PartialInstruction, Venue, AMOUNT_RANGE_CONTEXT, DEFAULT_DOMAIN,
     PRICE_RANGE_CONTEXT,
 };

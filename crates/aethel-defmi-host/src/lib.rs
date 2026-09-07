@@ -4,8 +4,8 @@
 
 use std::sync::Arc;
 
-use qomm_avalanche_vm::{application::ApplicationRuntime, state::State as LedgerState, QommVm};
-use qomm_defmi::facility::QuorumAuthorizer;
+use defmi_avalanche_vm::{application::ApplicationRuntime, state::State as LedgerState, QommVm};
+use defmi::facility::QuorumAuthorizer;
 use serde_json::{Map, Value};
 
 mod clearing_state;
@@ -32,7 +32,7 @@ impl ApplicationRuntime for AethelRuntime {
         authorizer: &QuorumAuthorizer,
         timestamp: u64,
     ) -> Result<[u8; 32], String> {
-        qomm_avalanche_vm::application::require_keys(params, &["application", "method", "params"])?;
+        defmi_avalanche_vm::application::require_keys(params, &["application", "method", "params"])?;
         if params.get("application").and_then(Value::as_str) != Some(APPLICATION_ID) {
             return Err("unknown application for this Aethel host".into());
         }

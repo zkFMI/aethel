@@ -3,11 +3,11 @@
 use std::ops::{Deref, DerefMut};
 
 use aethel_core::AethelBook;
-use qomm_avalanche_vm::state::State as LedgerState;
-use qomm_defmi::facility::QuorumAuthorizer;
+use defmi_avalanche_vm::state::State as LedgerState;
+use defmi::facility::QuorumAuthorizer;
 use serde::{de::DeserializeOwned, Serialize};
 
-pub use qomm_avalanche_vm::state::{
+pub use defmi_avalanche_vm::state::{
     id_key, AssetRecord, CreditFacilityRecord, CreditHoldRecord, GuarantorRecord, NoteClaimRecord,
     NoteRecord, NoteSerialRecord, OpeningEnvelopeRecord, SettlementVerifierRecord,
     TransitionReceipt,

@@ -21,12 +21,12 @@ use aethel_zkpi::{
 };
 use base64::{engine::general_purpose::STANDARD as BASE64, Engine};
 use deccp_core::{ClearingBook, DefmiSettlementReceipt};
-use qomm_defmi::{
+use defmi::{
     facility::{QuorumAuthorizer, ZERO},
     participant::{ParticipantRole, ParticipantStatus},
     settlement_verifier::settlement_verifier_key,
 };
-use qomm_zk::pedersen::Pedersen;
+use zkfmi_zk::pedersen::Pedersen;
 use serde::de::DeserializeOwned;
 use serde_json::{Map, Number, Value};
 use sha2::{Digest, Sha256};
@@ -1266,7 +1266,7 @@ fn require_active_asset(state: &State, asset_id: [u8; 32], name: &str) -> Result
 fn require_active_participant(
     state: &State,
     participant_id: [u8; 32],
-) -> Result<&qomm_defmi::participant::ParticipantRecord, String> {
+) -> Result<&defmi::participant::ParticipantRecord, String> {
     let participant = state
         .participant_registry
         .participants

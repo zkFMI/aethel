@@ -7,12 +7,12 @@ publish = false
 description = "Aethel-owned receivable proof context and wire format over generic zkPI"
 
 [dependencies]
-qomm-zkpi.workspace = true
+zkpi.workspace = true
 qomm-proofs.workspace = true
 curve25519-dalek.workspace = true
 sha2.workspace = true
 
 [dev-dependencies]
 zkfmi-crypto = { workspace = true, features = ["test-support"] }
-qomm-zk.workspace = true
+zkfmi-zk.workspace = true
 rand.workspace = true

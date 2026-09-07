@@ -218,7 +218,7 @@ pub fn decode(bytes: &[u8]) -> Result<ReceivableInstruction, Error> {
             return Err(Error::InvalidSignature);
         }
         Some(
-            qomm_zkpi::QuorumApproval::decode(reader.take(length, "PQ authorization")?)
+            zkpi::QuorumApproval::decode(reader.take(length, "PQ authorization")?)
                 .map_err(|_| Error::InvalidSignature)?,
         )
     } else {

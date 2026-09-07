@@ -11,7 +11,7 @@ use aethel_core::{
     RotateProviderKey, SetProviderStatus, StreamState, StreamStatus, StreamTransition,
 };
 use ed25519_dalek::{Signer, SigningKey};
-use qomm_defmi::{
+use defmi::{
     facility::QuorumAuthorizer,
     participant::{EntityApproval, KeyPurpose, PurposeKey, RotateParticipantKey},
 };
@@ -67,7 +67,7 @@ fn signed_transition(
 fn apply_transition(
     state: &mut State,
     authorizer: &QuorumAuthorizer,
-    signers: &BTreeMap<String, qomm_defmi::governance::GovernanceSigner>,
+    signers: &BTreeMap<String, defmi::governance::GovernanceSigner>,
     transition: &StreamTransition,
     timestamp: u64,
 ) -> Result<(), String> {
