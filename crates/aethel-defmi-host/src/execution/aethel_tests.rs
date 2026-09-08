@@ -30,7 +30,6 @@ use deccp_core::{
     GuaranteeFacilityStatus, GuaranteeHoldStatus, ParticipantAdmission,
     QuorumApproval as DeccpQuorumApproval,
 };
-use ed25519_dalek::SigningKey;
 use defmi::{
     facility::{NodeApproval, QuorumApproval, QuorumAuthorizer},
     note_chain::{ClaimAuthorizationCommitment, NoteClaim, NoteClaimKind, NoteOutput},
@@ -40,15 +39,16 @@ use defmi::{
     },
     settlement_verifier::SettlementVerifierConfig,
 };
-use qomm_proofs::opening_envelope::{EncryptedOpeningShare, OpeningEnvelope};
-use qomm_proofs::threshold_range::{
-    deal_bits, joint_prove_range_from_contributions, ThresholdRangeProof,
-};
-use zkfmi_zk::pedersen::Pedersen;
+use ed25519_dalek::SigningKey;
 use rand_core::OsRng;
 use serde::Serialize;
 use serde_json::{json, Value};
 use sha2::{Digest, Sha256};
+use zkfmi_zk::pedersen::Pedersen;
+use zkpi_proofs::opening_envelope::{EncryptedOpeningShare, OpeningEnvelope};
+use zkpi_proofs::threshold_range::{
+    deal_bits, joint_prove_range_from_contributions, ThresholdRangeProof,
+};
 
 use crate::{
     execution::deccp::{

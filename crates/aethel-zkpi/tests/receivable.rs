@@ -6,15 +6,15 @@ use aethel_zkpi::receivable::{
 };
 use aethel_zkpi::receivable_wire;
 use curve25519_dalek::{ristretto::RistrettoPoint, scalar::Scalar, traits::Identity};
-use qomm_proofs::threshold_range::{
-    deal_bits, joint_prove_range_from_contributions, ThresholdRangeProof,
-};
+use rand::rngs::OsRng;
 use zkfmi_zk::pedersen::Pedersen;
 use zkpi::{
     deal_quorum, frost, Bounds, PartialInstruction, Venue, AMOUNT_RANGE_CONTEXT, DEFAULT_DOMAIN,
     PRICE_RANGE_CONTEXT,
 };
-use rand::rngs::OsRng;
+use zkpi_proofs::threshold_range::{
+    deal_bits, joint_prove_range_from_contributions, ThresholdRangeProof,
+};
 
 const THRESHOLD: usize = 3;
 

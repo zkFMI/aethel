@@ -6,8 +6,8 @@
 //! Aethel state root.
 
 use curve25519_dalek::ristretto::CompressedRistretto;
-use qomm_proofs::threshold_range::{verify_threshold_range, ThresholdRangeProof};
 use sha2::{Digest, Sha256, Sha512};
+use zkpi_proofs::threshold_range::{verify_threshold_range, ThresholdRangeProof};
 
 use crate::{frost, wire, Instruction, Venue};
 

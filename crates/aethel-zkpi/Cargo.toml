@@ -8,7 +8,7 @@ description = "Aethel-owned receivable proof context and wire format over generi
 
 [dependencies]
 zkpi.workspace = true
-qomm-proofs.workspace = true
+zkpi-proofs.workspace = true
 curve25519-dalek.workspace = true
 sha2.workspace = true
 
